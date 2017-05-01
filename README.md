@@ -10,6 +10,7 @@ id | title | description
 --- | --- | ---
 1 | Vertigo | "A San Francisco detective suffering from acrophobia investigates the strange activities of an old friend's wife, all the while becoming dangerously obsessed with her."
 2 | 2001: A Space Odyssey | "Humanity finds a mysterious, obviously artificial object buried beneath the Lunar surface and, with the intelligent computer H.A.L. 9000, sets off on a quest."
+
 ↑
 ### genres_movies
 movieid | genreid
