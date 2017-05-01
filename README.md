@@ -1,6 +1,10 @@
-# IWWWSWS
-I Wonder Whether we Should Watch Something
+# PROJECT DOAMA
+Decide On A Movie Already
 
+## INTRO
+TODO
+
+## SETUP INFO
 This project uses three tables to contain movie, genre, and movie_genres information.
 
 This is a visualization of the tables in the database:
