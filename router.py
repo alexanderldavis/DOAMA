@@ -19,5 +19,14 @@ def index():
     res = cur.fetchall()
     return render_template('welcome.html', movieList = res)
 
+@app.route("/searchMovie")
+def searchMovie():
+    args = request.url.split('?')[1]
+    title = args.split("=")[1]
+    cur = conn.cursor()
+    cur.execute("""SELECT id, title, poster, rated FROM movies where title = %s""", (title,))
+    res = cur.fetchall()
+    return render_template('welcome.html', movieList = res)
+
 if __name__=='__main__':
     app.run(debug=True)

@@ -27,12 +27,18 @@
     </div>
 </form>
 
+<p>Or, search for a Movie:</p>
+<form class="form-inline" action="/searchMovie" method="get">
+  <input class="form-control" type="text" name="movietitle" value="" placeholder="Movie Title">
+  <input type="submit" name="" class="btn btn-primary" id="submitRequirements" value = "Search for Requirement">
+</form>
+
 <div class="tablediv">
     <h3>Now Showing Results for {{ title }}</h3>
     <table class="table table-bordered table-hover table-striped table-condensed">
       {% for (id, title, poster, rated) in movieList %}
       <div class="floated_img">
-        <img class="movieName" src="{{ poster }}" alt="Poster for {{ title }}">
+        <a href="http://www.projectdoama.com/movieInfo/{{id}}"><img width="150" height="200" class="movieName" src="{{ poster }}" alt="Poster for {{ title }}"></a>
         <p>{{ title }} [{{ rated }}]</p>
       </div>
 
