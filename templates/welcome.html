@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block body %}
+<!DOCTYPE html>
+<p>Hello! Welcome to the All College Requirements Project. To use, simply enter in a course <br>name OR select
+  one or more requirements that you would like to have fulfilled by a course. <br>Then, just click the corresponding search button!</p>
+
+<form class="form-inline" action="/searchCourses" method="get">
+<!-- <p>from</p><select></select><p>good for</p><select></select><p>who like</p><select></select><p>starring</p><select></select><p>streaming on</p><select></select> -->
+    <p>Please show me movie recommendations that are...</p><br>
+    <div class="form-group">
+        <label for="timeSelect">Good For</label>
+        <select class="form-control" name="time" id="timeSelect">
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="genreSelect">Who Like</label>
+        <select class="form-control" name="genre" id="genreSelect">
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="actorInput">Starring</label>
+        <input type="text" name="actors" id="actorInput" placeholder="Names separated by commas">
+    </div>
+    <div class="form-group">
+        <label for="serviceSelect">Streaming Service</label>
+        <select multiple class="form-control" name="service" id="serviceSelect">
+        </select>
+    </div>
+</form>
+{% endblock %}
