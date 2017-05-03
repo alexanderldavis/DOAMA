@@ -14,7 +14,8 @@ app = Flask(__name__)
 @app.route("/")
 def index():
     cur = conn.cursor()
-    cur.execute("""SELECT id, title, description, year, rated, runtime from movies where title = 'Avatar';""")
+    # cur.execute("""SELECT id, title, description, year, rated, runtime from movies where title = 'Avatar';""")
+    cur.execute("""SELECT id, title, poster, rated FROM movies where title = 'Avatar';""")
     res = cur.fetchall()
     return render_template('welcome.html', movieList = res)
 

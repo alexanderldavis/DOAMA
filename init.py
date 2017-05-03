@@ -16,7 +16,7 @@ conn = db
 cur = conn.cursor()
 cur.execute("DROP table movies CASCADE; DROP table genres CASCADE; DROP table genres_movies CASCADE; DROP table actors CASCADE; DROP table actors_movies CASCADE;")
 print("TABLES DELETED")
-cur.execute("""CREATE table movies (id serial unique, title varchar(100), description text, year varchar(40), rated varchar(50), runtime varchar(50)); """)
+cur.execute("""CREATE table movies (id serial unique, title varchar(100), description text, year varchar(40), rated varchar(50), runtime varchar(50), poster varchar(200));""")
 cur.execute("""CREATE table genres (id serial unique, name varchar(20)); CREATE table genres_movies (movieid int, genreid int, FOREIGN KEY (movieid) references movies(id), FOREIGN KEY (genreid) references genres(id), primary key (movieid, genreid));""")
 cur.execute("""CREATE table actors (id serial unique, name varchar(99)); CREATE table actors_movies (movieid int, actorid int, FOREIGN KEY (movieid) references movies(id), FOREIGN KEY (actorid) references actors(id), primary key (movieid, actorid));""")
 print("TABLES CREATED")
@@ -45,7 +45,7 @@ for i in range(1,len(data)):
     dataParsed = json.loads(res.text)
     if dataParsed["Response"] != "False":
         totalnumoffilms+=1
-        cur.execute("""INSERT INTO movies (title, description, year, rated, runtime) VALUES (%s, %s, %s, %s, %s);""", (dataParsed["Title"],dataParsed["Plot"],dataParsed["Year"],dataParsed["Rated"], dataParsed["Runtime"]))
+        cur.execute("""INSERT INTO movies (title, description, year, rated, runtime, poster) VALUES (%s, %s, %s, %s, %s, %s);""", (dataParsed["Title"],dataParsed["Plot"],dataParsed["Year"],dataParsed["Rated"], dataParsed["Runtime"],dataParsed["Poster"]))
         print("Added: ",dataParsed["Title"])
         genres = dataParsed["Genre"]
         genres = genres.split(", ")
