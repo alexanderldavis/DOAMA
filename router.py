@@ -4,12 +4,19 @@ import os
 import urllib.parse
 import json
 
+urllib.parse.uses_netloc.append("postgres")
+url = urllib.parse.urlparse(os.environ["DATABASE_URL"])
+conn = psycopg2.connect(database=url.path[1:],user=url.username,password=url.password,host=url.hostname,port=url.port)
+
+
 app = Flask(__name__)
 
 @app.route("/")
 def index():
-    res = []
-    return render_template('welcome.html', courseList = res, title="Top 5 Gened-Fulfilling Courses")
+    cur = conn.cursor()
+    cur.execute("""SELECT id, title, description, year, rated, runtime from movies where title = 'Avatar';""")
+    res = cur.fetchall()
+    return render_template('welcome.html', movieList = res)
 
 if __name__=='__main__':
     app.run(debug=True)

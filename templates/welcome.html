@@ -5,7 +5,6 @@
   one or more requirements that you would like to have fulfilled by a course. <br>Then, just click the corresponding search button!</p>
 
 <form class="form-inline" action="/searchCourses" method="get">
-<!-- <p>from</p><select></select><p>good for</p><select></select><p>who like</p><select></select><p>starring</p><select></select><p>streaming on</p><select></select> -->
     <p>Please show me movie recommendations that are...</p><br>
     <div class="form-group">
         <label for="timeSelect">Good For</label>
@@ -27,4 +26,16 @@
         </select>
     </div>
 </form>
+
+<div class="tablediv">
+    <h3>Now Showing Results for {{ title }}</h3>
+    <table class="table table-bordered table-hover table-striped table-condensed">
+      <tr><th>Title</th><th>Number</th><th>Fulfills</th></tr>
+      {% for (id, title, description, year, rated, runtime) in courseList %}
+        <tr><td>{{ title }}</td><td>{{ description }}</td><td>{{ year }}</td><td>{{ rated }}</td><td>{{ runtime }}</td></tr>
+      {% endfor %}
+    </table>
+  </div>
+
+
 {% endblock %}
