@@ -14,7 +14,7 @@ db = psycopg2.connect(database=url.path[1:],user=url.username,password=url.passw
 conn = db
 #################### CREATE TABLES / KNUTH ####################
 cur = conn.cursor()
-cur.execute("DROP table movies CASCADE; DROP table genres CASCADE; DROP table genres_movies CASCADE;")
+# cur.execute("DROP table movies CASCADE; DROP table genres CASCADE; DROP table genres_movies CASCADE; DROP table actors CASCADE; DROP table actors_movies CASCADE;")
 print("TABLES DELETED")
 cur.execute("""CREATE table movies (id serial unique, title varchar(100), description text, year varchar(4), rated varchar(50), runtime varchar(50)); """)
 cur.execute("""CREATE table genres (id serial unique, name varchar(20)); CREATE table genres_movies (movieid int, genreid int, FOREIGN KEY (movieid) references movies(id), FOREIGN KEY (genreid) references genres(id), primary key (movieid, genreid));""")
