@@ -31,7 +31,7 @@
     <h3>Now Showing Results for {{ title }}</h3>
     <table class="table table-bordered table-hover table-striped table-condensed">
       <tr><th>Title</th><th>Number</th><th>Fulfills</th></tr>
-      {% for (id, title, description, year, rated, runtime) in courseList %}
+      {% for (id, title, description, year, rated, runtime) in movieList %}
         <tr><td>{{ title }}</td><td>{{ description }}</td><td>{{ year }}</td><td>{{ rated }}</td><td>{{ runtime }}</td></tr>
       {% endfor %}
     </table>
