@@ -21,6 +21,13 @@ def index():
 
     return render_template('welcome.html', genreList = genreList)
 
+@app.route("/search")
+def search():
+    cur = conn.cursor()
+    cur.execute("""SELECT id, title, poster, rated from movies where title = 'Avatar'""")
+    res = cur.fetchall()
+    return render_template('searchresults.html', movieList = res)
+
 @app.route("/searchMovie")
 def searchMovie():
     args = request.url.split('?')[1]
@@ -30,7 +37,7 @@ def searchMovie():
     cur = conn.cursor()
     cur.execute("""SELECT id, title, poster, rated FROM movies where title like '%"""+title+"""%'""")
     res = cur.fetchall()
-    return render_template('welcome.html', movieList = res)
+    return render_template('searchresults.html', movieList = res)
 
 if __name__=='__main__':
     app.run(debug=True)
