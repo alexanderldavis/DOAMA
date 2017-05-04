@@ -4,7 +4,7 @@
 <p>Hello! Welcome to the All College Requirements Project. To use, simply enter in a course <br>name OR select
   one or more requirements that you would like to have fulfilled by a course. <br>Then, just click the corresponding search button!</p>
 
-<form class="form-inline" action="/searchCourses" method="get">
+<form class="form-inline loadText" action="/searchCourses" method="get">
     <p>Please show me movie recommendations that are...</p><br>
     <div class="form-group">
         <label for="timeSelect">Good For</label>
@@ -27,13 +27,13 @@
     </div>
 </form>
 
-<p>Or, search for a Movie:</p>
-<form class="form-inline" action="/searchMovie" method="get">
-  <input class="form-control" type="text" name="movietitle" value="" placeholder="Movie Title">
-  <input type="submit" name="" class="btn btn-primary" id="submitRequirements" value = "Search for Requirement">
+<p class="loadText" >Or, search for a Movie:</p>
+<form class="form-inline loadText" action="/searchMovie" method="get">
+  <input class="form-control loadText" type="text" name="movietitle" value="" placeholder="Movie Title">
+  <input type="submit" name="" class="btn btn-primary loadText" id="submitRequirements" value = "Search for Requirement">
 </form>
 
-<div class="tablediv">
+<div class="tablediv loadText">
     <h3>Now Showing Results for {{ title }}</h3>
     <table class="table table-bordered table-hover table-striped table-condensed">
       {% for (id, title, poster, rated) in movieList %}
@@ -44,7 +44,7 @@
 
       {% endfor %}
     </table>
-  </div>
+</div>
 
 
 {% endblock %}
