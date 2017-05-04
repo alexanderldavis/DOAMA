@@ -26,7 +26,7 @@ def searchMovie():
     title = title.title()
     title = title.replace("+", " ")
     cur = conn.cursor()
-    cur.execute("""SELECT id, title, poster, rated FROM movies where title like %s""", (title,))
+    cur.execute("""SELECT id, title, poster, rated FROM movies where title like '%"""+title+"""%'""")
     res = cur.fetchall()
     return render_template('welcome.html', movieList = res)
 
