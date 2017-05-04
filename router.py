@@ -23,6 +23,8 @@ def index():
 def searchMovie():
     args = request.url.split('?')[1]
     title = args.split("=")[1]
+    title = title.title()
+    title = title.replace("+", " ")
     cur = conn.cursor()
     cur.execute("""SELECT id, title, poster, rated FROM movies where title = %s""", (title,))
     res = cur.fetchall()
