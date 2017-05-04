@@ -54,22 +54,25 @@
   }
 
 </style>
-<div class="tablediv loadText" onload="loadFunction()" style="margin:0;">
-    <div id ="loader"></div>
-    <div class="animate-bottom" id="myDiv" style="display:none;">
-      <h3>Now Showing Results for {{ title }}</h3>
-      <table class="table table-bordered table-hover table-striped table-condensed">
-        {% for (id, title, poster, rated) in movieList %}
-        <div class="floated_img">
-          <a href="http://www.projectdoama.com/movieInfo/{{id}}"><img width="150" height="200" class="movieName" src="{{ poster }}" alt="Poster for {{ title }}"></a>
-          <p>{{ title }} [{{ rated }}]</p>
-        </div>
+<div onload="loadFunction()">
+  <div class="tablediv loadText" onload="loadFunction()" style="margin:0;">
+      <div id ="loader"></div>
+      <div class="animate-bottom" id="myDiv" style="display:none;">
+        <h3>Now Showing Results for {{ title }}</h3>
+        <table class="table table-bordered table-hover table-striped table-condensed">
+          {% for (id, title, poster, rated) in movieList %}
+          <div class="floated_img">
+            <a href="http://www.projectdoama.com/movieInfo/{{id}}"><img width="150" height="200" class="movieName" src="{{ poster }}" alt="Poster for {{ title }}"></a>
+            <p>{{ title }} [{{ rated }}]</p>
+          </div>
 
-        {% endfor %}
-      </table>
-    </div>
+          {% endfor %}
+        </table>
+      </div>
 
+  </div>
 </div>
+
 
 <script>
 var myVar;
