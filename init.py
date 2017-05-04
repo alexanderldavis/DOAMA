@@ -6,6 +6,7 @@ from bs4 import BeautifulSoup
 import urllib.parse
 import requests as req
 import json
+from canistreamit import search, streaming, rental, purchase, dvd, xfinity
 
 urllib.parse.uses_netloc.append("postgres")
 url = urllib.parse.urlparse(os.environ["DATABASE_URL"])
@@ -19,6 +20,8 @@ print("TABLES DELETED")
 cur.execute("""CREATE table movies (id serial unique, title varchar(100), description text, year varchar(40), rated varchar(50), runtime varchar(50), poster varchar(200));""")
 cur.execute("""CREATE table genres (id serial unique, name varchar(20)); CREATE table genres_movies (movieid int, genreid int, FOREIGN KEY (movieid) references movies(id), FOREIGN KEY (genreid) references genres(id), primary key (movieid, genreid));""")
 cur.execute("""CREATE table actors (id serial unique, name varchar(99)); CREATE table actors_movies (movieid int, actorid int, FOREIGN KEY (movieid) references movies(id), FOREIGN KEY (actorid) references actors(id), primary key (movieid, actorid));""")
+cur.execute("""CREATE table services_movies (movie_id FOREIGN key, service_id FOREIGN key)""")
+cur.execute("""CREATE table services (id serial unique, name text)""")
 print("TABLES CREATED")
 conn.commit()
 t = req.get('http://www.theyshootpictures.com/gf1000_all1000films_table.php')
@@ -44,6 +47,19 @@ for i in range(1,len(data)):
     res = req.get("http://www.omdbapi.com/?t={}".format(movieName))
     dataParsed = json.loads(res.text)
     if dataParsed["Response"] != "False":
+        # search for availability in different gate
+        movie=search(dataParsed['Title'])[0]
+        streamingList=movie['_id'].keys()
+        rentalList=movie['_id'].keys()
+        purchaseList=movie['_id'].keys()
+        dvdList=dvd(movie['_id'])
+        cableList=xfinity(movie['_id'])
+        for li in [streamingList,rentalList,purchaseList,dvdList,cableList]:
+            if li!=[]:
+                for key in li:
+                    print(li[key])
+                    cur.execute("""INSERT INTO services(name) VALUES (%s);""",(li[key]));
+                    cur.execute("""INSERT INTO services_movies(movie_id,service_id) VALUES ((select id from movies where title=%s),(select id from services where name=%s));""",(dataParsed['title'],li[key])
         totalnumoffilms+=1
         if dataParsed["Poster"] != "N/A":
             cur.execute("""INSERT INTO movies (title, description, year, rated, runtime, poster) VALUES (%s, %s, %s, %s, %s, %s);""", (dataParsed["Title"],dataParsed["Plot"],dataParsed["Year"],dataParsed["Rated"], dataParsed["Runtime"],dataParsed["Poster"]))
