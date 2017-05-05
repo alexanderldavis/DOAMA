@@ -18,8 +18,9 @@ def index():
     # cur.execute("""SELECT id, title, poster, rated FROM movies where title = 'Avatar';""")
     cur.execute("""SELECT * from genres;""")
     genreList = cur.fetchall()
-
-    return render_template('welcome.html', genreList = genreList)
+    cur.execute("""SELECT * from services;""")
+    serviceList=cur.fetchall()
+    return render_template('welcome.html', genreList = genreList,serviceList=serviceList)
 
 @app.route("/search")
 def search():

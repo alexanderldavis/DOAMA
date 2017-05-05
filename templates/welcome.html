@@ -24,6 +24,9 @@
     <div class="form-group">
         <label for="serviceSelect">Streaming Service</label>
         <select multiple class="form-control" name="service" id="serviceSelect">
+          {% for (id, service) in serviceList %}
+          <option value="{{id}}">{{service}}</option>
+          {% endfor %}
         </select>
     </div>
     <input type="submit" name="" class="btn btn-primary loadText" id="submitQuery" value = "Find a Movie!">
