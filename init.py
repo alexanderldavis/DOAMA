@@ -24,6 +24,11 @@ cur.execute("""CREATE table services_movies (movie_id FOREIGN key, service_id FO
 cur.execute("""CREATE table services (id serial unique, name text)""")
 print("TABLES CREATED")
 conn.commit()
+watchingOptions=['netflix_instant','amazon_prime_instant_video','hulu_movies','crackle','youtube_free','epix','streampix','snagfilms','fandor_streaming','amazon_video_rental','apple_itunes_rental','android_rental','vudu_rental','youtube_rental','sony_rental','vimeo_vod_rental','amazon_video_purchase','apple_itunes_purchase','android_purchase','vudu_purchase','xbox_purchase','sony_purchase','vimeo_vod_purchase\
+','amazon_dvd','amazon_bluray','netflix_dvd','redbox','hbo','showtime','cinemax','starz','encore','xfinity_free']
+for option in watchingOptions:
+    cur.execute("""INSERT INTO services(name) VALUES (%s);""",(option))
+    print(option)
 t = req.get('http://www.theyshootpictures.com/gf1000_all1000films_table.php')
 print("LIST SCRAPED FROM SOURCE")
 soup=BeautifulSoup(t.text)
@@ -58,8 +63,8 @@ for i in range(1,len(data)):
             if li!=[]:
                 for key in li:
                     print(li[key])
-                    cur.execute("""INSERT INTO services(name) VALUES (%s);""",(li[key]))
-                    cur.execute("""INSERT INTO services_movies(movie_id,service_id) VALUES ((select id from movies where title=%s),(select id from services where name=%s));""",(dataParsed['title'],li[key])
+                    # cur.execute("""INSERT INTO services(name) VALUES (%s);""",(li[key]))
+                    cur.execute("""INSERT INTO services_movies(movie_id,service_id) VALUES ((select id from movies where title=%s),(select id from services where name=%s));""",(dataParsed['title'],li[key]))
         totalnumoffilms+=1
         if dataParsed["Poster"] != "N/A":
             cur.execute("""INSERT INTO movies (title, description, year, rated, runtime, poster) VALUES (%s, %s, %s, %s, %s, %s);""", (dataParsed["Title"],dataParsed["Plot"],dataParsed["Year"],dataParsed["Rated"], dataParsed["Runtime"],dataParsed["Poster"]))
