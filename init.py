@@ -15,7 +15,7 @@ db = psycopg2.connect(database=url.path[1:],user=url.username,password=url.passw
 conn = db
 #################### CREATE TABLES / KNUTH ####################
 cur = conn.cursor()
-cur.execute("DROP table movies CASCADE; DROP table genres CASCADE; DROP table genres_movies CASCADE; DROP table actors CASCADE; DROP table actors_movies CASCADE;")
+cur.execute("DROP table services CASCADE; DROP table services_movies CASCADE; DROP table movies CASCADE; DROP table genres CASCADE; DROP table genres_movies CASCADE; DROP table actors CASCADE; DROP table actors_movies CASCADE;")
 print("TABLES DELETED")
 cur.execute("""CREATE table movies (id serial unique, title varchar(100), description text, year varchar(40), rated varchar(50), runtime varchar(50), poster varchar(200));""")
 cur.execute("""CREATE table genres (id serial unique, name varchar(20)); CREATE table genres_movies (movieid int, genreid int, FOREIGN KEY (movieid) references movies(id), FOREIGN KEY (genreid) references genres(id), primary key (movieid, genreid));""")
@@ -27,7 +27,7 @@ conn.commit()
 watchingOptions=['netflix_instant','amazon_prime_instant_video','hulu_movies','crackle','youtube_free','epix','streampix','snagfilms','fandor_streaming','amazon_video_rental','apple_itunes_rental','android_rental','vudu_rental','youtube_rental','sony_rental','vimeo_vod_rental','amazon_video_purchase','apple_itunes_purchase','android_purchase','vudu_purchase','xbox_purchase','sony_purchase','vimeo_vod_purchase\
 ','amazon_dvd','amazon_bluray','netflix_dvd','redbox','hbo','showtime','cinemax','starz','encore','xfinity_free']
 for option in watchingOptions:
-    cur.execute("""INSERT INTO services(name) VALUES (%s);""",(option))
+    cur.execute("""INSERT INTO services(name) VALUES (%s);""",(option,))
     print(option)
 t = req.get('http://www.theyshootpictures.com/gf1000_all1000films_table.php')
 print("LIST SCRAPED FROM SOURCE")
