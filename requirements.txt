@@ -1,12 +1,13 @@
 appdirs==1.4.3
 beautifulsoup4==4.5.3
 bs4==0.0.1
+canistreamit=0.2
 click==6.7
 ez-setup==0.9
 Flask==0.12.1
 gunicorn==19.7.1
 itsdangerous==0.24
-Jinja2==2.9.6
+Jinja2==2.9.6s
 MarkupSafe==1.0
 packaging==16.8
 psycopg2==2.7.1
