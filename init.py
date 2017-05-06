@@ -51,9 +51,12 @@ for i in range(1,len(data)):
     movieName = movieName.replace(" ", "+")
     res = req.get("http://www.omdbapi.com/?t={}".format(movieName))
     dataParsed = json.loads(res.text)
+
     if dataParsed["Response"] != "False":
+        print(dataParsed(['Title']))
         # search for availability in different gate
         movie=search(dataParsed['Title'])[0]
+        print(movie)
         streamingList=streaming(movie['_id']).keys()
         rentalList=rental(movie['_id']).keys()
         purchaseList=purchase(movie['_id']).keys()
