@@ -7,7 +7,7 @@ ez-setup==0.9
 Flask==0.12.1
 gunicorn==19.7.1
 itsdangerous==0.24
-Jinja2==2.9.6s
+Jinja2==2.9.6
 MarkupSafe==1.0
 packaging==16.8
 psycopg2==2.7.1
