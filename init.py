@@ -53,21 +53,22 @@ for i in range(1,len(data)):
     dataParsed = json.loads(res.text)
 
     if dataParsed["Response"] != "False":
-        print(dataParsed["Title"])
+        print(dataParsed['Title'])
         # search for availability in different gate
-        movie=search(dataParsed["Title"])[0]
+        movie=search(dataParsed['Title'])[0]
         print(movie)
-        streamingList=streaming(movie['_id']).keys()
-        rentalList=rental(movie['_id']).keys()
-        purchaseList=purchase(movie['_id']).keys()
+        streamingList=streaming(movie['_id'])
+        rentalList=rental(movie['_id'])
+        purchaseList=purchase(movie['_id'])
         dvdList=dvd(movie['_id'])
         cableList=xfinity(movie['_id'])
         for li in [streamingList,rentalList,purchaseList,dvdList,cableList]:
             if li!=[]:
-                for key in li:
+                keys=li.keys()
+                for key in keys:
                     print(li[key])
                     # cur.execute("""INSERT INTO services(name) VALUES (%s);""",(li[key]))
-                    cur.execute("""INSERT INTO services_movies(movie_id,service_id) VALUES ((select id from movies where title=%s),(select id from services where name=%s));""",(dataParsed['title'],li[key]))
+                    cur.execute("""INSERT INTO services_movies(movie_id,service_id) VALUES ((select id from movies where title=%s),(select id from services where name=%s));""",(dataParsed['Title'],li[key]))
         totalnumoffilms+=1
         if dataParsed["Poster"] != "N/A":
             cur.execute("""INSERT INTO movies (title, description, year, rated, runtime, poster) VALUES (%s, %s, %s, %s, %s, %s);""", (dataParsed["Title"],dataParsed["Plot"],dataParsed["Year"],dataParsed["Rated"], dataParsed["Runtime"],dataParsed["Poster"]))
