@@ -66,9 +66,8 @@ for i in range(1,len(data)):
             if li!=[]:
                 keys=li.keys()
                 for key in keys:
-                    print(li[key])
                     # cur.execute("""INSERT INTO services(name) VALUES (%s);""",(li[key]))
-                    cur.execute("""INSERT INTO services_movies(movie_id,service_id) VALUES ((select id from movies where title=%s),(select id from services where name=%s));""",(dataParsed['Title'],li[key]))
+                    cur.execute("""INSERT INTO services_movies(movie_id,service_id) VALUES ((select id from movies where title=%s),(select id from services where name=%s));""",(dataParsed['Title'],key))
         totalnumoffilms+=1
         if dataParsed["Poster"] != "N/A":
             cur.execute("""INSERT INTO movies (title, description, year, rated, runtime, poster) VALUES (%s, %s, %s, %s, %s, %s);""", (dataParsed["Title"],dataParsed["Plot"],dataParsed["Year"],dataParsed["Rated"], dataParsed["Runtime"],dataParsed["Poster"]))
