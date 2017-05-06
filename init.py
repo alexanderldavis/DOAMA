@@ -53,9 +53,9 @@ for i in range(1,len(data)):
     dataParsed = json.loads(res.text)
 
     if dataParsed["Response"] != "False":
-        print(dataParsed(['Title']))
+        print(dataParsed(["title"]))
         # search for availability in different gate
-        movie=search(dataParsed['Title'])[0]
+        movie=search(dataParsed["title"])[0]
         print(movie)
         streamingList=streaming(movie['_id']).keys()
         rentalList=rental(movie['_id']).keys()
