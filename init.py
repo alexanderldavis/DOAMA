@@ -54,9 +54,9 @@ for i in range(1,len(data)):
     if dataParsed["Response"] != "False":
         # search for availability in different gate
         movie=search(dataParsed['Title'])[0]
-        streamingList=movie['_id'].keys()
-        rentalList=movie['_id'].keys()
-        purchaseList=movie['_id'].keys()
+        streamingList=stream(movie['_id']).keys()
+        rentalList=rental(movie['_id']).keys()
+        purchaseList=purchase(movie['_id']).keys()
         dvdList=dvd(movie['_id'])
         cableList=xfinity(movie['_id'])
         for li in [streamingList,rentalList,purchaseList,dvdList,cableList]:
