@@ -21,7 +21,9 @@ def index():
     genreList = cur.fetchall()
     cur.execute("""SELECT * from services;""")
     serviceList=cur.fetchall()
-    return render_template('welcome.html', genreList = genreList,serviceList=serviceList)
+    cur.execute("""SELECT name from activities;""")
+    activityList=cur.fetchall()
+    return render_template('welcome.html', genreList = genreList,serviceList=serviceList,activityList=activityList)
 
 # @app.route("/activitysearch")
 # def activity():
@@ -31,7 +33,13 @@ def index():
 @app.route("/search")
 def search():
     cur = conn.cursor()
+    activity=request.args['selected_activity']
+    goodfor=request.args['group']
+    genre=request.args['genre']
+    starring=request.args['actor']
+    print(activity,goodfor,genre,starring)
     cur.execute("""SELECT id, title, poster, rated from movies where title = 'Avatar';""")
+    cur.execute("")
     res = cur.fetchall()
     return render_template('searchresults.html', movieList = res)
 

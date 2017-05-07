@@ -4,8 +4,9 @@
 <br><br>
 <form class="form-inline loadText" action="/activitysearch" method="post">
   <label for="activityselect" style="font-size: 20pt;">I need a movie for my </label>
-  <select style="font-family: 'Source Sans Pro', sans-serif; font-size: 15pt;" class="form-control" name="">
-    <option value="">Family Night</option>
+  <select style="font-family: 'Source Sans Pro', sans-serif; font-size: 15pt;" class="form-control" name="selected_activity">
+    {%for activities in activityList%}
+    <option value="{{activity}}">{{activity}}</option>
   </select>
   <br>
   <div class="form-group">
@@ -18,7 +19,11 @@
     <h5>Or, show me movie recommendations that are...</h5>
     <div class="form-group">
         <label for="timeSelect">Good For</label>
-        <select class="form-control" name="time" id="timeSelect">
+        <select class="form-control" name="group" id="timeSelect">
+          <option value="Family">Family</option>
+          <option value="Couple">Couple</option>
+          <option value="Children">Children</option>
+          <option value="Adults">Adults</option>
         </select>
     </div>
     <div class="form-group">
@@ -31,7 +36,7 @@
     </div>
     <div class="form-group">
         <label for="actorInput">Starring</label>
-        <input class="form-control" type="text" name="actors" id="actorInput" placeholder="Names separated by commas">
+        <input class="form-control" type="text" name="actor" id="actorInput" placeholder="Names separated by commas">
         <input type="submit" name="" class="btn btn-primary" id="submitQuery" value = "Find a Movie!">
     </div>
 </form>
