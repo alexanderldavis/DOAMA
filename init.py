@@ -16,14 +16,15 @@ conn = db
 #################### CREATE TABLES / KNUTH ####################
 cur = conn.cursor()
 # cur.execute("DROP table services CASCADE; DROP table acitvities CASCADE; DROP table activities_movies CASCADE;DROP table services_movies CASCADE; DROP table movies CASCADE; DROP table genres CASCADE; DROP table genres_movies CASCADE; DROP table actors CASCADE; DROP table actors_movies CASCADE;")
+cur.execute("drop table if exists activities_movies; drop table if exists services_movies;")
 print("TABLES DELETED")
 cur.execute("""drop table if exists movies; CREATE table movies (id serial unique, title varchar(100), description text, year varchar(40), rated varchar(50), runtime varchar(50), poster varchar(200));""")
 cur.execute("""drop table if exists genres; CREATE table genres (id serial unique, name varchar(20)); CREATE table genres_movies (movieid int, genreid int, FOREIGN KEY (movieid) references movies(id), FOREIGN KEY (genreid) references genres(id), primary key (movieid, genreid));""")
 cur.execute("""drop table if exists actors; CREATE table actors (id serial unique, name varchar(99)); CREATE table actors_movies (movieid int, actorid int, FOREIGN KEY (movieid) references movies(id), FOREIGN KEY (actorid) references actors(id), primary key (movieid, actorid));""")
 cur.execute("""drop table if exists services; CREATE table services (id serial unique, name text);""")
 cur.execute("""drop table if exists activities; CREATE table activities (id serial unique, name text);""")
-cur.execute("""drop table if exists services_movies; CREATE table services_movies (movie_id int, FOREIGN key(movie_id) references movies(id), service_id int, FOREIGN key(service_id) references services(id));""")
-cur.execute("""drop table if exists activities_movies; CREATE table activities_movies (movie_id int, FOREIGN key (movie_id) references movies(id), activity_id text, FOREIGN key(activity_id) references activities(id));""")
+cur.execute(""" CREATE table services_movies (movie_id int, FOREIGN key(movie_id) references movies(id), service_id int, FOREIGN key(service_id) references services(id));""")
+cur.execute("""CREATE table activities_movies (movie_id int, FOREIGN key (movie_id) references movies(id), activity_id text, FOREIGN key(activity_id) references activities(id));""")
 print("TABLES CREATED")
 conn.commit()
 # create table for streaming channels
