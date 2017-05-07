@@ -11,6 +11,7 @@ conn = psycopg2.connect(database=url.path[1:],user=url.username,password=url.pas
 
 app = Flask(__name__)
 
+### WELCOME ###
 @app.route("/")
 def index():
     cur = conn.cursor()
@@ -22,6 +23,7 @@ def index():
     serviceList=cur.fetchall()
     return render_template('welcome.html', genreList = genreList,serviceList=serviceList)
 
+### SEARCH FOR RECCOMMENDATONS ###
 @app.route("/search")
 def search():
     cur = conn.cursor()
@@ -29,6 +31,7 @@ def search():
     res = cur.fetchall()
     return render_template('searchresults.html', movieList = res)
 
+### SEARCH FOR KNOWN MOVIE ###
 @app.route("/searchMovie")
 def searchMovie():
     args = request.url.split('?')[1]
@@ -39,6 +42,13 @@ def searchMovie():
     cur.execute("""SELECT id, title, poster, rated FROM movies where title like '%"""+title+"""%'""")
     res = cur.fetchall()
     return render_template('searchresults.html', movieList = res)
+
+### SHOW MOVIE INFORMATION ###
+@app.route("/movieInfo/<id>")
+def showMovieInfo(id):
+
+    return render_template('getmovieinfo.html', movieInformation = res)
+
 
 if __name__=='__main__':
     app.run(debug=True)
