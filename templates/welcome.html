@@ -4,10 +4,14 @@
 <br><br>
 <form class="form-inline loadText" action="/activitysearch" method="post">
   <label for="activityselect" style="font-size: 20pt;">I need a movie for my </label>
-  <select class="form-control" name="">
-    <option style="font-family: 'Source Sans Pro', sans-serif; font-size: 20pt; background-color:rgba(0, 0, 0, 0.5);" value="">Family Night</option>
+  <select style="font-family: 'Source Sans Pro', sans-serif; font-size: 20pt; background-color:rgba(0, 0, 0, 0.5);" class="form-control" name="">
+    <option value="">Family Night</option>
 
   </select>
+  <br>
+  <div class="form-control">
+    <input style="font-family: 'Source Sans Pro', sans-serif; font-size: 20pt;" type="submit" name="" class="btn btn-primary" id="submitActivityQuery" value = "DECIDE ON A MOVIE!">
+  </div>
 </form>
 <br><br><br>
 <form class="form-inline loadText1" action="/search" method="get">
@@ -32,7 +36,7 @@
     </div>
 </form>
 <br>
-<h6 class="form-inline loadText1">Or, search for a Movie:</h6>
+<h6 class="form-inline loadText2">Or, search for a Movie:</h6>
 <form class="form-inline loadText1" style = "margin-top:0;"action="/searchMovie" method="get">
   <input id="idmoviesearch" class="form-control" type="text" name="movietitle" value="" placeholder="Movie Title">
   <input type="submit" name="" class="btn btn-primary" id="submitMovieSearch" value = "Search for Movie">
