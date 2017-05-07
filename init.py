@@ -35,9 +35,9 @@ for option in watchingOptions:
     print(option)
 
 # create tables for activity:
-activityList=['Family+night','Girls+night','Date+night','Nerd+night',"Guys'+party",'Cultured+movie+night','Surprise+me']
+activityList=['Family+night','Girls+night','Date+night','Nerd+night',"Guys+party",'Cultured+movie+night','Surprise+me']
 for activity in activityList:
-    cur.execute("""INSERT into activities(name) VALUES (%s);"""%activity)
+    cur.execute("""INSERT into activities(name) VALUES (%s);""",(activity,))
 
 t = req.get('http://www.theyshootpictures.com/gf1000_all1000films_table.php')
 print("LIST SCRAPED FROM SOURCE")
@@ -103,7 +103,7 @@ for i in range(1,len(data)):
         if "Mistery" in genres or "Sci-Fi" in genres or "Crime" in genres or "Comedy" in genres or "Adventure"in genres or "Documentary" in genres or "War" in genres or "Biography" in genres:
                 cur.execute("""INSERT INTO activities_movies(movie_id,activity_id) VALUES ((SELECT id FROM movies WHERE title=%s),(SELECT id FROM activity WHERE name="Nerd night"))"""%dataParsed['Title'])
         if "Comedy" in genres or "Horror" in genres or "Thriller" in genres or "Adventure" in genres:
-                cur.execute("""INSERT INTO activities_movies(movie_id,activity_id) VALUES ((SELECT id FROM movies WHERE title=%s),(SELECT id FROM activity WHERE name="Guys' party"))"""%dataParsed['Title'])
+                cur.execute("""INSERT INTO activities_movies(movie_id,activity_id) VALUES ((SELECT id FROM movies WHERE title=%s),(SELECT id FROM activity WHERE name="Guy party"))"""%dataParsed['Title'])
         if "Western" in genres or "War" in genres or "Short" in genres:
                 cur.execute("""INSERT INTO activities_movies(movie_id,activity_id) VALUES ((SELECT id FROM movies WHERE title=%s),(SELECT id FROM activity WHERE name="Cultured movie night"))"""%dataParsed['Title'])
         if "Short" in genres or "Animation" in genres:
