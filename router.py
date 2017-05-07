@@ -23,9 +23,9 @@ def index():
     serviceList=cur.fetchall()
     return render_template('welcome.html', genreList = genreList,serviceList=serviceList)
 
-@app.route("/activitysearch")
-def activity():
-    return render_template('searchresults.html', movieList = res)
+# @app.route("/activitysearch")
+# def activity():
+#     return render_template('searchresults.html', movieList = res)
 
 ### SEARCH FOR RECCOMMENDATONS ###
 @app.route("/search")
@@ -48,10 +48,10 @@ def searchMovie():
     return render_template('searchresults.html', movieList = res)
 
 ### SHOW MOVIE INFORMATION ###
-@app.route("/movieInfo/<id>")
-def showMovieInfo(id):
-
-    return render_template('getmovieinfo.html', movieInformation = res)
+# @app.route("/movieInfo/<id>")
+# def showMovieInfo(id):
+#
+#     return render_template('getmovieinfo.html', movieInformation = res)
 
 
 if __name__=='__main__':

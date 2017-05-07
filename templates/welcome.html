@@ -4,7 +4,7 @@
 <form class="form-inline loadText" action="/activitysearch" method="post">
   <label for="activityselect" style="font-size: 20pt;">I need a movie for my</label>
   <select class="form-control" name="">
-    <option value="{{}}">Family Night</option>
+    <option value="">Family Night</option>
 
   </select>
 </form>
@@ -36,19 +36,5 @@
   <input id="idmoviesearch" class="form-control" type="text" name="movietitle" value="" placeholder="Movie Title">
   <input type="submit" name="" class="btn btn-primary" id="submitMovieSearch" value = "Search for Movie">
 </form>
-
-<!-- <div class="tablediv loadText">
-    <h3>Now Showing Results for {{ title }}</h3>
-    <table class="table table-bordered table-hover table-striped table-condensed">
-      {% for (id, title, poster, rated) in movieList %}
-      <div class="floated_img">
-        <a href="http://www.projectdoama.com/movieInfo/{{id}}"><img width="150" height="200" class="movieName" src="{{ poster }}" alt="Poster for {{ title }}"></a>
-        <p>{{ title }} [{{ rated }}]</p>
-      </div>
-
-      {% endfor %}
-    </table>
-</div> -->
-
 
 {% endblock %}
