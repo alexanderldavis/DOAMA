@@ -95,7 +95,7 @@ for i in range(1,len(data)):
         if "Adventure" in genres or "Comedy" in genres or "Mistery" in genres or "Fantasy" in genres or "Animation" in genres:
             if dataParsed['Rated']=="PG13" or dataParsed['Rated']=='PG':
                 cur.execute("""INSERT INTO activities_movies(movie_id,activity_id) VALUES ((SELECT id FROM movies WHERE title=%s),(SELECT id FROM activity WHERE name="Family night"))"""%dataParsed['Title'])
-        elif "Romance" in genres or "Drama" in genres or "Comedy" in genres oor "Fantasy" in genres or "Animation" in genres:
+        elif "Romance" in genres or "Drama" in genres or "Comedy" in genres or "Fantasy" in genres or "Animation" in genres:
                 cur.execute("""INSERT INTO activities_movies(movie_id,activity_id) VALUES ((SELECT id FROM movies WHERE title=%s),(SELECT id FROM activity WHERE name="Girls night"))"""%dataParsed['Title'])
         elif "Romance" in genres or "Horror" in genres or "Drama" in genres or "Thriller" in genres or "Fantasy" in genres or "Animation" in genres:
                 cur.execute("""INSERT INTO activities_movies(movie_id,activity_id) VALUES ((SELECT id FROM movies WHERE title=%s),(SELECT id FROM activity WHERE name="Date night"))"""%dataParsed['Title'])
