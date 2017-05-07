@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block body %}
 <!DOCTYPE html>
+<br><br>
 <form class="form-inline loadText" action="/search" method="get">
     <h5>Please show me movie recommendations that are...</h5>
     <div class="form-group">
@@ -23,8 +24,8 @@
     </div>
 </form>
 <br>
+<h6 class="form-inline loadText">Or, search for a Movie:</h6>
 <form class="form-inline loadText" action="/searchMovie" method="get">
-  <label for="idmoviesearch">Or, search for a Movie:</label>
   <input id="idmoviesearch" class="form-control loadText" type="text" name="movietitle" value="" placeholder="Movie Title">
   <input type="submit" name="" class="btn btn-primary loadText" id="submitMovieSearch" value = "Search for Movie">
 </form>
