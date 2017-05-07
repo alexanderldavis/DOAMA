@@ -50,19 +50,19 @@
 
   #myDiv {
     display: none;
-    float: left;
+    
   }
 </style>
   <div class="tablediv loadText" onload="loadFunction()" style="margin:0;">
       <div id ="loader"></div>
       <div class="animate-bottom" id="myDiv" style="display:none;">
-        <h3>Now Showing Results for {{ title }}</h3>
+        <h3 style="text-align:center;">Now Showing Results for {{ title }}</h3>
         <!-- <table class="table table-bordered table-hover table-striped table-condensed"> -->
           <div>
             {% for (id, title, poster, rated) in movieList %}
               <div class="floated_img">
-              <a href="http://www.projectdoama.com/movieInfo/{{id}}"><img width="150" height="200" class="movieName" src="{{ poster }}" alt="Poster for {{ title }}"></a>
-              <h5>{{ title }} [{{ rated }}]</h5>
+                <a href="http://www.projectdoama.com/movieInfo/{{id}}"><img width="150" height="200" class="movieName" src="{{ poster }}" alt="Poster for {{ title }}"></a>
+                <h5>{{ title }} [{{ rated }}]</h5>
               </div>
             {% endfor %}
           </div>
