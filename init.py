@@ -64,6 +64,7 @@ for i in range(1,len(data)):
 
     if dataParsed["Response"] != "False":
         totalnumoffilms+=1
+        print(totalnumoffilms)
         if dataParsed["Poster"] != "N/A":
             cur.execute("""INSERT INTO movies (title, description, year, rated, runtime, poster) VALUES (%s, %s, %s, %s, %s, %s);""", (dataParsed["Title"],dataParsed["Plot"],dataParsed["Year"],dataParsed["Rated"], dataParsed["Runtime"],dataParsed["Poster"]))
         else:
@@ -72,7 +73,6 @@ for i in range(1,len(data)):
         print(dataParsed['Title'])
         # search for availability in different gate
         movie=search(dataParsed['Title'])[0]
-        print(movie)
         streamingList=streaming(movie['_id'])
         rentalList=rental(movie['_id'])
         purchaseList=purchase(movie['_id'])
@@ -95,19 +95,19 @@ for i in range(1,len(data)):
         # create entries for activities_movies table
         if "Adventure" in genres or "Comedy" in genres or "Mistery" in genres or "Fantasy" in genres or "Animation" in genres:
             if dataParsed['Rated']=="PG13" or dataParsed['Rated']=='PG':
-                cur.execute("""INSERT INTO activities_movies(movie_id,activity_id) VALUES ((SELECT id FROM movies WHERE title=%s),(SELECT id FROM activity WHERE name="Family night"))"""%dataParsed['Title'])
+                cur.execute("""INSERT INTO activities_movies(movie_id,activity_id) VALUES ((SELECT id FROM movies WHERE title='%s'),(SELECT id FROM activity WHERE name="Family night"))"""%dataParsed['Title'])
         if "Romance" in genres or "Drama" in genres or "Comedy" in genres or "Fantasy" in genres or "Animation" in genres:
-                cur.execute("""INSERT INTO activities_movies(movie_id,activity_id) VALUES ((SELECT id FROM movies WHERE title=%s),(SELECT id FROM activity WHERE name="Girls night"))"""%dataParsed['Title'])
+                cur.execute("""INSERT INTO activities_movies(movie_id,activity_id) VALUES ((SELECT id FROM movies WHERE title='%s'),(SELECT id FROM activity WHERE name="Girls night"))"""%dataParsed['Title'])
         if "Romance" in genres or "Horror" in genres or "Drama" in genres or "Thriller" in genres or "Fantasy" in genres or "Animation" in genres:
-                cur.execute("""INSERT INTO activities_movies(movie_id,activity_id) VALUES ((SELECT id FROM movies WHERE title=%s),(SELECT id FROM activity WHERE name="Date night"))"""%dataParsed['Title'])
+                cur.execute("""INSERT INTO activities_movies(movie_id,activity_id) VALUES ((SELECT id FROM movies WHERE title='%s'),(SELECT id FROM activity WHERE name="Date night"))"""%dataParsed['Title'])
         if "Mistery" in genres or "Sci-Fi" in genres or "Crime" in genres or "Comedy" in genres or "Adventure"in genres or "Documentary" in genres or "War" in genres or "Biography" in genres:
-                cur.execute("""INSERT INTO activities_movies(movie_id,activity_id) VALUES ((SELECT id FROM movies WHERE title=%s),(SELECT id FROM activity WHERE name="Nerd night"))"""%dataParsed['Title'])
+                cur.execute("""INSERT INTO activities_movies(movie_id,activity_id) VALUES ((SELECT id FROM movies WHERE title='%s'),(SELECT id FROM activity WHERE name="Nerd night"))"""%dataParsed['Title'])
         if "Comedy" in genres or "Horror" in genres or "Thriller" in genres or "Adventure" in genres:
-                cur.execute("""INSERT INTO activities_movies(movie_id,activity_id) VALUES ((SELECT id FROM movies WHERE title=%s),(SELECT id FROM activity WHERE name="Guy party"))"""%dataParsed['Title'])
+                cur.execute("""INSERT INTO activities_movies(movie_id,activity_id) VALUES ((SELECT id FROM movies WHERE title='%s'),(SELECT id FROM activity WHERE name="Guy party"))"""%dataParsed['Title'])
         if "Western" in genres or "War" in genres or "Short" in genres:
-                cur.execute("""INSERT INTO activities_movies(movie_id,activity_id) VALUES ((SELECT id FROM movies WHERE title=%s),(SELECT id FROM activity WHERE name="Cultured movie night"))"""%dataParsed['Title'])
+                cur.execute("""INSERT INTO activities_movies(movie_id,activity_id) VALUES ((SELECT id FROM movies WHERE title='%s'),(SELECT id FROM activity WHERE name="Cultured movie night"))"""%dataParsed['Title'])
         if "Short" in genres or "Animation" in genres:
-                cur.execute("""INSERT INTO activities_movies(movie_id,activity_id) VALUES ((SELECT id FROM movies WHERE title=%s),(SELECT id FROM activity WHERE name="Surprise me"))"""%dataParsed['Title'])
+                cur.execute("""INSERT INTO activities_movies(movie_id,activity_id) VALUES ((SELECT id FROM movies WHERE title='%s'),(SELECT id FROM activity WHERE name="Surprise me"))"""%dataParsed['Title'])
 
         actors = dataParsed["Actors"]
         actors = actors.split(", ")
