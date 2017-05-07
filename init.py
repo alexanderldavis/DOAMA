@@ -37,7 +37,7 @@ for option in watchingOptions:
 # create tables for activity:
 activityList=['Family+night','Girls+night','Date+night','Nerd+night',"Guys'+party",'Cultured+movie+night','Surprise+me']
 for activity in activityList:
-    cur.execute("""INSERT into acitivies(name) VALUES (%s);"""%activity)
+    cur.execute("""INSERT into activities(name) VALUES (%s);"""%activity)
 
 t = req.get('http://www.theyshootpictures.com/gf1000_all1000films_table.php')
 print("LIST SCRAPED FROM SOURCE")
