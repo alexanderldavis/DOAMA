@@ -66,10 +66,10 @@
             {% endfor %}
           </div> -->
 
-          <table border="0" cellpadding="5">
+          <table>
               <tr>
               {% for (id, title, poster, rated) in movieList %}
-              <td align="center" valign="center">
+              <td style="text-align: center;">
               <a href="http://www.projectdoama.com/movieInfo/{{id}}"><img width="150" height="200" class="movieName" src="{{ poster }}" alt="Poster for {{ title }}"></a>
               <br>
               <h5>{{ title }} [{{ rated }}]</h5>
