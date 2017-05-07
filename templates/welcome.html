@@ -1,9 +1,16 @@
 {% extends "base.html" %}
 {% block body %}
 <!DOCTYPE html>
-<br><br>
+<form class="form-inline loadText" action="/activitysearch" method="post">
+  <label for="activityselect" style="font-size: 20pt;">I need a movie for my</label>
+  <select class="form-control" name="">
+    <option value="{{}}">Family Night</option>
+
+  </select>
+</form>
+<br><br><br><br><br>
 <form class="form-inline loadText" action="/search" method="get">
-    <h5>Please show me movie recommendations that are...</h5>
+    <h5>Or, please show me movie recommendations that are...</h5>
     <div class="form-group">
         <label for="timeSelect">Good For</label>
         <select class="form-control" name="time" id="timeSelect">
@@ -26,8 +33,8 @@
 <br>
 <h6 class="form-inline loadText">Or, search for a Movie:</h6>
 <form class="form-inline loadText" style = "margin-top:0;"action="/searchMovie" method="get">
-  <input id="idmoviesearch" class="form-control loadText" type="text" name="movietitle" value="" placeholder="Movie Title">
-  <input type="submit" name="" class="btn btn-primary loadText" id="submitMovieSearch" value = "Search for Movie">
+  <input id="idmoviesearch" class="form-control" type="text" name="movietitle" value="" placeholder="Movie Title">
+  <input type="submit" name="" class="btn btn-primary" id="submitMovieSearch" value = "Search for Movie">
 </form>
 
 <!-- <div class="tablediv loadText">

@@ -23,6 +23,10 @@ def index():
     serviceList=cur.fetchall()
     return render_template('welcome.html', genreList = genreList,serviceList=serviceList)
 
+@app.route("/activitysearch")
+def activity():
+    return render_template('searchresults.html', movieList = res)
+
 ### SEARCH FOR RECCOMMENDATONS ###
 @app.route("/search")
 def search():
