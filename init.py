@@ -18,7 +18,7 @@ cur = conn.cursor()
 # cur.execute("DROP table services CASCADE; DROP table acitvities CASCADE; DROP table activities_movies CASCADE;DROP table services_movies CASCADE; DROP table movies CASCADE; DROP table genres CASCADE; DROP table genres_movies CASCADE; DROP table actors CASCADE; DROP table actors_movies CASCADE;")
 cur.execute("drop table if exists activities_movies; drop table if exists services_movies;drop table if exists genres_movies; drop table if exists actors_movies;")
 print("TABLES DELETED")
-cur.execute("""drop table if exists movies; CREATE table movies (id serial unique, title varchar(100), description text, year varchar(40), rated varchar(50), runtime varchar(50), poster varchar(200));""")
+cur.execute("""drop table if exists movies; CREATE table movies (id serial unique, title varchar(100), description text, year varchar(40), rated varchar(50), runtime varchar(50), poster varchar(200), rating int);""")
 cur.execute("""drop table if exists genres; CREATE table genres (id serial unique, name varchar(20)); CREATE table genres_movies (movieid int, genreid int, FOREIGN KEY (movieid) references movies(id), FOREIGN KEY (genreid) references genres(id), primary key (movieid, genreid));""")
 cur.execute("""drop table if exists actors; CREATE table actors (id serial unique, name varchar(99)); CREATE table actors_movies (movieid int, actorid int, FOREIGN KEY (movieid) references movies(id), FOREIGN KEY (actorid) references actors(id), primary key (movieid, actorid));""")
 cur.execute("""drop table if exists services; CREATE table services (id serial unique, name text);""")
@@ -38,16 +38,18 @@ activityList=['Family+night','Girls+night','Date+night','Nerd+night',"Guys+party
 for activity in activityList:
     cur.execute("""INSERT into activities(name) VALUES (%s);""",(activity,))
 
-t = req.get('http://www.theyshootpictures.com/gf1000_all1000films_table.php')
-print("LIST SCRAPED FROM SOURCE")
-soup=BeautifulSoup(t.text,"html.parser")
-soup.prettify()
-data=soup.find_all("td", { "class" : "csv_column_3" })
+# t = req.get('http://www.theyshootpictures.com/gf1000_all1000films_table.php')
+# print("LIST SCRAPED FROM SOURCE")
+# soup=BeautifulSoup(t.text,"html.parser")
+# soup.prettify()
+# data=soup.find_all("td", { "class" : "csv_column_3" })
+file=open("finalMovieList.txt","r")
+data=file.readlines()
 totalnumoffilms=0
 genreList = []
 actorList = []
 for i in range(1,len(data)):
-    movieName = data[i].get_text()
+    movieName = data[i].replace("\n","")
     finalString = ""
     if "," in movieName:
         s = movieName.split(", ")
@@ -63,11 +65,12 @@ for i in range(1,len(data)):
 
     if dataParsed["Response"] != "False":
         totalnumoffilms+=1
-        print(totalnumoffilms)
+        rottenTomatoes=dataParsed["Ratings"][1] #rating is taken from rotten tomatoes
+        rating=int(rottenTomatoes['Value'][:-1])
         if dataParsed["Poster"] != "N/A":
-            cur.execute("""INSERT INTO movies (title, description, year, rated, runtime, poster) VALUES (%s, %s, %s, %s, %s, %s);""", (dataParsed["Title"],dataParsed["Plot"],dataParsed["Year"],dataParsed["Rated"], dataParsed["Runtime"],dataParsed["Poster"]))
+            cur.execute("""INSERT INTO movies (title, description, year, rated, runtime, poster, rating) VALUES (%s, %s, %s, %s, %s, %s, %s);""", (dataParsed["Title"],dataParsed["Plot"],dataParsed["Year"],dataParsed["Rated"], dataParsed["Runtime"],dataParsed["Poster"],rating))
         else:
-            cur.execute("""INSERT INTO movies (title, description, year, rated, runtime, poster) VALUES (%s, %s, %s, %s, %s, %s);""", (dataParsed["Title"],dataParsed["Plot"],dataParsed["Year"],dataParsed["Rated"], dataParsed["Runtime"],"http://www.projectdoama.com/static/penguin.jpg"))
+            cur.execute("""INSERT INTO movies (title, description, year, rated, runtime, poster, rating) VALUES (%s, %s, %s, %s, %s, %s, %s);""", (dataParsed["Title"],dataParsed["Plot"],dataParsed["Year"],dataParsed["Rated"], dataParsed["Runtime"],"http://www.projectdoama.com/static/penguin.jpg",rating))
         print("Added: ",dataParsed["Title"])
         print(dataParsed['Title'])
         # search for availability in different gate

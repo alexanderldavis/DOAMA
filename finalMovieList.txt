@@ -1,500 +1,751 @@
-Ben-Hur
-Gone with the Wind
-Time of Violence
-The English Patient
-Schindler's List
-Saving Private Ryan
-The Deer Hunter
-The Elephant Man
-Midnight Express
-Titanic
-The Aviator
-Terms of Endearment
-American Beauty
-Forrest Gump
-Amadeus
-One Flew Over the Cuckoo's Nest
-Braveheart
-Gladiator
-Scarface
-There Will Be Blood
-The Godfather
-The Godfather: Part II
-The Pianist
-Das Boot
-Downfall
-The Lives of Others
-Bicycle Thieves
-The Best Years of Our Lives
-To Kill a Mockingbird
-It's a Wonderful Life
-All About Eve
-On the Waterfront
-A Streetcar Named Desire
-East of Eden
-Gentleman's Agreement
-The Sting
-Kramer vs. Kramer
-Ordinary People
-As Good as It Gets
-Groundhog Day
-Fight Club
-Gattaca
-The Matrix
-The Lord of the Rings: The Fellowship of the Ring
-The Lord of the Rings: The Two Towers
-The Lord of the Rings: The Return of the King
-Avatar
-Pan's Labyrinth
-Syriana
-The Talented Mr. Ripley
-Heat
-The Insider
-Goodfellas
-Casino
-The Departed
-Gangs of New York
-Raging Bull
-Taxi Driver
-Falling Down
-The Good Son
-The Devil's Advocate
-Philadelphia
-The Shawshank Redemption
-Eyes Wide Shut
-Full Metal Jacket
-Barry Lyndon
-Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb
-Paths of Glory
-Spartacus
-The Shining
-A Clockwork Orange
-2001: A Space Odyssey
-Lolita
-The Killing
-The Cranes Are Flying
-Z
-The Day of the Jackal
-Chinatown
-The Bridge on the River Kwai
-Doctor Zhivago
-Lawrence of Arabia
-A Passage to India
-Gandhi
-The Last Emperor
-Reds
-Departures
-A Man for All Seasons
-High Noon
-Apocalypse Now
-Dracula
-The Silence of the Lambs
-Network
-Dog Day Afternoon
-12 Angry Men
-The Grapes of Wrath
-The Searchers
-Once Upon a Time in America
-Once Upon a Time in the West
-The Good, the Bad and the Ugly
-Butch Cassidy and the Sundance Kid
-Unforgiven
-Mystic River
-Million Dollar Baby
-A Beautiful Mind
-A Separation
-12 Years a Slave
-The King's Speech
-Character
-Cinema Paradiso
-The World is Big and Salvation Lurks Around the Corner
-Viva Zapata!
-Giant
-Cat on a Hot Tin Roof
-Notorious
-Ikiru
-Dersu Uzala
-Rashomon
-Seven Samurai
-The Twilight Samurai
-Raise the Red Lantern
-Hero
-Battle Royale
-J.S.A.: Joint Security Area
-Memories of Murder
-Inglourious Basterds
-Kill Bill: Vol. 1
-Kill Bill: Vol. 2
-Pulp Fiction
-Reservoir Dogs
-Django Unchained
-JFK
-Any Given Sunday
-Wall Street
-Natural Born Killers
-Platoon
-Born on the Fourth of July
-Dead Poets Society
-Rain Man
-Broadcast News
-Mississippi Burning
-In the Heat of the Night
-Paper Moon
-The Last Picture Show
-The Getaway
-Guess Who's Coming to Dinner
-Midnight Cowboy
-Cool Hand Luke
-The Graduate
-Breakfast at Tiffany's
-Zorba the Greek
-Psycho
-Rear Window
-Rebecca
-The Bad and the Beautiful
-Rocky
-Lenny
-Marathon Man
-Ragtime
-Life Is Beautiful
-The Remains of the Day
-Malèna
-Two Women
-La Strada
-Fargo
-No Country for Old Men
-The Big Lebowski
-Burn After Reading
-Adaptation.
-Little Miss Sunshine
-La La Land
+Captain America: Civil War
+Rogue One
+The Jungle Book
+Batman v Superman: Dawn of Justice
+Fantastic Beasts and Where to Find Them
+Deadpool
+Suicide Squad
+Doctor Strange
+X-Men: Apocalypse
+Warcraft
+Jason Bourne
+Independence Day: Resurgence
+The Legend of Tarzan
+Star Trek Beyond
+Now You See Me 2
+Passengers
+Teenage Mutant Ninja Turtles: Out of the Shadows
+Assassin's Creed
+Ghostbusters
+Inferno
 Arrival
-Mr. Nobody
-Cloud Atlas
-Being John Malkovich
-Donnie Darko
-Rosemary's Baby
-The Sixth Sense
-Mulholland Dr.
-Blue Velvet
-Dogville
-Blood Diamond
-The Last King of Scotland
-Hotel Rwanda
-Man on Fire
-Training Day
-Léon: The Professional
-American Psycho
-The Game
-Snatch
-Tsotsi
-City of God
-Slumdog Millionaire
-The Secret in Their Eyes
-Talk to Her
-Broken Embraces
-Volver
-All About My Mother
-Bad Education
-The Skin I Live In
-The Sea Inside
-Her
-Vanilla Sky
-The Beach
-Good Will Hunting
-Scent of a Woman
-Reality Bites
-What's Eating Gilbert Grape
-The Straight Story
-About Schmidt
-Lost in Translation
-Moneyball
-Eternal Sunshine of the Spotless Mind
-L.A. Confidential
-The Usual Suspects
-The French Connection
-The Untouchables
-Witness
-Blow
-Big Fish
-Amélie
-Evil
-Let the Right One In
-Lagaan: Once Upon a Time in India
-The Help
-Into the Wild
-Revolutionary Road
-Road to Perdition
-Amores Perros
-21 Grams
-Babel
-In a Better World
-The Hunt
-Munich
-The Fighter
-Traffic
-Apocalypto
-Crash
-The Prestige
-Memento
-Black Swan
-The Wrestler
-Kolya
-In the Name of the Father
-The Social Network
-The Green Mile
-A.I. Artificial Intelligence
-Catch Me If You Can
-The Pursuit of Happyness
-Seven Pounds
-Capote
-Doubt
-The Truman Show
-Sling Blade
-Dances with Wolves
-Cold Mountain
-Dangerous Liaisons
-The Piano
-The Widow of Saint-Pierre
-Twin Sisters
-M
-Citizen Kane
-Sunset Blvd.
-The Apartment
-Roman Holiday
-The Lost Weekend
-The Wages of Fear
-The 400 Blows
-The Discreet Charm of the Bourgeoisie
-Belle de Jour
-Tristana
-That Obscure Object of Desire
-The Battle of Algiers
-The Great Escape
-The Treasure of the Sierra Madre
-The African Queen
-The Man Who Would Be King
-Master and Commander: The Far Side of the World
-The Mission
-Glory
-Raiders of the Lost Ark
-Amistad
-War Horse
-The Color Purple
-Pirates of the Caribbean: The Curse of the Black Pearl
-Troy
-Australia
-Crouching Tiger, Hidden Dragon
-Elizabeth
-American History X
-La Haine
-The Verdict
-Erin Brockovich
-Trainspotting
-The Acid House
-Rise of the Footsoldier
-La Femme Nikita
-Se7en
-The Fugitive
-Mission: Impossible
-Double Indemnity
-Witness for the Prosecution
-Peeping Tom
-The Exorcist
-Carrie
-Alien
-Blade Runner
-Twelve Monkeys
-The Reader
-The Constant Gardener
-Atonement
-Up in the Air
-The Assassination of Jesse James by the Coward Robert Ford
-Letters from Iwo Jima
-Dirty Pretty Things
-Inside Man
-Aliens
-The Abyss
-Contact
-Inception
-Insomnia
-U Turn
-I Am Sam
-Mamma Mia!
-Spanglish
-In Bruges
-The Next Three Days
-Biutiful
-The Artist
-The Master
-Boogie Nights
-The People vs. Larry Flynt
-Cast Away
-Flight
-The Devil Wears Prada
-Before the Devil Knows You're Dead
-25th Hour
-127 Hours
-28 Days Later...
-Unbreakable
-The Girl with the Dragon Tattoo
-The Man Who Wasn't There
-Cinderella Man
-The Hours
-La Vie en Rose
-The Intouchables
-The Diving Bell and the Butterfly
-A Prophet
-Joyeux Noel
-No Man's Land
-Before the Rain
-Paradise Now
-The Motorcycle Diaries
-Nowhere in Africa
-Amen.
-Sophie Scholl: The Final Days
-Katyn
-Revanche
-Black Book
-The Counterfeiters
-The Edge of Heaven
-Bloody Sunday
-Hard Candy
-Juno
-Almost Famous
-Notes on a Scandal
-Sideways
-Moon
-Jaws
-The Poseidon Adventure
-Deliverance
-Planet of the Apes
-The Chase
-Papillon
-Serpico
-The Conversation
-Dirty Harry
-Bonnie and Clyde
-The Producers
-Blazing Saddles
-Monty Python and the Holy Grail
-Life of Brian
-Murder on the Orient Express
-American Graffiti
-Straw Dogs
-Annie Hall
-A Man and a Woman
-Dersu Uzala
-Come and See
-Vsichko e lyubov
-The Omen
-Hair
-Missing
-Music Box
-The Killing Fields
-Empire of the Sun
-Indochine
-Cry Freedom
-The Legend of 1900
-The Agony and the Ecstasy
-The Sound of Music
-Singin' in the Rain
-Being There
-Sleuth
-The Wicker Man
-Five Easy Pieces
-The Driver
-North by Northwest
-Vertigo
-Anatomy of a Murder
-The Hustler
-Easy Rider
-Judgment at Nuremberg
-The Boys from Brazil
-Le Cercle Rouge
-Le Samouraï
-Au Revoir Les Enfants
-The Professional
-Rocco and His Brothers
+Allegiant
+The Huntsman: Winter's War
 The Magnificent Seven
-The Thomas Crown Affair
-Bullitt
-Children of a Lesser God
-Atlantic City
-Blood Simple.
-Prizzi's Honor
-Tess
-Frantic
-Trading Places
-Sex, Lies, and Videotape
-The Machinist
-Argo
-In the Bedroom
-Walk the Line
-(500) Days of Summer
-Shaun of the Dead
-The Ides of March
-Charlie Wilson's War
-The Iceman
-Eastern Promises
-A History of Violence
-Bummer
-From Dusk Till Dawn
-The Faculty
-Starship Troopers
-Death Proof
+Jack Reacher: Never Go Back
+Gods of Egypt
+Mechanic: Resurrection
+The Shallows
+The Purge: Election Year
+Office Christmas Party
+The 5th Wave
+Ben-Hur
+Train to Busan
+Bad Santa 2
+Morgan
+Star Wars: Episode VII - The Force Awakens
+Jurassic World
+Furious 7
+Avengers: Age of Ultron
+Spectre
+Mission: Impossible - Rogue Nation
+The Hunger Games: Mockingjay - Part 2
+The Martian
+Ant-Man
+San Andreas
+Terminator Genisys
+Kingsman: The Secret Service
+Mad Max: Fury Road
+Taken 3
+Maze Runner: The Scorch Trials
+Insurgent
+Pixels
+Ted 2
+Tomorrowland
+Jupiter Ascending
+Creed
+Fantastic Four
+The Hateful Eight
+Goosebumps
+The Last Witch Hunter
 Point Break
-Boys Don't Cry
-Donnie Brasco
-Carlito's Way
-Leaving Las Vegas
-Ghost
-The Player
-Thelma & Louise
-Do the Right Thing
-The Crying Game
-A Fish Called Wanda
-Reversal of Fortune
-Working Girl
-Tootsie
-The King of Comedy
-The Vanishing
-Malcolm X
-A Bronx Tale
-Boyz n the Hood
-Dead Man Walking
-Fatal Attraction
-Pay It Forward
-East/West
-Election
-Punch-Drunk Love
-The Station Agent
-Capital
-Frost/Nixon
-Spotlight
-The Revenant
-Birdman or (The Unexpected Virtue of Ignorance)
-The Grand Budapest Hotel
-Whiplash
-Foxcatcher
-A Most Violent Year
-Nightcrawler
-Hugo
-Shame
-Moonlight
-Victoria
-Ed Wood
-Glengarry Glen Ross
-Misery
-Audition
-Lost Highway
-Thesis
-Children of Men
-Gravity
-District 9
-Zero Dark Thirty
+The Big Short
+Seventh Son
+Chappie
+In the Heart of the Sea
+Hitman: Agent 47
 Ex Machina
-Carol
-Far from Heaven
-The Best Offer
-Captain Phillips
+Self/less
+Scouts Guide to the Zombie Apocalypse
+Knock Knock
+Extinction
+Transformers: Age of Extinction
+The Hobbit: The Battle of the Five Armies
+Guardians of the Galaxy
+Maleficent
+The Hunger Games: Mockingjay - Part 1
+X-Men: Days of Future Past
+Captain America: The Winter Soldier
+The Amazing Spider-Man 2
+Interstellar
+Godzilla
+Teenage Mutant Ninja Turtles
+Lucy
+Edge of Tomorrow
+Noah
+Night at the Museum: Secret of the Tomb
+The Maze Runner
+300: Rise of an Empire
+Divergent
+Exodus: Gods and Kings
+Hercules
+RoboCop
+Non-Stop
+Dracula Untold
+Fury
+The Expendables 3
+Need for Speed
+Dumb and Dumber To
+Pompeii
+The Purge: Anarchy
+Transcendence
+Snowpiercer
+A Million Ways to Die in the West
+John Wick
+I, Frankenstein
+The Giver
+Iron Man 3
+The Hobbit: The Desolation of Smaug
+The Hunger Games: Catching Fire
+Fast & Furious 6
+Man of Steel
+Thor: The Dark World
+World War Z
+Star Trek Into Darkness
+The Wolverine
+Pacific Rim
+The Wolf of Wall Street
+G.I. Joe: Retaliation
+The Hangover Part III
+Now You See Me
+Oblivion
+Elysium
+The Lone Ranger
+Grown Ups 2
+After Earth
+Hansel & Gretel: Witch Hunters
+White House Down
+Percy Jackson: Sea of Monsters
+Olympus Has Fallen
+RED 2
+47 Ronin
+Escape Plan
+Last Vegas
+Ender's Game
+Warm Bodies
+Evil Dead
+The Purge
+Carrie
+Scary Movie 5
+R.I.P.D.
+The Call
+The Family
+Parker
+Homefront
+Grudge Match
+The Incredible Burt Wonderstone
+Machete Kills
+Stand Up Guys
+Redemption
+The Avengers
+Skyfall
+The Dark Knight Rises
+The Hobbit: An Unexpected Journey
+The Twilight Saga: Breaking Dawn - Part 2
+The Amazing Spider-Man
+The Hunger Games
+Men in Black 3
+Life of Pi
+Ted
+Prometheus
+Snow White and the Huntsman
+Journey 2: The Mysterious Island
+Battleship
+Wrath of the Titans
+The Expendables 2
+John Carter
+Dark Shadows
+Resident Evil: Retribution
+Jack Reacher
+Total Recall
+Underworld Awakening
+Ghost Rider: Spirit of Vengeance
+Cloud Atlas
+Abraham Lincoln: Vampire Hunter
+The Cabin in the Woods
+Red Dawn
+Safe
+Dredd
+Lockout
+A Thousand Words
+The Man with the Iron Fists
+Solomon Kane
+Piranha 3DD
+Seeking Justice
+Red Lights
+The Grey
+Django Unchained
+The Watch
+Taken 2
+Iron Sky
+Death Race: Inferno
+Astérix and Obélix: God Save Britannia
+Harry Potter and the Deathly Hallows: Part 2
+Transformers: Dark of the Moon
+Pirates of the Caribbean: On Stranger Tides
+The Twilight Saga: Breaking Dawn - Part 1
+Mission: Impossible - Ghost Protocol
+Fast Five
+The Hangover Part II
+Rise of the Planet of the Apes
+Thor
+Captain America: The First Avenger
+X-Men: First Class
+Real Steel
+Super 8
+Green Lantern
+Battle Los Angeles
+Cowboys & Aliens
+In Time
+Limitless
+Johnny English Reborn
+Final Destination 5
+Tower Heist
+Source Code
+Contagion
+The Adjustment Bureau
+Sanctum
+Paul
+Scream 4
+The Rite
+Season of the Witch
+Sucker Punch
+Red Riding Hood
+Priest
+The Darkest Hour
+Killer Elite
+The Mechanic
+Conan the Barbarian
+A Very Harold & Kumar 3D Christmas
+Sherlock Holmes: A Game of Shadows
+The Green Hornet
+Drive Angry
+The Thing
+The Eagle
+Trespass
+Harry Potter and the Deathly Hallows: Part 1
+The Twilight Saga: Eclipse
+Iron Man 2
+Clash of the Titans
+TRON: Legacy
+The Karate Kid
+Prince of Persia: The Sands of Time
+Resident Evil: Afterlife
+Salt
+The Tourist
+The Expendables
+Knight and Day
+Percy Jackson & the Olympians: The Lightning Thief
+The Sorcerer's Apprentice
+RED
+The A-Team
+Unstoppable
+The Book of Eli
+The Wolfman
+Predators
+Piranha 3D
+Legion
+Hot Tub Time Machine
+The Crazies
+Daybreakers
+Machete
+Splice
+Saw 3D: The Final Chapter
+A Nightmare on Elm Street
+Undisputed 3: Redemption
+Inception
+Shutter Island
+Stone
+Death Race 2
+The Experiment
+Grown Ups
+Avatar
+Harry Potter and the Half-Blood Prince
+Transformers: Revenge of the Fallen
+2012
+The Twilight Saga: New Moon
+Angels & Demons
+The Hangover
+Night at the Museum: Battle of the Smithsonian
+Star Trek
+X-Men Origins: Wolverine
+Terminator Salvation
+Fast & Furious
+Inglourious Basterds
+G.I. Joe: The Rise of Cobra
+The Final Destination
+Watchmen
+The Taking of Pelham 123
+Surrogates
+Race to Witch Mountain
+Zombieland
+Friday the 13th
+Underworld: Rise of the Lycans
+Ninja Assassin
+Halloween II
+Cirque du Freak: The Vampire's Assistant
+Crank: High Voltage
+The Box
+Jennifer's Body
+Armored
+Outlander
+The Tournament
+Saw VI
+Sherlock Holmes
+Bad Lieutenant: Port of Call New Orleans
+Knowing
+Exam
+Taken
+The Dark Knight
+Indiana Jones and the Kingdom of the Crystal Skull
+Hancock
+Quantum of Solace
+Iron Man
+The Mummy: Tomb of the Dragon Emperor
+Twilight
+Wanted
+The Incredible Hulk
+Journey to the Center of the Earth
+The Day the Earth Stood Still
+Jumper
+Tropic Thunder
+The Happening
+The Forbidden Kingdom
+Rambo
+Transporter 3
+Death Race
+Babylon A.D.
+Superhero Movie
+The X Files: I Want to Believe
+The Bank Job
+Meet Dave
+Harold & Kumar Escape from Guantanamo Bay
+Doomsday
+21
+Hellboy II: The Golden Army
+Saw V
+Yes Man
+Righteous Kill
+The Eye
+Punisher: War Zone
+Asterix at the Olympic Games
+Pirates of the Caribbean: At World's End
+Harry Potter and the Order of the Phoenix
+Spider-Man 3
+Transformers
+I Am Legend
+National Treasure: Book of Secrets
+300
+Live Free or Die Hard
+Ocean's Thirteen
+Fantastic Four: Rise of the Silver Surfer
+Mr. Bean's Holiday
+Ghost Rider
+Evan Almighty
+Resident Evil: Extinction
+1408
+Aliens vs. Predator: Requiem
+Hannibal Rising
+Halloween
+30 Days of Night
+Mr. Magorium's Wonder Emporium
+28 Weeks Later
+The Reaping
+The Mist
+War
+The Invasion
+The Hills Have Eyes II
+Shoot 'Em Up
+DOA: Dead or Alive
+Planet Terror
+Saw IV
+Hostel: Part II
+Next
+The Bourne Ultimatum
+The Bucket List
+Pirates of the Caribbean: Dead Man's Chest
+The Da Vinci Code
+Casino Royale
+Night at the Museum
+X-Men: The Last Stand
+Mission: Impossible III
+Superman Returns
+Click
+Poseidon
+Scary Movie 4
+The Fast and the Furious: Tokyo Drift
+Rocky Balboa
+V for Vendetta
+The Omen
+Final Destination 3
+Underworld: Evolution
+Children of Men
+Fearless
+Snakes on a Plane
+Crank
+Thank You for Smoking
+The Covenant
+Ultraviolet
+Slither
+Saw III
+The Prestige
+Hostel
+Undisputed 2: Last Man Standing
+Miami Vice
+World Trade Center
+Lucky Number Slevin
+Harry Potter and the Goblet of Fire
+Star Wars: Episode III - Revenge of the Sith
+War of the Worlds
+King Kong
+Mr. & Mrs. Smith
+Batman Begins
+Fantastic Four
+Constantine
+Kingdom of Heaven
+The 40-Year-Old Virgin
+The Island
+Kung Fu Hustle
+Transporter 2
+Lord of War
+Elektra
+Æon Flux
+Unleashed
+Land of the Dead
+Two for the Money
+Domino
+Saw II
+Chaos
+The Weather Man
+London
+Revolver
+Stealth
+Jarhead
+Harry Potter and the Prisoner of Azkaban
+Spider-Man
+The Passion of the Christ
+The Day After Tomorrow
+Troy
+Ocean's Twelve
+National Treasure
+I, Robot
+Van Helsing
+The Terminal
+Hero
+AVP: Alien vs. Predator
+Alexander
+Kill Bill: Vol. 2
+Resident Evil: Apocalypse
+Mean Girls
+Blade: Trinity
+The Forgotten
+Saw
+Dawn of the Dead
+The Stepford Wives
+Hellboy
+Secret Window
+House of Flying Daggers
+Catwoman
+Around the World in 80 Days
+Anacondas: The Hunt for the Blood Orchid
+Taxi
+Taking Lives
+Sky Captain and the World of Tomorrow
+Cellular
+The Punisher
+Godsend
+Shaun of the Dead
+Harold & Kumar Go to White Castle
+Envy
+Collateral
+Million Dollar Baby
+The Bourne Supremacy
+The Lord of the Rings: The Return of the King
+The Matrix Reloaded
+Pirates of the Caribbean: The Curse of the Black Pearl
+Bruce Almighty
+Terminator 3: Rise of the Machines
+The Matrix Revolutions
+X-Men 2
+Hulk
+2 Fast 2 Furious
+Scary Movie 3
+Master and Commander: The Far Side of the World
+S.W.A.T.
+The Haunted Mansion
+Kill Bill: Vol. 1
+The League of Extraordinary Gentlemen
+Daredevil
+The Italian Job
+Johnny English
+Lara Croft Tomb Raider: The Cradle of Life
+Gothika
+Freddy vs. Jason
+The Recruit
+Underworld
+Final Destination 2
+Identity
+28 Days Later...
+Bad Santa
+Dreamcatcher
+The A-Team
+Unstoppable
+The Book of Eli
+The Wolfman
+Predators
+Piranha 3D
+Legion
+Hot Tub Time Machine
+The Crazies
+Daybreakers
+Machete
+Splice
+Saw 3D: The Final Chapter
+A Nightmare on Elm Street
+Undisputed 3: Redemption
+Inception
+Shutter Island
+Stone
+Death Race 2
+The Experiment
+Grown Ups
+Avatar
+Harry Potter and the Half-Blood Prince
+Transformers: Revenge of the Fallen
+2012
+The Twilight Saga: New Moon
+Angels & Demons
+The Hangover
+Night at the Museum: Battle of the Smithsonian
+Star Trek
+X-Men Origins: Wolverine
+Terminator Salvation
+Fast & Furious
+Inglourious Basterds
+G.I. Joe: The Rise of Cobra
+The Final Destination
+Watchmen
+The Taking of Pelham 123
+Surrogates
+Race to Witch Mountain
+Zombieland
+Friday the 13th
+Underworld: Rise of the Lycans
+Ninja Assassin
+Halloween II
+Cirque du Freak: The Vampire's Assistant
+Crank: High Voltage
+The Box
+Jennifer's Body
+Armored
+Outlander
+The Tournament
+Saw VI
+Sherlock Holmes
+Bad Lieutenant: Port of Call New Orleans
+Knowing
+Exam
+Taken
+The Dark Knight
+Indiana Jones and the Kingdom of the Crystal Skull
+Hancock
+Quantum of Solace
+Iron Man
+The Mummy: Tomb of the Dragon Emperor
+Twilight
+Wanted
+The Incredible Hulk
+Journey to the Center of the Earth
+The Day the Earth Stood Still
+Jumper
+Tropic Thunder
+The Happening
+The Forbidden Kingdom
+Rambo
+Transporter 3
+Death Race
+Babylon A.D.
+Superhero Movie
+The X Files: I Want to Believe
+The Bank Job
+Meet Dave
+Harold & Kumar Escape from Guantanamo Bay
+Doomsday
+21
+Hellboy II: The Golden Army
+Saw V
+Yes Man
+Righteous Kill
+The Eye
+Punisher: War Zone
+Asterix at the Olympic Games
+Pirates of the Caribbean: At World's End
+Harry Potter and the Order of the Phoenix
+Spider-Man 3
+Transformers
+I Am Legend
+National Treasure: Book of Secrets
+300
+Live Free or Die Hard
+Ocean's Thirteen
+Fantastic Four: Rise of the Silver Surfer
+Mr. Bean's Holiday
+Ghost Rider
+Evan Almighty
+Resident Evil: Extinction
+1408
+Aliens vs. Predator: Requiem
+Hannibal Rising
+Halloween
+30 Days of Night
+Mr. Magorium's Wonder Emporium
+28 Weeks Later
+The Reaping
+The Mist
+War
+The Invasion
+The Hills Have Eyes II
+Shoot 'Em Up
+DOA: Dead or Alive
+Planet Terror
+Saw IV
+Hostel: Part II
+Next
+The Bourne Ultimatum
+The Bucket List
+Pirates of the Caribbean: Dead Man's Chest
+The Da Vinci Code
+Casino Royale
+Night at the Museum
+X-Men: The Last Stand
+Mission: Impossible III
+Superman Returns
+Click
+Poseidon
+Scary Movie 4
+The Fast and the Furious: Tokyo Drift
+Rocky Balboa
+V for Vendetta
+The Omen
+Final Destination 3
+Underworld: Evolution
+Children of Men
+Fearless
+Snakes on a Plane
+Crank
+Thank You for Smoking
+The Covenant
+Ultraviolet
+Slither
+Saw III
+The Prestige
+Hostel
+Undisputed 2: Last Man Standing
+Miami Vice
+World Trade Center
+Lucky Number Slevin
+Harry Potter and the Goblet of Fire
+Star Wars: Episode III - Revenge of the Sith
+War of the Worlds
+King Kong
+Mr. & Mrs. Smith
+Batman Begins
+Fantastic Four
+Constantine
+Kingdom of Heaven
+The 40-Year-Old Virgin
+The Island
+Kung Fu Hustle
+Transporter 2
+Lord of War
+Elektra
+Æon Flux
+Unleashed
+Land of the Dead
+Two for the Money
+Domino
+Saw II
+Chaos
+The Weather Man
+London
+Revolver
+Stealth
+Jarhead
+Harry Potter and the Prisoner of Azkaban
+Spider-Man
+The Passion of the Christ
+The Day After Tomorrow
+Troy
+Ocean's Twelve
+National Treasure
+I, Robot
+Van Helsing
+The Terminal
+Hero
+AVP: Alien vs. Predator
+Alexander
+Kill Bill: Vol. 2
+Resident Evil: Apocalypse
+Mean Girls
+Blade: Trinity
+The Forgotten
+Saw
+Dawn of the Dead
+The Stepford Wives
+Hellboy
+Secret Window
+House of Flying Daggers
+Catwoman
+Around the World in 80 Days
+Anacondas: The Hunt for the Blood Orchid
+Taxi
+Taking Lives
+Sky Captain and the World of Tomorrow
+Cellular
+The Punisher
+Godsend
+Shaun of the Dead
+Harold & Kumar Go to White Castle
+Envy
+Collateral
+Million Dollar Baby
+The Bourne Supremacy
+The Lord of the Rings: The Return of the King
+The Matrix Reloaded
+Pirates of the Caribbean: The Curse of the Black Pearl
+Bruce Almighty
+Terminator 3: Rise of the Machines
+The Matrix Revolutions
+X-Men 2
+Hulk
+2 Fast 2 Furious
+Scary Movie 3
+Master and Commander: The Far Side of the World
+S.W.A.T.
+The Haunted Mansion
+Kill Bill: Vol. 1
+The League of Extraordinary Gentlemen
+Daredevil
+The Italian Job
+Johnny English
+Lara Croft Tomb Raider: The Cradle of Life
+Gothika
+Freddy vs. Jason
+The Recruit
+Underworld
+Final Destination 2
+Identity
+28 Days Later...
+Bad Santa
+Dreamcatcher
+Happy Feet
