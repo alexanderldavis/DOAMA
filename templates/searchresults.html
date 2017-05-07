@@ -52,7 +52,6 @@
     display: none;
     text-align: center;
   }
-
 </style>
   <div class="tablediv loadText" onload="loadFunction()" style="margin:0;">
       <div id ="loader"></div>
@@ -62,7 +61,7 @@
           {% for (id, title, poster, rated) in movieList %}
           <div class="floated_img">
             <a href="http://www.projectdoama.com/movieInfo/{{id}}"><img width="150" height="200" class="movieName" src="{{ poster }}" alt="Poster for {{ title }}"></a>
-            <p>{{ title }} [{{ rated }}]</p>
+            <h5>{{ title }} [{{ rated }}]</h5>
           </div>
 
           {% endfor %}

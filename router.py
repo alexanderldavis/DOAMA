@@ -31,7 +31,7 @@ def index():
 @app.route("/search")
 def search():
     cur = conn.cursor()
-    cur.execute("""SELECT id, title, poster, rated from movies where title = 'Avatar'""")
+    cur.execute("""SELECT id, title, poster, rated from movies where title = 'Avatar';""")
     res = cur.fetchall()
     return render_template('searchresults.html', movieList = res)
 
@@ -43,7 +43,7 @@ def searchMovie():
     title = title.title()
     title = title.replace("+", " ")
     cur = conn.cursor()
-    cur.execute("""SELECT id, title, poster, rated FROM movies where title like '%"""+title+"""%'""")
+    cur.execute("""SELECT id, title, poster, rated FROM movies where title like '%"""+title+"""%' LIMIT 5;""")
     res = cur.fetchall()
     return render_template('searchresults.html', movieList = res)
 
