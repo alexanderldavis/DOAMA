@@ -16,7 +16,7 @@ conn = db
 #################### CREATE TABLES / KNUTH ####################
 cur = conn.cursor()
 # cur.execute("DROP table services CASCADE; DROP table acitvities CASCADE; DROP table activities_movies CASCADE;DROP table services_movies CASCADE; DROP table movies CASCADE; DROP table genres CASCADE; DROP table genres_movies CASCADE; DROP table actors CASCADE; DROP table actors_movies CASCADE;")
-cur.execute("drop table if exists activities_movies; drop table if exists services_movies;drop table if exists genres; drop table if exists actors;")
+cur.execute("drop table if exists activities_movies; drop table if exists services_movies;drop table if exists genres_movies; drop table if exists actors_movies;")
 print("TABLES DELETED")
 cur.execute("""drop table if exists movies; CREATE table movies (id serial unique, title varchar(100), description text, year varchar(40), rated varchar(50), runtime varchar(50), poster varchar(200));""")
 cur.execute("""CREATE table genres (id serial unique, name varchar(20)); CREATE table genres_movies (movieid int, genreid int, FOREIGN KEY (movieid) references movies(id), FOREIGN KEY (genreid) references genres(id), primary key (movieid, genreid));""")
