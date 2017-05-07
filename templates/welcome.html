@@ -7,6 +7,7 @@
   <select style="font-family: 'Source Sans Pro', sans-serif; font-size: 15pt;" class="form-control" name="selected_activity">
     {%for activities in activityList%}
     <option value="{{activity}}">{{activity}}</option>
+    {% endfor %}
   </select>
   <br>
   <div class="form-group">
