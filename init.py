@@ -24,7 +24,7 @@ cur.execute("""drop table if exists actors; CREATE table actors (id serial uniqu
 cur.execute("""drop table if exists services; CREATE table services (id serial unique, name text);""")
 cur.execute("""drop table if exists activities; CREATE table activities (id serial unique, name text);""")
 cur.execute(""" CREATE table services_movies (movie_id int, FOREIGN key(movie_id) references movies(id), service_id int, FOREIGN key(service_id) references services(id));""")
-cur.execute("""CREATE table activities_movies (movie_id int, FOREIGN key (movie_id) references movies(id), activity_id text, FOREIGN key(activity_id) references activities(id));""")
+cur.execute("""CREATE table activities_movies (movie_id int, FOREIGN key (movie_id) references movies(id), activity_id int, FOREIGN key(activity_id) references activities(id));""")
 print("TABLES CREATED")
 conn.commit()
 # create table for streaming channels
