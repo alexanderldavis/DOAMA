@@ -67,6 +67,7 @@ for i in range(1,len(data)):
         totalnumoffilms+=1
         rottenTomatoes=dataParsed["Ratings"][1] #rating is taken from rotten tomatoes
         rating=int(rottenTomatoes['Value'][:len(rottenTomatoes['Value'])])
+        print(rating)
         if dataParsed["Poster"] != "N/A":
             cur.execute("""INSERT INTO movies (title, description, year, rated, runtime, poster, rating) VALUES (%s, %s, %s, %s, %s, %s, %s);""", (dataParsed["Title"],dataParsed["Plot"],dataParsed["Year"],dataParsed["Rated"], dataParsed["Runtime"],dataParsed["Poster"],rating))
         else:
