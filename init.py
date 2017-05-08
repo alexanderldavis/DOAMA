@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 import urllib.parse
 import requests as req
 import json
-from canistreamit import search, streaming, rental, purchase, dvd, xfinity
+# from canistreamit import search, streaming, rental, purchase, dvd, xfinity
 
 urllib.parse.uses_netloc.append("postgres")
 url = urllib.parse.urlparse(os.environ["DATABASE_URL"])
@@ -74,18 +74,18 @@ for i in range(1,len(data)):
             cur.execute("""INSERT INTO movies (title, description, year, rated, runtime, poster, rating) VALUES (%s, %s, %s, %s, %s, %s, %s);""", (dataParsed["Title"],dataParsed["Plot"],dataParsed["Year"],dataParsed["Rated"], dataParsed["Runtime"],"http://www.projectdoama.com/static/penguin.jpg",rating))
         print("Added: ",dataParsed["Title"])
         # search for availability in different gate
-        movie=search(dataParsed['Title'])[0]
-        streamingList=streaming(movie['_id'])
-        rentalList=rental(movie['_id'])
-        purchaseList=purchase(movie['_id'])
-        dvdList=dvd(movie['_id'])
-        cableList=xfinity(movie['_id'])
-        for li in [streamingList,rentalList,purchaseList,dvdList,cableList]:
-            if li!=[]:
-                keys=li.keys()
-                for key in keys:
-                    # cur.execute("""INSERT INTO services(name) VALUES (%s);""",(li[key]))
-                    cur.execute("""INSERT INTO services_movies(movie_id,service_id) VALUES ((select id from movies where title=%s),(select id from services where name=%s));""",(dataParsed['Title'],key))
+        # movie=search(dataParsed['Title'])[0]
+        # streamingList=streaming(movie['_id'])
+        # rentalList=rental(movie['_id'])
+        # purchaseList=purchase(movie['_id'])
+        # dvdList=dvd(movie['_id'])
+        # cableList=xfinity(movie['_id'])
+        # for li in [streamingList,rentalList,purchaseList,dvdList,cableList]:
+        #     if li!=[]:
+        #         keys=li.keys()
+        #         for key in keys:
+        #             # cur.execute("""INSERT INTO services(name) VALUES (%s);""",(li[key]))
+        #             cur.execute("""INSERT INTO services_movies(movie_id,service_id) VALUES ((select id from movies where title=%s),(select id from services where name=%s));""",(dataParsed['Title'],key))
         genres = dataParsed["Genre"]
         genres = genres.split(", ")
         for genre in genres:
