@@ -72,7 +72,6 @@ for i in range(1,len(data)):
         else:
             cur.execute("""INSERT INTO movies (title, description, year, rated, runtime, poster, rating) VALUES (%s, %s, %s, %s, %s, %s, %s);""", (dataParsed["Title"],dataParsed["Plot"],dataParsed["Year"],dataParsed["Rated"], dataParsed["Runtime"],"http://www.projectdoama.com/static/penguin.jpg",rating))
         print("Added: ",dataParsed["Title"])
-        print(dataParsed['Title'])
         # search for availability in different gate
         movie=search(dataParsed['Title'])[0]
         streamingList=streaming(movie['_id'])
