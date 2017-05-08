@@ -37,8 +37,7 @@ def search():
     goodfor=request.args['group']
     genre=request.args['genre']
     starring=request.args['actor']
-    print(activity,goodfor,genre,starring)
-    cur.execute("""SELECT id, title, poster, rated from movies where title = 'Avatar';""")
+    # cur.execute("""SELECT id, title, poster, rated from movies where title = 'Avatar';""")
     if activity!="":
         cur.execute("""SELECT movie.id, movie.title, movie.poster, movie.rated, movie.rating from movies join activities_movies on (activities_movies.movie_id=movies.id) join activity on (activities_movies.activity_id=acitvities.id) WHERE activities.name='%s';"""%activity)
     res = cur.fetchall()
