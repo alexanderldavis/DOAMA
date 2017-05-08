@@ -21,7 +21,7 @@ def index():
     genreList = cur.fetchall()
     cur.execute("""SELECT * from services;""")
     serviceList=cur.fetchall()
-    cur.execute("""SELECT name from activities;""")
+    cur.execute("""SELECT * from activities;""")
     activityList=cur.fetchall()
     return render_template('welcome.html', genreList = genreList,serviceList=serviceList,activityList=activityList)
 

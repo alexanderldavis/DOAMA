@@ -34,7 +34,7 @@ for option in watchingOptions:
     cur.execute("""INSERT INTO services(name) VALUES (%s);""",(option,))
 
 # create tables for activity:
-activityList=['Family+night','Girls+night','Date+night','Nerd+night',"Guys+party",'Cultured+movie+night','Surprise+me']
+activityList=['Family night','Girls night','Date night','Nerd night','Guys party','Cultured movie night','Surprise me']
 for activity in activityList:
     cur.execute("""INSERT into activities(name) VALUES (%s);""",(activity,))
 
