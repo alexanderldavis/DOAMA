@@ -39,7 +39,7 @@ def search():
     starring=request.args['actor']
     # cur.execute("""SELECT id, title, poster, rated from movies where title = 'Avatar';""")
     if activity!="":
-        cur.execute("""SELECT movie.id, movie.title, movie.poster, movie.rated, movie.rating from movies join activities_movies on (activities_movies.movie_id=movies.id) join activity on (activities_movies.activity_id=acitvities.id) WHERE activities.name='%s';"""%activity)
+        cur.execute("""SELECT movie.id, movie.title, movie.poster, movie.rated, movie.rating from movies join activities_movies on (activities_movies.movie_id=movies.id) join activity on (activities_movies.activity_id=acitvities.id) WHERE activities.name='%s' limit 5;"""%activity)
     res = cur.fetchall()
     return render_template('searchresults.html', movieList = res)
 
