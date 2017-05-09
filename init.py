@@ -56,7 +56,7 @@ data = data.split("\n")
 idNum = 0
 for movie in data:
     moviename = moviename.title()
-    moviename = movie.replace(" ", "+")
+    movieName = moviename.replace(" ", "+")
     res = req.get("http://www.omdbapi.com/?t={}".format(movieName))
     dataParsed = json.loads(res.text)
     if dataParsed["Response"] != "False":
