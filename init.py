@@ -22,7 +22,7 @@ t = req.get('https://raw.githubusercontent.com/alexanderldavis/DOAMA/master/fina
 print("LIST SCRAPED FROM SOURCE")
 data = t.text
 data = data.split("\n")
-for movie of data:
+for movie in data:
     print(movie)
 
 #####################################################################
