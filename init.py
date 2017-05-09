@@ -63,11 +63,11 @@ for movie in data:
         newmovie = movies(title = dataParsed["Title"], description = dataParsed["Plot"], year = dataParsed["Year"], rated = dataParsed["Rated"], runtime = dataParsed["Runtime"], poster = dataParsed["Poster"])
         print("Added: ", dataParsed["Title"])
         db.add(newmovie)
-        genres = dataParsed["Genres"]
+        genres = dataParsed["Genre"]
         genres = genres.split(", ")
         for genre in genres:
             if genre not in genreList:
-                newgenre = genres(name = dataParsed["Genres"])
+                newgenre = genres(name = genre)
                 db.add(newgenre)
                 genreList.append(genre)
             somemovieid = db.query(movies).filter_by(title = dataParsed["Title"]).first()
