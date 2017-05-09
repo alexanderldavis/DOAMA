@@ -27,15 +27,15 @@ cur.execute("""CREATE table activities_movies (movie_id int, FOREIGN key (movie_
 print("TABLES CREATED")
 conn.commit()
 
-# POPULATE TABLE services
-watchingOptions=['netflix_instant','amazon_prime_instant_video','hulu_movies','crackle','youtube_free','epix','streampix','snagfilms','fandor_streaming','amazon_video_rental','apple_itunes_rental','android_rental','vudu_rental','youtube_rental','sony_rental','vimeo_vod_rental','amazon_video_purchase','apple_itunes_purchase','android_purchase','vudu_purchase','xbox_purchase','sony_purchase','vimeo_vod_purchase','amazon_dvd','amazon_bluray','netflix_dvd','redbox','hbo','showtime','cinemax','starz','encore','xfinity_free']
-for option in watchingOptions:
-    cur.execute("""INSERT INTO services(name) VALUES (%s);""",(option,))
+# # POPULATE TABLE services
+# watchingOptions=['netflix_instant','amazon_prime_instant_video','hulu_movies','crackle','youtube_free','epix','streampix','snagfilms','fandor_streaming','amazon_video_rental','apple_itunes_rental','android_rental','vudu_rental','youtube_rental','sony_rental','vimeo_vod_rental','amazon_video_purchase','apple_itunes_purchase','android_purchase','vudu_purchase','xbox_purchase','sony_purchase','vimeo_vod_purchase','amazon_dvd','amazon_bluray','netflix_dvd','redbox','hbo','showtime','cinemax','starz','encore','xfinity_free']
+# for option in watchingOptions:
+#     cur.execute("""INSERT INTO services(name) VALUES (%s);""",(option,))
 
-# POPULATE TABLE activities
-activityList=['Family night','Girls night','Date night','Nerd night','Guys party','Cultured movie night','Surprise me']
-for activity in activityList:
-    cur.execute("""INSERT into activities(name) VALUES (%s);""",(activity,))
+# # POPULATE TABLE activities
+# activityList=['Family night','Girls night','Date night','Nerd night','Guys party','Cultured movie night','Surprise me']
+# for activity in activityList:
+#     cur.execute("""INSERT into activities(name) VALUES (%s);""",(activity,))
 
 t = req.get('https://raw.githubusercontent.com/alexanderldavis/DOAMA/master/finalMovieList.txt')
 print("LIST SCRAPED FROM SOURCE")
