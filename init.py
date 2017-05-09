@@ -1,28 +1,27 @@
-from flask import Flask, render_template, request, flash
-from wtforms import Form, BooleanField, TextField, validators, SubmitField, RadioField, SelectField
-from flask_wtf import Form
-from flask_sqlalchemy import SQLAlchemy
-import requests as req
+from json import load
+from sqlalchemy import Table, Column, Integer, String, ForeignKey, create_engine
+from sqlalchemy.orm import relationship, sessionmaker
+from sqlalchemy.ext.declarative import declarative_base
 
-app = Flask(__name__)
-app.debug = True
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///students.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
-db = SQLAlchemy(app)
-app.secret_key = 'development key'
+Base = declarative_base()
 
+urllib.parse.uses_netloc.append("postgres")
+url = urllib.parse.urlparse(os.environ["DATABASE_URL"])
+db = psycopg2.connect(database=url.path[1:],user=url.username,password=url.password,host=url.hostname,port=url.port)
 
-class movies(db.Model):
-    __tablename__ = 'movies'
-    movieid = db.Column(db.Integer, primary_key= True)
-    title = db.Column(db.String)
-
-    def __init__(self, movieid, title):
-        self.movieid = movieid
-        self.title = title
+class movies(Base):
+    __tablename__='movie'
+    id=Column(Integer,primary_key=True)
+    title=Column(String)
 
     def __repr__(self):
-        return '<id {}>'.format(self.title)
+        return "Movie: ({})".format(self.title)
+
+engine = create_engine(os.environ["DATABASE_URL"])
+Session = sessionmaker(bind=engine)
+db = Session()
+Base.metadata.drop_all(engine)
+Base.metadata.create_all(engine)
 
 t = req.get('https://raw.githubusercontent.com/alexanderldavis/DOAMA/master/finalMovieList.txt')
 print("LIST SCRAPED FROM SOURCE")
@@ -30,10 +29,47 @@ data = t.text
 data = data.split("\n")
 idNum = 0
 for movie in data:
-    print(movie)
-    newmovie = movies(movieid = idNum, title=movie)
-    db.session.add(newmovie)
-    db.session.commit()
+    newmovie = movies(title = movie)
+    db.add(newmovie)
+db.commit()
+
+
+
+# from flask import Flask, render_template, request, flash
+# from wtforms import Form, BooleanField, TextField, validators, SubmitField, RadioField, SelectField
+# from flask_wtf import Form
+# from flask_sqlalchemy import SQLAlchemy
+# import requests as req
+#
+# app = Flask(__name__)
+# app.debug = True
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///students.db'
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+# db = SQLAlchemy(app)
+# app.secret_key = 'development key'
+#
+# class movies(db.Model):
+#     __tablename__ = 'movies'
+#     movieid = db.Column(db.Integer, primary_key= True)
+#     title = db.Column(db.String)
+#
+#     def __init__(self, movieid, title):
+#         self.movieid = movieid
+#         self.title = title
+#
+#     def __repr__(self):
+#         return '<id {}>'.format(self.title)
+#
+# t = req.get('https://raw.githubusercontent.com/alexanderldavis/DOAMA/master/finalMovieList.txt')
+# print("LIST SCRAPED FROM SOURCE")
+# data = t.text
+# data = data.split("\n")
+# idNum = 0
+# for movie in data:
+#     print(movie)
+#     newmovie = movies(movieid = idNum, title=movie)
+#     db.session.add(newmovie)
+#     db.session.commit()
 
 #####################################################################
 ############### OLD #####################
