@@ -15,15 +15,12 @@ conn = db
 cur = conn.cursor()
 
 # DROP ALL TABLES, CREATE ALL TABLES
-cur.execute("""drop table if exists activities_movies; drop table if exists services_movies;drop table if exists genres_movies; drop table if exists actors_movies;""")
 print("TABLES DELETED")
-cur.execute("""drop table if exists movies; CREATE table movies (id serial unique, title varchar(100), description text, year varchar(40), rated varchar(50), runtime varchar(50), poster varchar(200));""")
-cur.execute("""drop table if exists genres; CREATE table genres (id serial unique, name varchar(20)); CREATE table genres_movies (movieid int, genreid int, FOREIGN KEY (movieid) references movies(id), FOREIGN KEY (genreid) references genres(id), primary key (movieid, genreid));""")
-cur.execute("""drop table if exists actors; CREATE table actors (id serial unique, name varchar(99)); CREATE table actors_movies (movieid int, actorid int, FOREIGN KEY (movieid) references movies(id), FOREIGN KEY (actorid) references actors(id), primary key (movieid, actorid));""")
-cur.execute("""drop table if exists services; CREATE table services (id serial unique, name text);""")
-cur.execute("""drop table if exists activities; CREATE table activities (id serial unique, name text);""")
-cur.execute(""" CREATE table services_movies (movie_id int, FOREIGN key(movie_id) references movies(id), service_id int, FOREIGN key(service_id) references services(id));""")
-cur.execute("""CREATE table activities_movies (movie_id int, FOREIGN key (movie_id) references movies(id), activity_id int, FOREIGN key(activity_id) references activities(id));""")
+cur.execute("""drop table movies; CREATE table movies (id serial unique, title varchar(100), description text, year varchar(40), rated varchar(50), runtime varchar(50), poster varchar(200));""")
+cur.execute("""drop table genres; CREATE table genres (id serial unique, name varchar(20)); CREATE table genres_movies (movieid int, genreid int, FOREIGN KEY (movieid) references movies(id), FOREIGN KEY (genreid) references genres(id), primary key (movieid, genreid));""")
+# cur.execute("""drop table if exists actors; CREATE table actors (id serial unique, name varchar(99)); CREATE table actors_movies (movieid int, actorid int, FOREIGN KEY (movieid) references movies(id), FOREIGN KEY (actorid) references actors(id), primary key (movieid, actorid));""")
+# cur.execute("""CREATE table services_movies (movie_id int, FOREIGN key(movie_id) references movies(id), service_id int, FOREIGN key(service_id) references services(id));""")
+# cur.execute("""CREATE table activities_movies (movie_id int, FOREIGN key (movie_id) references movies(id), activity_id int, FOREIGN key(activity_id) references activities(id));""")
 print("TABLES CREATED")
 conn.commit()
 
@@ -39,7 +36,6 @@ conn.commit()
 
 t = req.get('https://raw.githubusercontent.com/alexanderldavis/DOAMA/master/finalMovieList.txt')
 print("LIST SCRAPED FROM SOURCE")
-# data = file.split("\n")
 data = t.text
 data = data.split("\n")
 genreList = []
@@ -63,13 +59,13 @@ for movie in data:
                 cur.execute("""INSERT INTO genres (name) VALUES (%s)""", (genre,))
                 genreList.append(genre)
             cur.execute("""INSERT INTO genres_movies (movieid, genreid) VALUES (%s, (SELECT id FROM genres WHERE name = %s))""", (str(totalnumoffilms), genre))
-        actors = dataParsed["Actors"]
-        actors = actors.split(", ")
-        for actor in actors:
-            if actor not in actorList:
-                cur.execute("""INSERT INTO actors (name) VALUES (%s)""", (actor,))
-                actorList.append(actor)
-            cur.execute("""INSERT INTO actors_movies (movieid, actorid) VALUES (%s, (SELECT id from actors WHERE name = %s))""", (str(totalnumoffilms), actor))
+        # actors = dataParsed["Actors"]
+        # actors = actors.split(", ")
+    #     for actor in actors:
+    #         if actor not in actorList:
+    #             cur.execute("""INSERT INTO actors (name) VALUES (%s)""", (actor,))
+    #             actorList.append(actor)
+    #         cur.execute("""INSERT INTO actors_movies (movieid, actorid) VALUES (%s, (SELECT id from actors WHERE name = %s))""", (str(totalnumoffilms), actor))
     conn.commit()
 print("TABLE POPULATED")
 print("===============================INFO===============================")
