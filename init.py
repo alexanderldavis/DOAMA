@@ -73,6 +73,7 @@ print("===============================INFO===============================")
 print("All Genres:", genreList)
 print("Total Num of Films:", totalnumoffilms-1)
 
+
 # #heroku run python3 init.py
 # import psycopg2
 # from flask import Flask, render_template, request
