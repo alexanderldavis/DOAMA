@@ -18,7 +18,7 @@ url = urllib.parse.urlparse(os.environ["DATABASE_URL"])
 db = psycopg2.connect(database=url.path[1:],user=url.username,password=url.password,host=url.hostname,port=url.port)
 
 class movies(Base):
-    __tablename__='movie'
+    __tablename__='movies'
     id=Column(Integer,primary_key=True)
     title=Column(String)
     description = Column(String)
