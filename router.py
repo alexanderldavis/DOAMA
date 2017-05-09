@@ -23,16 +23,13 @@ app = Flask(__name__)
 app.secret_key = 'wtforms more like wtf forms'
 
 class SearchForm(Form):
-    options = SelectField('Search By:', [validators.Required()], choices=[('FamilyNight', 'Family Night'), ('FamilyNight', 'Family Night'),('FamilyNight', 'Family Night'),('FamilyNight', 'Family Night'),('FamilyNight', 'Family Night'),('FamilyNight', 'Family Night'),('FamilyNight', 'Family Night'),('FamilyNight', 'Family Night')])
+    options = SelectField('Search By:', [validators.Required()], choices=[('FamilyNight', 'Family Night'), ('DateNight', 'Date Night'),('GirlsNight', 'Girls Night'),('GuysNight', 'Guys Night'), ('NerdNight', 'Nerd Night'), ('CulturedNight', 'Cultured Movie Night'), ('SurpriseMe', 'Surprise Me')])
     submit = SubmitField('Search')
 
-@app.route("/", methods=['GET', 'POST'])
+@app.route("/", methods=['GET'])
 def index():
     form = SearchForm()
-    if request.method == 'POST' and form.validate():
-        return render_template('welcome.html', info=[])
-    elif request.method == 'GET':
-        return render_template('welcome.html', form=form)
+    return render_template('welcome.html', form=form)
 
 
 
