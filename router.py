@@ -34,7 +34,7 @@ def index():
 ### SEARCH FOR RECCOMMENDATONS ###
 @app.route("/search")
 def search():
-    res = db.session.query(movie).filter(movie.title='Avatar')
+    res = db.session.query(movie).filter(movie.title=='Avatar')
     print("###############################\nres: ", res)
     return render_template('searchresults.html', movieList = res)
 
