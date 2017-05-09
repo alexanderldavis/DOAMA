@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request, flash
-from flask_bootstrap import Bootstrap
 from wtforms import Form, BooleanField, TextField, validators, SubmitField, RadioField, SelectField
 from flask_wtf import Form
 from flask_sqlalchemy import SQLAlchemy
