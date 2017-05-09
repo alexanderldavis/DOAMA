@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, flash
 from wtforms import Form, BooleanField, TextField, validators, SubmitField, RadioField, SelectField
 from flask_wtf import Form
 from flask_sqlalchemy import SQLAlchemy
+import requests as req
 
 app = Flask(__name__)
 app.debug = True
@@ -19,8 +20,13 @@ t = req.get('https://raw.githubusercontent.com/alexanderldavis/DOAMA/master/fina
 print("LIST SCRAPED FROM SOURCE")
 data = t.text
 data = data.split("\n")
+idNum = 0
 for movie in data:
     print(movie)
+    newmovie = movie(idNum = idNum, title=movie)
+    db.session.add(newmovie)
+
+db.session.commit()
 
 #####################################################################
 ############### OLD #####################
