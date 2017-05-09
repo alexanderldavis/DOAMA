@@ -24,6 +24,8 @@ urllib.parse.uses_netloc.append("postgres")
 url = urllib.parse.urlparse(os.environ["DATABASE_URL"])
 db = psycopg2.connect(database=url.path[1:],user=url.username,password=url.password,host=url.hostname,port=url.port)
 
+app = Flask(__name__)
+
 class SearchForm(Form):
     options = SelectField('Search By:', choices=[('Test', 'Test')])
     field = TextField("Enter a value")
