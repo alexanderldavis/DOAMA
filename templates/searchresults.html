@@ -77,7 +77,7 @@ div.desc {
 
 </style>
   <div class="tablediv loadText" onload="loadFunction()" style="margin:0;">
-      <!-- <div id ="loader"></div>
+      <div id ="loader"></div>
       <div class="animate-bottom" id="myDiv" style="display:none;">
         <h3 style="text-align:center;">Now Showing Results for {{ title }}</h3>
         <div>
@@ -87,7 +87,7 @@ div.desc {
                 <h5>{{ title }} [{{ rated }}]</h5>
               </div>
             {% endfor %}
-          </div> -->
+          </div>
 
           <!-- <table style="text-align: center;">
               <tr style="text-align: center;">
@@ -100,14 +100,14 @@ div.desc {
               {% endfor %}
               </tr>
           </table> -->
-          {% for (id, title, poster, rated, rating) in movieList %}
+          <!-- {% for (id, title, poster, rated, rating) in movieList %}
           <div class="gallery">
             <a href="http://www.projectdoama.com/movieInfo/{{id}}">
               <img width="150" height="200" class="movieName" src="{{ poster }}" alt="Poster for {{ title }}"></a>
             </a>
             <div class="desc">{{ title }} [{{ rated }}]</div>
           </div>
-          {% endfor %}
+          {% endfor %} -->
 
       </div>
 
