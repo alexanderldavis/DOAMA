@@ -1,39 +1,153 @@
-from flask import Flask, render_template, request, flash
-from wtforms import Form, BooleanField, TextField, validators, SubmitField, RadioField, SelectField
-from flask_wtf import Form
-from flask_sqlalchemy import SQLAlchemy
+from json import load
+from sqlalchemy import Table, Column, Integer, String, ForeignKey, create_engine
+from sqlalchemy.orm import relationship, sessionmaker
+from sqlalchemy.ext.declarative import declarative_base
+import psycopg2
+from flask import Flask, render_template, request
+import os
+from bs4 import BeautifulSoup
+import urllib.parse
 import requests as req
-
-app = Flask(__name__)
-app.debug = True
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///students.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
-db = SQLAlchemy(app)
-app.secret_key = 'development key'
+import json
 
 
-class movies(db.Model):
-    __tablename__ = 'movies'
-    movieid = db.Column(db.Integer, primary_key= True)
-    title = db.Column(db.String)
+Base = declarative_base()
 
-    def __init__(self, movieid, title):
-        self.movieid = movieid
-        self.title = title
+urllib.parse.uses_netloc.append("postgres")
+url = urllib.parse.urlparse(os.environ["DATABASE_URL"])
+db = psycopg2.connect(database=url.path[1:],user=url.username,password=url.password,host=url.hostname,port=url.port)
+
+genres_movies = Table('genres_movies', Base.metadata, Column('genres', Integer, ForeignKey('genres.id')), Column('movies', Integer, ForeignKey('movies.id')))
+
+class movies(Base):
+    __tablename__='movies'
+    id=Column(Integer,primary_key=True)
+    title=Column(String)
+    description = Column(String)
+    year = Column(String)
+    rated = Column(String)
+    runtime = Column(String)
+    poster = Column(String)
 
     def __repr__(self):
-        return '<id {}>'.format(self.title)
+        return "Movie: ({})".format(self.title)
+
+class genres(Base):
+    __tablename__ = 'genres'
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+
+    def __repr__(self):
+        return "Genre: ({})".format(self.name)
+
+# class genres_movies(Base):
+#     __tablename__ = 'genres_movies'
+#     movieid = Column(Integer, ForeignKey("movies.id"), primary_key = True)
+#     genreid = Column(Integer, ForeignKey("genres.id"), primary_key = True)
+
+engine = create_engine(os.environ["DATABASE_URL"])
+Session = sessionmaker(bind=engine)
+db = Session()
+Base.metadata.drop_all(engine)
+Base.metadata.create_all(engine)
 
 t = req.get('https://raw.githubusercontent.com/alexanderldavis/DOAMA/master/finalMovieList.txt')
 print("LIST SCRAPED FROM SOURCE")
 data = t.text
 data = data.split("\n")
-idNum = 0
+genreList = []
 for movie in data:
-    print(movie)
-    newmovie = movies(movieid = idNum, title=movie)
-    db.session.add(newmovie)
-    db.session.commit()
+    moviename = movie.title()
+    movieName = moviename.replace(" ", "+")
+    res = req.get("http://www.omdbapi.com/?t={}".format(movieName))
+    dataParsed = json.loads(res.text)
+    if dataParsed["Response"] != "False":
+        newmovie = movies(title = dataParsed["Title"], description = dataParsed["Plot"], year = dataParsed["Year"], rated = dataParsed["Rated"], runtime = dataParsed["Runtime"], poster = dataParsed["Poster"])
+        print("Added: ", dataParsed["Title"])
+        db.add(newmovie)
+        genres1 = dataParsed["Genre"]
+        genres1 = genres1.split(", ")
+        for genre in genres1:
+            if genre not in genreList:
+                newgenre = genres(name = genre)
+                db.add(newgenre)
+                genreList.append(genre)
+        somemovieid = db.query(movies).filter_by(title = dataParsed["Title"]).first()
+        print("movieid: ", somemovieid)
+        # newgenremovie = genres_movies(movieid = )
+    db.commit()
+    #     dataParsed = json.loads(res.text)
+    #
+    #     if dataParsed["Response"] != "False":
+    #         rated = dataParsed["Rated"]
+    #         cur.execute("""INSERT INTO movies (title, description, year, rated, runtime, poster) VALUES (%s, %s, %s, %s, %s, %s);""", (dataParsed["Title"],dataParsed["Plot"],dataParsed["Year"],dataParsed["Rated"], dataParsed["Runtime"],dataParsed["Poster"]))
+    #         print("Added: ", dataParsed["Title"])
+    #         # if dataParsed['Ratings']!=[]:
+    #         #     for source in dataParsed['Ratings']:
+    #         #         if source['Source']=="Rotten Tomatoes":
+    #         #             rating=int(source['Value'][:len(source['Value'])-1])
+    #         #         else:
+    #         #             rating=None
+    #         #         print(rating)
+    #         genres = dataParsed["Genre"]
+    #         genres = genres.split(", ")
+    #         for genre in genres:
+    #             if genre not in genreList:
+    #                 cur.execute("""INSERT INTO genres (name) VALUES (%s)""", (genre,))
+    #                 genreList.append(genre)
+    #             cur.execute("""INSERT INTO genres_movies (movieid, genreid) VALUES (%s, (SELECT id FROM genres WHERE name = %s))""", (str(totalnumoffilms), genre))
+    #         # actors = dataParsed["Actors"]
+    #         # actors = actors.split(", ")
+    #     #     for actor in actors:
+    #     #         if actor not in actorList:
+    #     #             cur.execute("""INSERT INTO actors (name) VALUES (%s)""", (actor,))
+    #     #             actorList.append(actor)
+    #     #         cur.execute("""INSERT INTO actors_movies (movieid, actorid) VALUES (%s, (SELECT id from actors WHERE name = %s))""", (str(totalnumoffilms), actor))
+    #     conn.commit()
+    # print("TABLE POPULATED")
+    # print("===============================INFO===============================")
+    # print("All Genres:", genreList)
+    # print("Total Num of Films:", totalnumoffilms-1)
+# db.commit()
+
+
+
+
+# from flask import Flask, render_template, request, flash
+# from wtforms import Form, BooleanField, TextField, validators, SubmitField, RadioField, SelectField
+# from flask_wtf import Form
+# from flask_sqlalchemy import SQLAlchemy
+# import requests as req
+#
+# app = Flask(__name__)
+# app.debug = True
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///students.db'
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+# db = SQLAlchemy(app)
+# app.secret_key = 'development key'
+#
+# class movies(db.Model):
+#     __tablename__ = 'movies'
+#     movieid = db.Column(db.Integer, primary_key= True)
+#     title = db.Column(db.String)
+#
+#     def __init__(self, movieid, title):
+#         self.movieid = movieid
+#         self.title = title
+#
+#     def __repr__(self):
+#         return '<id {}>'.format(self.title)
+#
+# t = req.get('https://raw.githubusercontent.com/alexanderldavis/DOAMA/master/finalMovieList.txt')
+# print("LIST SCRAPED FROM SOURCE")
+# data = t.text
+# data = data.split("\n")
+# idNum = 0
+# for movie in data:
+#     print(movie)
+#     newmovie = movies(movieid = idNum, title=movie)
+#     db.session.add(newmovie)
+#     db.session.commit()
 
 #####################################################################
 ############### OLD #####################
