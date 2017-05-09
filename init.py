@@ -63,27 +63,29 @@ for movie in movies:
     moviename = movie.title()
     movieName = moviename.replace(" ", "+")
     res = req.get("http://www.omdbapi.com/?t={}".format(movieName))
-    dataParsed = json.loads(res.text)
-    if dataParsed["Response"] != "False":
-        genresOfMovie = dataParsed["Genre"]
-        genresOfMovie = genresOfMovie.split(", ")
-        for genre in genresOfMovie:
-            if genre not in genreList:
-                newgenre = Genre(genre = genre)
-                db.add(newgenre)
-                genreList.append(genre)
-                allGenres[genre] = newgenre
-        try:
-            if dataParsed["Ratings"] != []:
-                for source in dataParsed["Ratings"]:
-                    if source["Source"] == "Rotten Tomatoes":
-                        rating = int(source["Value"][:len(source['Value'])-1])
-            newmovie = Movie(title = dataParsed["Title"], description = dataParsed["Plot"], year = dataParsed["Year"], rated = dataParsed["Rated"], runtime = dataParsed["Runtime"], poster = dataParsed["Poster"], rating=rating, genres = [allGenres[g] for g in genresOfMovie])
-            print("Added: ", dataParsed["Title"])
-            db.add(newmovie)
+    try:
+        dataParsed = json.loads(res.text)
+        if dataParsed["Response"] != "False":
+            genresOfMovie = dataParsed["Genre"]
+            genresOfMovie = genresOfMovie.split(", ")
+            for genre in genresOfMovie:
+                if genre not in genreList:
+                    newgenre = Genre(genre = genre)
+                    db.add(newgenre)
+                    genreList.append(genre)
+                    allGenres[genre] = newgenre
+            try:
+                if dataParsed["Ratings"] != []:
+                    for source in dataParsed["Ratings"]:
+                        if source["Source"] == "Rotten Tomatoes":
+                            rating = int(source["Value"][:len(source['Value'])-1])
+                newmovie = Movie(title = dataParsed["Title"], description = dataParsed["Plot"], year = dataParsed["Year"], rated = dataParsed["Rated"], runtime = dataParsed["Runtime"], poster = dataParsed["Poster"], rating=rating, genres = [allGenres[g] for g in genresOfMovie])
+                print("Added: ", dataParsed["Title"])
+                db.add(newmovie)
+            except:
+                print("Failed to add "+dataParsed["Title"]+". Sigh-Oh well! Moving on!")
         except:
-            print("Failed to add "+dataParsed["Title"]+". Sigh-Oh well! Moving on!")
-
+            print("failed for unknown reason")
     db.commit()
     #     dataParsed = json.loads(res.text)
     #
