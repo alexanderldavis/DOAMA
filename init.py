@@ -55,15 +55,13 @@ data = t.text
 data = data.split("\n")
 idNum = 0
 for movie in data:
-
-    db.add(newmovie)
     res = req.get("http://www.omdbapi.com/?t={}".format(movieName))
     dataParsed = json.loads(res.text)
     if dataParsed["Response"] != "False":
         rated = dataParsed["Rated"]
         newmovie = movies(title = dataParsed["Title"], description = dataParsed["Plot"], year = dataParsed["Year"], rated = dataParsed["Rated"], runtime = dataParsed["Runtime"], poster = dataParsed["Poster"])
         print("Added: ", dataParsed["Title"])
-
+        db.add(newmovie)
     db.commit()
     #     dataParsed = json.loads(res.text)
     #
