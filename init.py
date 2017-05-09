@@ -70,12 +70,9 @@ for movie in data:
                 newgenre = genres(name = genre)
                 db.add(newgenre)
                 genreList.append(genre)
-            somemovieid = db.query(movies).filter_by(title = dataParsed["Title"]).first()
-            print("movieid: ", somemovieid)
+        somemovieid = db.query(movies).filter(movies.id.any(title = dataParsed["Title"])).first()
+        print("movieid: ", somemovieid)
             # newgenremovie = genres_movies(movieid = )
-
-
-
     db.commit()
     #     dataParsed = json.loads(res.text)
     #
