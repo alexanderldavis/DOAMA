@@ -1,84 +1,118 @@
-import psycopg2
-from flask import Flask, render_template, request
-import os
-from bs4 import BeautifulSoup
-import urllib.parse
-import requests as req
-import json
+from flask import Flask, render_template, request, flash
+from flask_bootstrap import Bootstrap
+from wtforms import Form, BooleanField, TextField, validators, SubmitField, RadioField, SelectField
+from flask_wtf import Form
+from flask_sqlalchemy import SQLAlchemy
+from apiclient.discovery import build
+from wtforms_sqlalchemy.orm import model_form
 
-urllib.parse.uses_netloc.append("postgres")
-url = urllib.parse.urlparse(os.environ["DATABASE_URL"])
-db = psycopg2.connect(database=url.path[1:],user=url.username,password=url.password,host=url.hostname,port=url.port)
+app = Flask(__name__)
+app.debug = True
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///students.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+db = SQLAlchemy(app)
+app.secret_key = 'development key'
 
-conn = db
-#################### DELETE AND CREATE TABLES / HEROKU ####################
-cur = conn.cursor()
-
-# DROP ALL TABLES, CREATE ALL TABLES
-print("TABLES DELETED")
-cur.execute("""drop table movies CASCADE; CREATE table movies (id serial unique, title varchar(100), description text, year varchar(40), rated varchar(50), runtime varchar(50), poster varchar(200));""")
-cur.execute("""drop table genres CASCADE; drop table genres_movies CASCADE; CREATE table genres (id serial unique, name varchar(20)); CREATE table genres_movies (movieid int, genreid int, FOREIGN KEY (movieid) references movies(id), FOREIGN KEY (genreid) references genres(id), primary key (movieid, genreid));""")
-# cur.execute("""drop table if exists actors; CREATE table actors (id serial unique, name varchar(99)); CREATE table actors_movies (movieid int, actorid int, FOREIGN KEY (movieid) references movies(id), FOREIGN KEY (actorid) references actors(id), primary key (movieid, actorid));""")
-# cur.execute("""CREATE table services_movies (movie_id int, FOREIGN key(movie_id) references movies(id), service_id int, FOREIGN key(service_id) references services(id));""")
-# cur.execute("""CREATE table activities_movies (movie_id int, FOREIGN key (movie_id) references movies(id), activity_id int, FOREIGN key(activity_id) references activities(id));""")
-print("TABLES CREATED")
-conn.commit()
-
-# # POPULATE TABLE services
-# watchingOptions=['netflix_instant','amazon_prime_instant_video','hulu_movies','crackle','youtube_free','epix','streampix','snagfilms','fandor_streaming','amazon_video_rental','apple_itunes_rental','android_rental','vudu_rental','youtube_rental','sony_rental','vimeo_vod_rental','amazon_video_purchase','apple_itunes_purchase','android_purchase','vudu_purchase','xbox_purchase','sony_purchase','vimeo_vod_purchase','amazon_dvd','amazon_bluray','netflix_dvd','redbox','hbo','showtime','cinemax','starz','encore','xfinity_free']
-# for option in watchingOptions:
-#     cur.execute("""INSERT INTO services(name) VALUES (%s);""",(option,))
-
-# # POPULATE TABLE activities
-# activityList=['Family night','Girls night','Date night','Nerd night','Guys party','Cultured movie night','Surprise me']
-# for activity in activityList:
-#     cur.execute("""INSERT into activities(name) VALUES (%s);""",(activity,))
+class movies(db.Model):
+    __tablename__ = 'movies'
+    movieid = db.Column(db.Integer, primary_key= True)
+    title = db.Column(db.Integer, primary_key = True)
 
 t = req.get('https://raw.githubusercontent.com/alexanderldavis/DOAMA/master/finalMovieList.txt')
 print("LIST SCRAPED FROM SOURCE")
 data = t.text
 data = data.split("\n")
-genreList = []
-actorList = []
-totalnumoffilms=0
-for movie in data:
-    totalnumoffilms += 1
-    movieName = movie.replace(" ", "+")
-    res = req.get("http://www.omdbapi.com/?t={}".format(movieName))
-    dataParsed = json.loads(res.text)
+for movie of data:
+    print(movie)
 
-    if dataParsed["Response"] != "False":
-        rated = dataParsed["Rated"]
-        cur.execute("""INSERT INTO movies (title, description, year, rated, runtime, poster) VALUES (%s, %s, %s, %s, %s, %s);""", (dataParsed["Title"],dataParsed["Plot"],dataParsed["Year"],dataParsed["Rated"], dataParsed["Runtime"],dataParsed["Poster"]))
-        print("Added: ", dataParsed["Title"])
-        # if dataParsed['Ratings']!=[]:
-        #     for source in dataParsed['Ratings']:
-        #         if source['Source']=="Rotten Tomatoes":
-        #             rating=int(source['Value'][:len(source['Value'])-1])
-        #         else:
-        #             rating=None
-        #         print(rating)
-        genres = dataParsed["Genre"]
-        genres = genres.split(", ")
-        for genre in genres:
-            if genre not in genreList:
-                cur.execute("""INSERT INTO genres (name) VALUES (%s)""", (genre,))
-                genreList.append(genre)
-            cur.execute("""INSERT INTO genres_movies (movieid, genreid) VALUES (%s, (SELECT id FROM genres WHERE name = %s))""", (str(totalnumoffilms), genre))
-        # actors = dataParsed["Actors"]
-        # actors = actors.split(", ")
-    #     for actor in actors:
-    #         if actor not in actorList:
-    #             cur.execute("""INSERT INTO actors (name) VALUES (%s)""", (actor,))
-    #             actorList.append(actor)
-    #         cur.execute("""INSERT INTO actors_movies (movieid, actorid) VALUES (%s, (SELECT id from actors WHERE name = %s))""", (str(totalnumoffilms), actor))
-    conn.commit()
-print("TABLE POPULATED")
-print("===============================INFO===============================")
-print("All Genres:", genreList)
-print("Total Num of Films:", totalnumoffilms-1)
+#####################################################################
+############### OLD #####################
+#####################################################################
+# import psycopg2
+# from flask import Flask, render_template, request
+# import os
+# from bs4 import BeautifulSoup
+# import urllib.parse
+# import requests as req
+# import json
+#
+# urllib.parse.uses_netloc.append("postgres")
+# url = urllib.parse.urlparse(os.environ["DATABASE_URL"])
+# db = psycopg2.connect(database=url.path[1:],user=url.username,password=url.password,host=url.hostname,port=url.port)
+#
+# conn = db
+# #################### DELETE AND CREATE TABLES / HEROKU ####################
+# cur = conn.cursor()
+#
+# # DROP ALL TABLES, CREATE ALL TABLES
+# print("TABLES DELETED")
+# cur.execute("""drop table movies CASCADE; CREATE table movies (id serial unique, title varchar(100), description text, year varchar(40), rated varchar(50), runtime varchar(50), poster varchar(200));""")
+# cur.execute("""drop table genres CASCADE; drop table genres_movies CASCADE; CREATE table genres (id serial unique, name varchar(20)); CREATE table genres_movies (movieid int, genreid int, FOREIGN KEY (movieid) references movies(id), FOREIGN KEY (genreid) references genres(id), primary key (movieid, genreid));""")
+# # cur.execute("""drop table if exists actors; CREATE table actors (id serial unique, name varchar(99)); CREATE table actors_movies (movieid int, actorid int, FOREIGN KEY (movieid) references movies(id), FOREIGN KEY (actorid) references actors(id), primary key (movieid, actorid));""")
+# # cur.execute("""CREATE table services_movies (movie_id int, FOREIGN key(movie_id) references movies(id), service_id int, FOREIGN key(service_id) references services(id));""")
+# # cur.execute("""CREATE table activities_movies (movie_id int, FOREIGN key (movie_id) references movies(id), activity_id int, FOREIGN key(activity_id) references activities(id));""")
+# print("TABLES CREATED")
+# conn.commit()
+#
+# # # POPULATE TABLE services
+# # watchingOptions=['netflix_instant','amazon_prime_instant_video','hulu_movies','crackle','youtube_free','epix','streampix','snagfilms','fandor_streaming','amazon_video_rental','apple_itunes_rental','android_rental','vudu_rental','youtube_rental','sony_rental','vimeo_vod_rental','amazon_video_purchase','apple_itunes_purchase','android_purchase','vudu_purchase','xbox_purchase','sony_purchase','vimeo_vod_purchase','amazon_dvd','amazon_bluray','netflix_dvd','redbox','hbo','showtime','cinemax','starz','encore','xfinity_free']
+# # for option in watchingOptions:
+# #     cur.execute("""INSERT INTO services(name) VALUES (%s);""",(option,))
+#
+# # # POPULATE TABLE activities
+# # activityList=['Family night','Girls night','Date night','Nerd night','Guys party','Cultured movie night','Surprise me']
+# # for activity in activityList:
+# #     cur.execute("""INSERT into activities(name) VALUES (%s);""",(activity,))
+#
+# t = req.get('https://raw.githubusercontent.com/alexanderldavis/DOAMA/master/finalMovieList.txt')
+# print("LIST SCRAPED FROM SOURCE")
+# data = t.text
+# data = data.split("\n")
+# genreList = []
+# actorList = []
+# totalnumoffilms=0
+# for movie in data:
+#     totalnumoffilms += 1
+#     movieName = movie.replace(" ", "+")
+#     res = req.get("http://www.omdbapi.com/?t={}".format(movieName))
+#     dataParsed = json.loads(res.text)
+#
+#     if dataParsed["Response"] != "False":
+#         rated = dataParsed["Rated"]
+#         cur.execute("""INSERT INTO movies (title, description, year, rated, runtime, poster) VALUES (%s, %s, %s, %s, %s, %s);""", (dataParsed["Title"],dataParsed["Plot"],dataParsed["Year"],dataParsed["Rated"], dataParsed["Runtime"],dataParsed["Poster"]))
+#         print("Added: ", dataParsed["Title"])
+#         # if dataParsed['Ratings']!=[]:
+#         #     for source in dataParsed['Ratings']:
+#         #         if source['Source']=="Rotten Tomatoes":
+#         #             rating=int(source['Value'][:len(source['Value'])-1])
+#         #         else:
+#         #             rating=None
+#         #         print(rating)
+#         genres = dataParsed["Genre"]
+#         genres = genres.split(", ")
+#         for genre in genres:
+#             if genre not in genreList:
+#                 cur.execute("""INSERT INTO genres (name) VALUES (%s)""", (genre,))
+#                 genreList.append(genre)
+#             cur.execute("""INSERT INTO genres_movies (movieid, genreid) VALUES (%s, (SELECT id FROM genres WHERE name = %s))""", (str(totalnumoffilms), genre))
+#         # actors = dataParsed["Actors"]
+#         # actors = actors.split(", ")
+#     #     for actor in actors:
+#     #         if actor not in actorList:
+#     #             cur.execute("""INSERT INTO actors (name) VALUES (%s)""", (actor,))
+#     #             actorList.append(actor)
+#     #         cur.execute("""INSERT INTO actors_movies (movieid, actorid) VALUES (%s, (SELECT id from actors WHERE name = %s))""", (str(totalnumoffilms), actor))
+#     conn.commit()
+# print("TABLE POPULATED")
+# print("===============================INFO===============================")
+# print("All Genres:", genreList)
+# print("Total Num of Films:", totalnumoffilms-1)
+#
 
 
+#####################################################################
+############### REALLY OLD #####################
+#####################################################################
 # #heroku run python3 init.py
 # import psycopg2
 # from flask import Flask, render_template, request
