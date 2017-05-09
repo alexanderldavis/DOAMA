@@ -41,7 +41,7 @@ t = req.get('https://raw.githubusercontent.com/alexanderldavis/DOAMA/master/fina
 print("LIST SCRAPED FROM SOURCE")
 # data = file.split("\n")
 print(t.text)
-data = t.split("\n")
+data = t.text.split("\n")
 genreList = []
 actorList = []
 totalnumoffilms=0
