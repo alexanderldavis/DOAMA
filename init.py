@@ -23,7 +23,7 @@ data = data.split("\n")
 idNum = 0
 for movie in data:
     print(movie)
-    newmovie = movie(idNum = idNum, title=movie)
+    newmovie = movies(idNum = idNum, title=movie)
     db.session.add(newmovie)
 
 db.session.commit()
