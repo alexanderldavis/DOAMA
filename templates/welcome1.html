@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block body %}
+<!DOCTYPE html>
+<br><br>
+<form class="form-inline loadText" action="/search">
+  <label for="activityselect" style="font-size: 20pt;">I need a movie for my </label>
+  <select style="font-family: 'Source Sans Pro', sans-serif; font-size: 15pt;" class="form-control" name="selected_activity">
+    <option value="Family Night">Family Night</option>
+    <option value="Date Night">Date Night</option>
+    <option value="Girl Night">Girls' Night</option>
+    <option value="Guy Night">Guys' Night</option>
+    <option value="Nerd Night">Nerd Night</option>
+    <option value="Cultured Movie Night">Cultured Movie Night</option>
+    <option value="Surprise Me">Surprise Me!</option>
+  </select>
+  <br><br>
+  <div class="form-group">
+    <input style="font-family: 'Source Sans Pro', sans-serif; font-size: 20pt;" type="submit" name="" class="btn btn-primary" id="submitActivityQuery" value = "DOAMA!">
+  </div>
+</form>
+
+<br><br><br><br><br>
+<form class="form-inline loadText1" action="/search" method="get">
+    <h5>Or, show me movie recommendations that are...</h5>
+    <div class="form-group">
+        <label for="timeSelect">Good For</label>
+        <select class="form-control" name="group" id="timeSelect">
+          <option value="Family">Family</option>
+          <option value="Couple">Couple</option>
+          <option value="Children">Children</option>
+          <option value="Adults">Adults</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="genreSelect">Who Like</label>
+        <select class="form-control" name="genre" id="genreSelect">
+          {% for (id, genre) in genreList %}
+          <option value="{{id}}">{{genre}}</option>
+          {% endfor %}
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="actorInput">Starring</label>
+        <input class="form-control" type="text" name="actor" id="actorInput" placeholder="Names separated by commas">
+        <input type="submit" name="" class="btn btn-primary" id="submitQuery" value = "Find a Movie!">
+    </div>
+</form>
+<br>
+<h6 class="form-inline loadText2">Or, search for a Movie:</h6>
+<form class="form-inline loadText1" style = "margin-top:0;"action="/searchMovie" method="get">
+  <input id="idmoviesearch" class="form-control" type="text" name="movietitle" value="" placeholder="Movie Title">
+  <input type="submit" name="" class="btn btn-primary" id="submitMovieSearch" value = "Search for Movie">
+</form>
+
+{% endblock %}
