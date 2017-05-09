@@ -17,7 +17,7 @@ cur = conn.cursor()
 # DROP ALL TABLES, CREATE ALL TABLES
 cur.execute("""drop table if exists activities_movies; drop table if exists services_movies;drop table if exists genres_movies; drop table if exists actors_movies;""")
 print("TABLES DELETED")
-cur.execute("""drop table if exists movies; CREATE table movies (id serial unique, title varchar(100), description text, year varchar(40), rated varchar(50), runtime varchar(50), poster varchar(200), rating int);""")
+cur.execute("""drop table if exists movies; CREATE table movies (id serial unique, title varchar(100), description text, year varchar(40), rated varchar(50), runtime varchar(50), poster varchar(200));""")
 cur.execute("""drop table if exists genres; CREATE table genres (id serial unique, name varchar(20)); CREATE table genres_movies (movieid int, genreid int, FOREIGN KEY (movieid) references movies(id), FOREIGN KEY (genreid) references genres(id), primary key (movieid, genreid));""")
 cur.execute("""drop table if exists actors; CREATE table actors (id serial unique, name varchar(99)); CREATE table actors_movies (movieid int, actorid int, FOREIGN KEY (movieid) references movies(id), FOREIGN KEY (actorid) references actors(id), primary key (movieid, actorid));""")
 cur.execute("""drop table if exists services; CREATE table services (id serial unique, name text);""")
@@ -53,7 +53,7 @@ for movie in data:
 
     if dataParsed["Response"] != "False":
         rated = dataParsed["Rated"]
-        cur.execute("""INSERT INTO movies (title, description, year, rated, runtime, poster, rating) VALUES (%s, %s, %s, %s, %s, %s, %s);""", (dataParsed["Title"],dataParsed["Plot"],dataParsed["Year"],dataParsed["Rated"], dataParsed["Runtime"],dataParsed["Poster"],rating))
+        cur.execute("""INSERT INTO movies (title, description, year, rated, runtime, poster) VALUES (%s, %s, %s, %s, %s, %s, %s);""", (dataParsed["Title"],dataParsed["Plot"],dataParsed["Year"],dataParsed["Rated"], dataParsed["Runtime"],dataParsed["Poster"]))
         print("Added: ", dataParsed["Title"])
 
         genres = dataParsed["Genre"]
