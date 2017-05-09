@@ -14,7 +14,7 @@ app.secret_key = 'development key'
 class movies(db.Model):
     __tablename__ = 'movies'
     movieid = db.Column(db.Integer, primary_key= True)
-    title = db.Column(db.Integer, primary_key = True)
+    title = db.Column(db.String)
 
 t = req.get('https://raw.githubusercontent.com/alexanderldavis/DOAMA/master/finalMovieList.txt')
 print("LIST SCRAPED FROM SOURCE")
