@@ -53,17 +53,29 @@ t = req.get('https://raw.githubusercontent.com/alexanderldavis/DOAMA/master/fina
 print("LIST SCRAPED FROM SOURCE")
 data = t.text
 data = data.split("\n")
-idNum = 0
+genreList = []
 for movie in data:
     moviename = movie.title()
     movieName = moviename.replace(" ", "+")
     res = req.get("http://www.omdbapi.com/?t={}".format(movieName))
     dataParsed = json.loads(res.text)
     if dataParsed["Response"] != "False":
-        rated = dataParsed["Rated"]
         newmovie = movies(title = dataParsed["Title"], description = dataParsed["Plot"], year = dataParsed["Year"], rated = dataParsed["Rated"], runtime = dataParsed["Runtime"], poster = dataParsed["Poster"])
         print("Added: ", dataParsed["Title"])
         db.add(newmovie)
+        genres = dataParsed["Genres"]
+        genres = genres.split(", ")
+        for genre in genres:
+            if genre not in genreList:
+                newgenre = genres(name = dataParsed["Genres"])
+                db.add(newgenre)
+                genreList.append(genre)
+            somemovieid = db.query(movies).filter_by(title = dataParsed["Title"]).first()
+            print("movieid: ", somemovieid)
+            # newgenremovie = genres_movies(movieid = )
+
+
+
     db.commit()
     #     dataParsed = json.loads(res.text)
     #
