@@ -75,10 +75,9 @@ for movie in movies:
             for source in dataParsed["Ratings"]:
                 if source["Source"] == "Rotten Tomatoes":
                     rating = int(source["Value"][:len(source['Value'])-1])
-        print(genresOfMovie)
-        # newmovie = Movie(title = dataParsed["Title"], description = dataParsed["Plot"], year = dataParsed["Year"], rated = dataParsed["Rated"], runtime = dataParsed["Runtime"], poster = dataParsed["Poster"], rating=rating, genres = [g for g in genresOfMovie])
-        # print("Added: ", dataParsed["Title"])
-        # db.add(newmovie)
+        newmovie = Movie(title = dataParsed["Title"], description = dataParsed["Plot"], year = dataParsed["Year"], rated = dataParsed["Rated"], runtime = dataParsed["Runtime"], poster = dataParsed["Poster"], rating=rating, genres = genresOfMovie)
+        print("Added: ", dataParsed["Title"])
+        db.add(newmovie)
     db.commit()
     #     dataParsed = json.loads(res.text)
     #
