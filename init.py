@@ -70,7 +70,7 @@ for movie in movies:
                 newgenre = Genre(genre = genre)
                 db.add(newgenre)
                 genreList.append(genre)
-        if parsedData["Ratings"] != []:
+        if dataParsed["Ratings"] != []:
             for source in movie["Ratings"]:
                 if source["Source"] == "Rotten Tomatoes":
                     rating = int(source["Value"][:len(source['Value'])-1])
