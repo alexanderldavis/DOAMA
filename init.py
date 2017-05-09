@@ -17,7 +17,7 @@ cur = conn.cursor()
 # DROP ALL TABLES, CREATE ALL TABLES
 print("TABLES DELETED")
 cur.execute("""drop table movies CASCADE; CREATE table movies (id serial unique, title varchar(100), description text, year varchar(40), rated varchar(50), runtime varchar(50), poster varchar(200));""")
-cur.execute("""drop table genres CASCADE; CREATE table genres (id serial unique, name varchar(20)); CREATE table genres_movies (movieid int, genreid int, FOREIGN KEY (movieid) references movies(id), FOREIGN KEY (genreid) references genres(id), primary key (movieid, genreid));""")
+cur.execute("""drop table genres CASCADE; drop table genres_movies CASCADE; CREATE table genres (id serial unique, name varchar(20)); CREATE table genres_movies (movieid int, genreid int, FOREIGN KEY (movieid) references movies(id), FOREIGN KEY (genreid) references genres(id), primary key (movieid, genreid));""")
 # cur.execute("""drop table if exists actors; CREATE table actors (id serial unique, name varchar(99)); CREATE table actors_movies (movieid int, actorid int, FOREIGN KEY (movieid) references movies(id), FOREIGN KEY (actorid) references actors(id), primary key (movieid, actorid));""")
 # cur.execute("""CREATE table services_movies (movie_id int, FOREIGN key(movie_id) references movies(id), service_id int, FOREIGN key(service_id) references services(id));""")
 # cur.execute("""CREATE table activities_movies (movie_id int, FOREIGN key (movie_id) references movies(id), activity_id int, FOREIGN key(activity_id) references activities(id));""")
