@@ -35,8 +35,14 @@ def index():
 ### SEARCH FOR RECCOMMENDATONS ###
 @app.route("/search")
 def search():
-    res = sqldb.session.query(movie).filter(movie.title=='Avatar')
-    print("###############################\nres: ", res)
+    cur = conn.cursor()
+    activity=request.args['selected_activity']
+    print(activity)
+    # cur.execute("""SELECT id, title, poster, rated from movies where title = 'Avatar';""")
+    if activity!="":
+        # cur.execute("""SELECT movies.id, movies.title, movies.poster, movies.rated, movies.rating from movies join activities_movies on (activities_movies.movie_id=movies.id) join activity on (activities_movies.activity_id=acitvities.id) WHERE activities.name='%s' limit 5;"""%activity)
+        cur.execute("""SELECT id, title, poster, rated from movies where title = 'Avatar';""")
+    res = cur.fetchall()
     return render_template('searchresults.html', movieList = res)
 
 
