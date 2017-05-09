@@ -78,7 +78,7 @@ for movie in movies:
         print(genresOfMovie)
         # newmovie = Movie(title = dataParsed["Title"], description = dataParsed["Plot"], year = dataParsed["Year"], rated = dataParsed["Rated"], runtime = dataParsed["Runtime"], poster = dataParsed["Poster"], rating=rating, genres = [g for g in genresOfMovie])
         # print("Added: ", dataParsed["Title"])
-        db.add(newmovie)
+        # db.add(newmovie)
     db.commit()
     #     dataParsed = json.loads(res.text)
     #
