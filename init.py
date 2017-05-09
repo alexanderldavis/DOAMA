@@ -17,6 +17,8 @@ urllib.parse.uses_netloc.append("postgres")
 url = urllib.parse.urlparse(os.environ["DATABASE_URL"])
 db = psycopg2.connect(database=url.path[1:],user=url.username,password=url.password,host=url.hostname,port=url.port)
 
+genres_movies = Table('genres_movies', Base.metadata, Column('genres', Integer, ForeignKey('genres.id')), Column('movies', Integer, ForeignKey('movies.id')))
+
 class movies(Base):
     __tablename__='movies'
     id=Column(Integer,primary_key=True)
@@ -38,10 +40,10 @@ class genres(Base):
     def __repr__(self):
         return "Genre: ({})".format(self.name)
 
-class genres_movies(Base):
-    __tablename__ = 'genres_movies'
-    movieid = Column(Integer, ForeignKey("movies.id"), primary_key = True)
-    genreid = Column(Integer, ForeignKey("genres.id"), primary_key = True)
+# class genres_movies(Base):
+#     __tablename__ = 'genres_movies'
+#     movieid = Column(Integer, ForeignKey("movies.id"), primary_key = True)
+#     genreid = Column(Integer, ForeignKey("genres.id"), primary_key = True)
 
 engine = create_engine(os.environ["DATABASE_URL"])
 Session = sessionmaker(bind=engine)
@@ -70,10 +72,9 @@ for movie in data:
                 newgenre = genres(name = genre)
                 db.add(newgenre)
                 genreList.append(genre)
-        print(newmovie.id)
-        # somemovieid = db.query(movies).filter_by(title = dataParsed["Title"]).first()
-        # print("movieid: ", somemovieid)
-            # newgenremovie = genres_movies(movieid = )
+        somemovieid = db.query(movies).filter_by(title = dataParsed["Title"]).first()
+        print("movieid: ", somemovieid)
+        # newgenremovie = genres_movies(movieid = )
     db.commit()
     #     dataParsed = json.loads(res.text)
     #
