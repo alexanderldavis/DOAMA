@@ -40,7 +40,6 @@ conn.commit()
 t = req.get('https://raw.githubusercontent.com/alexanderldavis/DOAMA/master/finalMovieList.txt')
 print("LIST SCRAPED FROM SOURCE")
 # data = file.split("\n")
-print(t.text)
 data = t.text
 data = data.split("\n")
 genreList = []
@@ -53,7 +52,7 @@ for movie in data:
 
     if dataParsed["Response"] != "False":
         rated = dataParsed["Rated"]
-        cur.execute("""INSERT INTO movies (title, description, year, rated, runtime, poster) VALUES (%s, %s, %s, %s, %s, %s, %s);""", (dataParsed["Title"],dataParsed["Plot"],dataParsed["Year"],dataParsed["Rated"], dataParsed["Runtime"],dataParsed["Poster"]))
+        cur.execute("""INSERT INTO movies (title, description, year, rated, runtime, poster) VALUES (%s, %s, %s, %s, %s, %s);""", (dataParsed["Title"],dataParsed["Plot"],dataParsed["Year"],dataParsed["Rated"], dataParsed["Runtime"],dataParsed["Poster"]))
         print("Added: ", dataParsed["Title"])
 
         genres = dataParsed["Genre"]
