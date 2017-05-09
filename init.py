@@ -41,39 +41,39 @@ t = req.get('https://raw.githubusercontent.com/alexanderldavis/DOAMA/master/fina
 print("LIST SCRAPED FROM SOURCE")
 # data = file.split("\n")
 print(t.text)
-# genreList = []
-# actorList = []
-# totalnumoffilms=0
-# for i in range(1, len(data)):
-#     movieName = data[i].replace("\n","")
-#     movieName = movieName.replace(" ", "+")
-#     res = req.get("http://www.omdbapi.com/?t={}".format(movieName))
-#     dataParsed = json.loads(res.text)
-#
-#     if dataParsed["Response"] != "False":
-#         rated = dataParsed["Rated"]
-#         cur.execute("""INSERT INTO movies (title, description, year, rated, runtime, poster, rating) VALUES (%s, %s, %s, %s, %s, %s, %s);""", (dataParsed["Title"],dataParsed["Plot"],dataParsed["Year"],dataParsed["Rated"], dataParsed["Runtime"],dataParsed["Poster"],rating))
-#         print("Added: ", dataParsed["Title"])
-#
-#         genres = dataParsed["Genre"]
-#         genres = genres.split(", ")
-#         for genre in genres:
-#             if genre not in genreList:
-#                 cur.execute("""INSERT INTO genres (name) VALUES (%s)""", (genre,))
-#                 genreList.append(genre)
-#             cur.execute("""INSERT INTO genres_movies (movieid, genreid) VALUES (%s, (SELECT id FROM genres WHERE name = %s))""", (str(totalnumoffilms), genre))
-#         actors = dataParsed["Actors"]
-#         actors = actors.split(", ")
-#         for actor in actors:
-#             if actor not in actorList:
-#                 cur.execute("""INSERT INTO actors (name) VALUES (%s)""", (actor,))
-#                 actorList.append(actor)
-#             cur.execute("""INSERT INTO actors_movies (movieid, actorid) VALUES (%s, (SELECT id from actors WHERE name = %s))""", (str(totalnumoffilms), actor))
-#     conn.commit()
-# print("TABLE POPULATED")
-# print("===============================INFO===============================")
-# print("All Genres:", genreList)
-# print("Total Num of Films:", totalnumoffilms-1)
+data = t.split("\n")
+genreList = []
+actorList = []
+totalnumoffilms=0
+for movie in data:
+    movieName = movie.replace(" ", "+")
+    res = req.get("http://www.omdbapi.com/?t={}".format(movieName))
+    dataParsed = json.loads(res.text)
+
+    if dataParsed["Response"] != "False":
+        rated = dataParsed["Rated"]
+        cur.execute("""INSERT INTO movies (title, description, year, rated, runtime, poster, rating) VALUES (%s, %s, %s, %s, %s, %s, %s);""", (dataParsed["Title"],dataParsed["Plot"],dataParsed["Year"],dataParsed["Rated"], dataParsed["Runtime"],dataParsed["Poster"],rating))
+        print("Added: ", dataParsed["Title"])
+
+        genres = dataParsed["Genre"]
+        genres = genres.split(", ")
+        for genre in genres:
+            if genre not in genreList:
+                cur.execute("""INSERT INTO genres (name) VALUES (%s)""", (genre,))
+                genreList.append(genre)
+            cur.execute("""INSERT INTO genres_movies (movieid, genreid) VALUES (%s, (SELECT id FROM genres WHERE name = %s))""", (str(totalnumoffilms), genre))
+        actors = dataParsed["Actors"]
+        actors = actors.split(", ")
+        for actor in actors:
+            if actor not in actorList:
+                cur.execute("""INSERT INTO actors (name) VALUES (%s)""", (actor,))
+                actorList.append(actor)
+            cur.execute("""INSERT INTO actors_movies (movieid, actorid) VALUES (%s, (SELECT id from actors WHERE name = %s))""", (str(totalnumoffilms), actor))
+    conn.commit()
+print("TABLE POPULATED")
+print("===============================INFO===============================")
+print("All Genres:", genreList)
+print("Total Num of Films:", totalnumoffilms-1)
 
 
 # #heroku run python3 init.py
