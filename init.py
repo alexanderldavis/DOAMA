@@ -11,7 +11,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
 app.secret_key = 'development key'
 
-Base = declarative_base()
 
 class movies(db.Model):
     __tablename__ = 'movies'
