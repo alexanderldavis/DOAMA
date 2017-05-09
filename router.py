@@ -20,6 +20,7 @@ url = urllib.parse.urlparse(os.environ["DATABASE_URL"])
 db = psycopg2.connect(database=url.path[1:],user=url.username,password=url.password,host=url.hostname,port=url.port)
 
 app = Flask(__name__)
+sqldb = SQLAlchemy(app)
 app.secret_key = 'wtforms more like wtf forms'
 
 class SearchForm(Form):
@@ -34,7 +35,7 @@ def index():
 ### SEARCH FOR RECCOMMENDATONS ###
 @app.route("/search")
 def search():
-    res = db.session.query(movie).filter(movie.title=='Avatar')
+    res = sqldb.session.query(movie).filter(movie.title=='Avatar')
     print("###############################\nres: ", res)
     return render_template('searchresults.html', movieList = res)
 
