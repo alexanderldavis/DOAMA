@@ -4,7 +4,6 @@
 {{ form.options.label }}
 
 <fieldset>
-  {{ form.hidden_tag() }}
   {% for form in form.options %}
     <div>{{form.label}} {{form}}</div>
   {% endfor %}
