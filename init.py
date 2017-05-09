@@ -25,8 +25,7 @@ for movie in data:
     print(movie)
     newmovie = movies(movieid = idNum, title=movie)
     db.session.add(newmovie)
-
-db.session.commit()
+    db.session.commit()
 
 #####################################################################
 ############### OLD #####################
