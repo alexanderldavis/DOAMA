@@ -11,6 +11,7 @@ class Movie(Base):
     __tablename__='movie'
     id=Column(Integer,primary_key=True)
     title=Column(String)
+    rating=Column(Integer)
     genres=relationship("Genre",
                             secondary=movie_genre,
                             back_populates="inMovie")
@@ -53,7 +54,12 @@ for genre in genreset:
 for movie in movies:
     if movie['Response']!="False":
         genreList=movie['Genre'].split(", ")
-        newmovie=Movie(title=movie['Title'], genres=[genres[g] for g in genreList])
+        if movie['Ratings']!=[]:
+            rating=0
+            for source in movie['Ratings']:
+                if source["Source"]=="Rotten Tomatoes":
+                    rating=int(source['Value'][:len(source['Value'])-1])
+        newmovie=Movie(title=movie['Title'], genres=[genres[g] for g in genreList], rating=rating)
         db.add(newmovie)
 
 db.commit()
