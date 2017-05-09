@@ -58,6 +58,7 @@ print("LIST SCRAPED FROM SOURCE")
 data = t.text
 movies = data.split("\n")
 genreList = []
+allGenres = {}
 for movie in movies:
     moviename = movie.title()
     movieName = moviename.replace(" ", "+")
@@ -71,11 +72,12 @@ for movie in movies:
                 newgenre = Genre(genre = genre)
                 db.add(newgenre)
                 genreList.append(genre)
+                allGenres[genre] = newgenre
         if dataParsed["Ratings"] != []:
             for source in dataParsed["Ratings"]:
                 if source["Source"] == "Rotten Tomatoes":
                     rating = int(source["Value"][:len(source['Value'])-1])
-        newmovie = Movie(title = dataParsed["Title"], description = dataParsed["Plot"], year = dataParsed["Year"], rated = dataParsed["Rated"], runtime = dataParsed["Runtime"], poster = dataParsed["Poster"], rating=rating, genres = genresOfMovie)
+        newmovie = Movie(title = dataParsed["Title"], description = dataParsed["Plot"], year = dataParsed["Year"], rated = dataParsed["Rated"], runtime = dataParsed["Runtime"], poster = dataParsed["Poster"], rating=rating, genres = [allGenres[g] for g in genreOfMovie])
         print("Added: ", dataParsed["Title"])
         db.add(newmovie)
     db.commit()
