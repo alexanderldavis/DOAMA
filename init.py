@@ -9,7 +9,6 @@ from bs4 import BeautifulSoup
 import urllib.parse
 import requests as req
 import json
-from db import PrimaryKeyConstraint
 
 
 Base = declarative_base()
@@ -41,13 +40,8 @@ class genres(Base):
 
 class genres_movies(Base):
     __tablename__ = 'genres_movies'
-    __table_args__ = (PrimaryKeyConstraint('movieid', 'genreid'))
-
     movieid = Column(Integer, ForeignKey("movie.id"))
     genreid = Column(Integer, ForeignKey("genre.id"))
-    # movieid = Column(Integer, ForeignKey('movie.id'))
-    # genreid = Column(Integer, ForeignKey('genre.id'))
-
 
 engine = create_engine(os.environ["DATABASE_URL"])
 Session = sessionmaker(bind=engine)
