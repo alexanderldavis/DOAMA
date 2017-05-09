@@ -51,13 +51,13 @@ for movie in data:
         rated = dataParsed["Rated"]
         cur.execute("""INSERT INTO movies (title, description, year, rated, runtime, poster) VALUES (%s, %s, %s, %s, %s, %s);""", (dataParsed["Title"],dataParsed["Plot"],dataParsed["Year"],dataParsed["Rated"], dataParsed["Runtime"],dataParsed["Poster"]))
         print("Added: ", dataParsed["Title"])
-        if dataParsed['Ratings']!=[]:
-            for source in dataParsed['Ratings']:
-                if source['Source']=="Rotten Tomatoes":
-                    rating=int(source['Value'][:len(source['Value'])-1])
-                else:
-                    rating=None
-                print(rating)
+        # if dataParsed['Ratings']!=[]:
+        #     for source in dataParsed['Ratings']:
+        #         if source['Source']=="Rotten Tomatoes":
+        #             rating=int(source['Value'][:len(source['Value'])-1])
+        #         else:
+        #             rating=None
+        #         print(rating)
         genres = dataParsed["Genre"]
         genres = genres.split(", ")
         for genre in genres:
