@@ -9,6 +9,8 @@ from bs4 import BeautifulSoup
 import urllib.parse
 import requests as req
 import json
+from db import PrimaryKeyConstraint
+
 
 Base = declarative_base()
 
