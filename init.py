@@ -73,13 +73,17 @@ for movie in movies:
                 db.add(newgenre)
                 genreList.append(genre)
                 allGenres[genre] = newgenre
-        if dataParsed["Ratings"] != []:
-            for source in dataParsed["Ratings"]:
-                if source["Source"] == "Rotten Tomatoes":
-                    rating = int(source["Value"][:len(source['Value'])-1])
-        newmovie = Movie(title = dataParsed["Title"], description = dataParsed["Plot"], year = dataParsed["Year"], rated = dataParsed["Rated"], runtime = dataParsed["Runtime"], poster = dataParsed["Poster"], rating=rating, genres = [allGenres[g] for g in genresOfMovie])
-        print("Added: ", dataParsed["Title"])
-        db.add(newmovie)
+        try:
+            if dataParsed["Ratings"] != []:
+                for source in dataParsed["Ratings"]:
+                    if source["Source"] == "Rotten Tomatoes":
+                        rating = int(source["Value"][:len(source['Value'])-1])
+            newmovie = Movie(title = dataParsed["Title"], description = dataParsed["Plot"], year = dataParsed["Year"], rated = dataParsed["Rated"], runtime = dataParsed["Runtime"], poster = dataParsed["Poster"], rating=rating, genres = [allGenres[g] for g in genresOfMovie])
+            print("Added: ", dataParsed["Title"])
+            db.add(newmovie)
+        except:
+            print("Failed to add "+dataParsed["Title"]+". Sigh-Oh well! Moving on!")
+
     db.commit()
     #     dataParsed = json.loads(res.text)
     #
