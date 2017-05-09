@@ -78,9 +78,9 @@ div.desc {
 </style>
   <div class="tablediv loadText" onload="loadFunction()" style="margin:0;">
       <div id ="loader"></div>
-      <div class="animate-bottom" id="myDiv" style="display:none;">
-        <h3 style="text-align:center;">Now Showing Results for {{ title }}</h3>
-        <div>
+        <div class="animate-bottom" id="myDiv" style="display:none;">
+          <h3 style="text-align:center;">Now Showing Results for {{ title }}</h3>
+          <div>
             {% for (id, title, poster, rated) in movieList %}
               <div class="floated_img">
                 <a href="http://www.projectdoama.com/movieInfo/{{id}}"><img width="150" height="200" class="movieName" src="{{ poster }}" alt="Poster for {{ title }}"></a>
@@ -89,7 +89,6 @@ div.desc {
             {% endfor %}
           </div>
       </div>
-
   </div>
 
 

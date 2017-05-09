@@ -57,10 +57,12 @@ def searchMovie():
     return render_template('searchresults.html', movieList = res)
 
 ### SHOW MOVIE INFORMATION ###
-# @app.route("/movieInfo/<id>")
-# def showMovieInfo(id):
-#
-#     return render_template('getmovieinfo.html', movieInformation = res)
+@app.route("/movieInfo/<id>")
+def showMovieInfo(id):
+    cur = conn.cursor()
+    cur.execute("""SELECT id, title, poster, rated FROM movies where id = %s""", (str(id),))
+    res = cur.fetchall()
+    return render_template('getmovieinfo.html', movieInformation = res)
 
 
 if __name__=='__main__':
