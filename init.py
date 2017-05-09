@@ -40,7 +40,7 @@ class genres(Base):
 class genres_movies(Base):
     __tablename__ = 'genres_movies'
     movieid = Column(Integer, ForeignKey('movie.id'))
-    genreid = Column(Integer, ForeginKey('genre.id'))
+    genreid = Column(Integer, ForeignKey('genre.id'))
 
 engine = create_engine(os.environ["DATABASE_URL"])
 Session = sessionmaker(bind=engine)
