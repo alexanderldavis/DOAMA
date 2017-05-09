@@ -790,7 +790,7 @@ Bad Santa
 Dreamcatcher
 Happy Feet
 """
-data = file.readlines()
+data = file.split("\n")
 genreList = []
 actorList = []
 totalnumoffilms=0
