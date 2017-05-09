@@ -1,22 +1,17 @@
-import json
-from sqlalchemy import Table, Column, Integer, String, ForeignKey, create_engine
-from sqlalchemy.orm import relationship, sessionmaker
-from sqlalchemy.ext.declarative import declarative_base
-import requests as req
-from wtforms import Form, BooleanField, TextField, validators, SubmitField, RadioField, SelectField
-from flask_wtf import Form
-from flask_sqlalchemy import SQLAlchemy
-from json import load
-from sqlalchemy import Table, Column, Integer, String, ForeignKey, create_engine
-from sqlalchemy.orm import relationship, sessionmaker
-from sqlalchemy.ext.declarative import declarative_base
 import psycopg2
-from flask import Flask, render_template, request
+import json
+from json import load
 import os
 from bs4 import BeautifulSoup
 import urllib.parse
 import requests as req
-
+from flask import Flask, render_template, request
+from flask_wtf import Form
+from flask_sqlalchemy import SQLAlchemy
+from wtforms import Form, BooleanField, TextField, validators, SubmitField, RadioField, SelectField
+from sqlalchemy import Table, Column, Integer, String, ForeignKey, create_engine
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import relationship, sessionmaker
 
 Base = declarative_base()
 
@@ -25,16 +20,20 @@ url = urllib.parse.urlparse(os.environ["DATABASE_URL"])
 db = psycopg2.connect(database=url.path[1:],user=url.username,password=url.password,host=url.hostname,port=url.port)
 
 app = Flask(__name__)
+app.secret_key = 'wtforms more like wtf forms'
 
 class SearchForm(Form):
-    options = SelectField('Search By:', [validators.required()], choices=[('Test', 'Test')])
-    field = TextField("Enter a value"), [validators.required()]
+    options = SelectField('Search By:', [validators.Required()], choices=[('Test', 'Test')])
+    field = TextField("Enter a value"), [validators.Required()]
     submit = SubmitField('Search')
 
-@app.route("/", methods=['GET'])
+@app.route("/", methods=['GET', 'POST'])
 def index():
     form = SearchForm()
-    return render_template('welcome.html', form=form)
+    if request.method == 'POST' and form.validate():
+        return render_template('welcome.html', info=[])
+    elif request.method == 'GET':
+        return render_template('welcome.html', form=form)
 
 
 
