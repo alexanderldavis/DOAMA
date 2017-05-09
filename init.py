@@ -11,10 +11,18 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
 app.secret_key = 'development key'
 
+
 class movies(db.Model):
     __tablename__ = 'movies'
     movieid = db.Column(db.Integer, primary_key= True)
     title = db.Column(db.String)
+
+    def __init__(self, movieid, title):
+        self.movieid = movieid
+        self.title = title
+
+    def __repr__(self):
+        return '<id {}>'.format(self.title)
 
 t = req.get('https://raw.githubusercontent.com/alexanderldavis/DOAMA/master/finalMovieList.txt')
 print("LIST SCRAPED FROM SOURCE")
