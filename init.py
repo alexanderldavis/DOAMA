@@ -70,7 +70,7 @@ for movie in data:
                 newgenre = genres(name = genre)
                 db.add(newgenre)
                 genreList.append(genre)
-        somemovieid = db.query(movies).filter(movies.id(title = dataParsed["Title"])).first()
+        somemovieid = db.query(movies).filter_by(title = dataParsed["Title"]).first()
         print("movieid: ", somemovieid)
             # newgenremovie = genres_movies(movieid = )
     db.commit()
