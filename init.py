@@ -23,6 +23,11 @@ class Movie(Base):
     __tablename__='movie'
     id=Column(Integer,primary_key=True)
     title=Column(String)
+    description=Column(String)
+    year=Column(String)
+    rated=Column(String)
+    runtime=Column(String)
+    poster = Column(String)
     genres=relationship("Genre",
                             secondary=movie_genre,
                             back_populates="inMovie")
@@ -56,16 +61,16 @@ for movie in data:
     res = req.get("http://www.omdbapi.com/?t={}".format(movieName))
     dataParsed = json.loads(res.text)
     if dataParsed["Response"] != "False":
-        newmovie = movies(title = dataParsed["Title"], description = dataParsed["Plot"], year = dataParsed["Year"], rated = dataParsed["Rated"], runtime = dataParsed["Runtime"], poster = dataParsed["Poster"])
-        print("Added: ", dataParsed["Title"])
-        db.add(newmovie)
         genres1 = dataParsed["Genre"]
         genres1 = genres1.split(", ")
         for genre in genres1:
             if genre not in genreList:
-                newgenre = genres(name = genre)
+                newgenre = Genre(genre = genre)
                 db.add(newgenre)
                 genreList.append(genre)
+        newmovie = Movie(title = dataParsed["Title"], description = dataParsed["Plot"], year = dataParsed["Year"], rated = dataParsed["Rated"], runtime = dataParsed["Runtime"], poster = dataParsed["Poster"], genres = [genres[g] for g in genre1])
+        print("Added: ", dataParsed["Title"])
+        db.add(newmovie)
     db.commit()
     #     dataParsed = json.loads(res.text)
     #
