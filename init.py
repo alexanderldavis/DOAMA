@@ -28,6 +28,7 @@ class Movie(Base):
     rated=Column(String)
     runtime=Column(String)
     poster = Column(String)
+    rating = Column(Integer)
     genres=relationship("Genre",
                             secondary=movie_genre,
                             back_populates="inMovie")
@@ -71,10 +72,10 @@ for movie in movies:
                 db.add(newgenre)
                 genreList.append(genre)
         if dataParsed["Ratings"] != []:
-            for source in movie["Ratings"]:
+            for source in dataParsed["Ratings"]:
                 if source["Source"] == "Rotten Tomatoes":
                     rating = int(source["Value"][:len(source['Value'])-1])
-        newmovie = Movie(title = dataParsed["Title"], description = dataParsed["Plot"], year = dataParsed["Year"], rated = dataParsed["Rated"], runtime = dataParsed["Runtime"], poster = dataParsed["Poster"], genres = [g for g in genreOfMovie])
+        newmovie = Movie(title = dataParsed["Title"], description = dataParsed["Plot"], year = dataParsed["Year"], rated = dataParsed["Rated"], runtime = dataParsed["Runtime"], poster = dataParsed["Poster"], rating=rating, genres = [g for g in genreOfMovie])
         print("Added: ", dataParsed["Title"])
         db.add(newmovie)
     db.commit()
