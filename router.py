@@ -27,8 +27,8 @@ db = psycopg2.connect(database=url.path[1:],user=url.username,password=url.passw
 app = Flask(__name__)
 
 class SearchForm(Form):
-    options = SelectField('Search By:', choices=[('Test', 'Test')])
-    field = TextField("Enter a value")
+    options = SelectField('Search By:', [validators.required()], choices=[('Test', 'Test')])
+    field = TextField("Enter a value"), [validators.required()]
     submit = SubmitField('Search')
 
 @app.route("/", methods=['GET'])
