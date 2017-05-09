@@ -46,6 +46,7 @@ genreList = []
 actorList = []
 totalnumoffilms=0
 for movie in data:
+    totalnumoffilms += 1
     movieName = movie.replace(" ", "+")
     res = req.get("http://www.omdbapi.com/?t={}".format(movieName))
     dataParsed = json.loads(res.text)
