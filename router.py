@@ -31,6 +31,14 @@ def index():
     return render_template('welcome.html', form=form)
 
 
+### SEARCH FOR RECCOMMENDATONS ###
+@app.route("/search")
+def search():
+    res = db.session.query(movie).filter(movie.title='Avatar')
+    print("###############################\nres: ", res)
+    return render_template('searchresults.html', movieList = res)
+
+
 
 # import psycopg2
 # from flask import Flask, render_template, request
