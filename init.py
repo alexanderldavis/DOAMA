@@ -1,122 +1,40 @@
-from json import load
-from sqlalchemy import Table, Column, Integer, String, ForeignKey, create_engine
-from sqlalchemy.orm import relationship, sessionmaker
-from sqlalchemy.ext.declarative import declarative_base
+from flask import Flask, render_template, request, flash
+from wtforms import Form, BooleanField, TextField, validators, SubmitField, RadioField, SelectField
+from flask_wtf import Form
+from flask_sqlalchemy import SQLAlchemy
+import requests as req
+
+app = Flask(__name__)
+app.debug = True
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///students.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+db = SQLAlchemy(app)
+app.secret_key = 'development key'
 
 Base = declarative_base()
 
+class movies(db.Model):
+    __tablename__ = 'movies'
+    movieid = db.Column(db.Integer, primary_key= True)
+    title = db.Column(db.String)
 
-course_requirement = Table('course_requirement',
-                           Base.metadata,
-                           Column('course', Integer, ForeignKey('course.id')),
-                           Column('requirement', Integer, ForeignKey('requirement.id')))
-
-class Course(Base):
-    """
-    SQLAlchemy Model object to represent a course
-    """
-    __tablename__ = 'course'
-    id = Column(Integer, primary_key=True)
-    title = Column(String)
-    number = Column(String)
-    dept = Column(String)
-    description = Column(String)
-    fulfills = relationship("Requirement",
-                            secondary=course_requirement,
-                            back_populates="satisfied_by")
+    def __init__(self, movieid, title):
+        self.movieid = movieid
+        self.title = title
 
     def __repr__(self):
-        return "Course({}, {})".format(self.number, self.title)
+        return '<id {}>'.format(self.title)
 
-
-class Requirement(Base):
-    """
-    SQLAlchemy Model object to represent an all college requirement
-    """
-    __tablename__ = 'requirement'
-    id = Column(Integer, primary_key=True)
-    description = Column(String)
-    satisfied_by = relationship("Course", secondary=course_requirement, back_populates="fulfills")
-
-    def __repr__(self):
-        return "Requirement({})".format(self.description)
-
-
-engine = create_engine('postgresql://millbr02:@localhost/genedorm')
-Session = sessionmaker(bind=engine)
-
-db = Session()
-Base.metadata.drop_all(engine)
-Base.metadata.create_all(engine)
-
-with open('geneds.json', 'r') as gf:
-    class_info = load(gf)
-
-rset = set()
-ged = {}
-for c in class_info:  # first pass collect all distinct gened designators
-    for g in c['fulfills']:
-        rset.add(g)
-
-for g in rset:
-    res = Requirement(description=g)
-    db.add(res)
-    ged[g] = res
-
-for c in class_info:
-    newc = Course(title=c['title'], dept=c['subject'], number=c['number'],
-                  fulfills=[ged[g] for g in c['fulfills']])
-    db.add(newc)
-
-db.commit()
-
-# Now lets try a query
-
-quants = db.query(Requirement).filter_by(description='Quantitative').first()
-
-print([x.number for x in quants.satisfied_by])
-
-x = db.query(Course).filter(Course.fulfills.any(description='Quantitative')).all()
-print([y for y in x])
-
-# filter_by is simpler than filter and uses key value pairs for queries
-#y = db.query(Course).filter_by(number='CS 150').first()
-
-y = db.query(Course).filter(Course.number == 'CS 150').first()
-
-print(y, y.fulfills)
-
-
-# from flask import Flask, render_template, request, flash
-# from wtforms import Form, BooleanField, TextField, validators, SubmitField, RadioField, SelectField
-# from flask_wtf import Form
-# from flask_sqlalchemy import SQLAlchemy
-# import requests as req
-#
-# app = Flask(__name__)
-# app.debug = True
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///students.db'
-# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
-# db = SQLAlchemy(app)
-# app.secret_key = 'development key'
-#
-# Base = declarative_base()
-#
-# class movies(db.Model):
-#     __tablename__ = 'movies'
-#     movieid = db.Column(db.Integer, primary_key= True)
-#     title = db.Column(db.String)
-#
-# t = req.get('https://raw.githubusercontent.com/alexanderldavis/DOAMA/master/finalMovieList.txt')
-# print("LIST SCRAPED FROM SOURCE")
-# data = t.text
-# data = data.split("\n")
-# idNum = 0
-# for movie in data:
-#     print(movie)
-#     newmovie = movies(movieid = idNum, title=movie)
-#     db.session.add(newmovie)
-#     db.session.commit()
+t = req.get('https://raw.githubusercontent.com/alexanderldavis/DOAMA/master/finalMovieList.txt')
+print("LIST SCRAPED FROM SOURCE")
+data = t.text
+data = data.split("\n")
+idNum = 0
+for movie in data:
+    print(movie)
+    newmovie = movies(movieid = idNum, title=movie)
+    db.session.add(newmovie)
+    db.session.commit()
 
 #####################################################################
 ############### OLD #####################
