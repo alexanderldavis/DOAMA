@@ -24,7 +24,6 @@ app.secret_key = 'wtforms more like wtf forms'
 
 class SearchForm(Form):
     options = SelectField('Search By:', [validators.Required()], choices=[('FamilyNight', 'Family Night'), ('DateNight', 'Date Night'),('GirlsNight', 'Girls Night'),('GuysNight', 'Guys Night'), ('NerdNight', 'Nerd Night'), ('CulturedNight', 'Cultured Movie Night'), ('SurpriseMe', 'Surprise Me')])
-    submit = SubmitField('Search')
 
 @app.route("/", methods=['GET'])
 def index():

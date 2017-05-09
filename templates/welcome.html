@@ -1,20 +1,19 @@
 {% extends "base.html" %}
 {% block body %}
 
-<form action="/search" method="post">
+<form class="form-inline loadText" action="/search" method="post">
+  <label for="activityselect" style="font-size: 20pt;">I need a movie for my </label>
    <fieldset>
-     <select class="" name="">
+     <select style="font-family: 'Source Sans Pro', sans-serif; font-size: 15pt;" class="form-control" name="selected_activity">
        {% for form in form.options %}
        {{form}}
        {% endfor %}
      </select>
-     <br>
-     <br>
-     <div>
-       {{form.submit}}
+     <br><br>
+     <div class="form-group">
+       <input style="font-family: 'Source Sans Pro', sans-serif; font-size: 20pt;" type="submit" name="" class="btn btn-primary" id="submitActivityQuery" value = "DOAMA!">
      </div>
    </fieldset>
-
 </form>
 
 
