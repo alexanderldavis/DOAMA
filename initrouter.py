@@ -81,7 +81,6 @@ for movie in movies:
                 allGenres[genre] = newgenre
         try:
             if dataParsed["Ratings"] != []:
-                rating=0
                 for source in dataParsed["Ratings"]:
                     if source["Source"] == "Rotten Tomatoes":
                         rating = int(source["Value"][:len(source['Value'])-1])
