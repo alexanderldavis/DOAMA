@@ -7,7 +7,6 @@ section {
     width: 80%;
     height: 100%;
     background: aqua;
-    opacity: 0.5;
     margin: auto;
     padding: 10px;
     border-radius: 5px;
@@ -99,13 +98,19 @@ div.desc {
   <div id ="loader"></div>
     <div class="animate-bottom" id="myDiv" style="display:none;">
       {% for (id, title, poster, rated, rating, plot) in movie %}
-        <h1>{{title}}</h1>
+        <h1>{{title}} [{{rated}}]</h1>
         <section>
           <div id = "one" class="loadText">
+            <h5>Plot</h5>
             <p>{{ plot }}</p>
+
+            <h5>Genres</h5>
+
+            <h5>Rotten Tomatoes Rating</h5>
+            <p>{{ rating }}</p>
+
           </div>
           <div id = "two" class="loadText">
-            <h1>{{title}}</h1>
             <img width="300" height="400" src="{{ poster }}" alt="Poster for {{ title }}">
           </div>
         </section>
