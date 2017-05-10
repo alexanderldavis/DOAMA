@@ -117,11 +117,19 @@ def getMovieInfo(id):
 
 @app.route("/goodFor")
 def goodFor():
-    # movie=request.args['movietitle']
-    # movie=movie.title()
-    # res=db.session.execute("""SELECT movie.id, movie.title, movie.poster, movie.rated, movie.rating from movie where movie.title like'%%%s%%' limit 12;"""%movie)
-    # res=res.fetchall()
-    return render_template('searchresults.html',movieList=[],activity="")
+    group=request.args['group']
+    genre=request.args['genre']
+    rating = None
+    if group = "Family":
+        rating = 'PG-13'
+    elif group = "Children":
+        rating = 'PG'
+    if rating is not None:
+        res=db.session.execute("""SELECT movie.id, movie.title, movie.poster, movie.rated, movie.rating from movie JOIN movie_genre ON (movie.id = movie_genre.movie_id) where movie_genre.genre_id =%s and movie.rated = %s limit 12;""",(genre, rating))
+    else:
+        res=db.session.execute("""SELECT movie.id, movie.title, movie.poster, movie.rated, movie.rating from movie JOIN movie_genre ON (movie.id = movie_genre.movie_id) where movie_genre.genre_id =%s limit 12;"""%genre)
+    res=res.fetchall()
+    return render_template('searchresults.html',movieList=res,activity="")
 
 
 # import psycopg2
