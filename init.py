@@ -52,8 +52,8 @@ class Genre(Base):
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI']=os.environ["DATABASE_URL"]
 db=SQLAlchemy(app)
-Base.metadata.drop_all(engine)
-Base.metadata.create_all(engine)
+# Base.metadata.drop_all(engine)
+# Base.metadata.create_all(engine)
 
 t = req.get('https://raw.githubusercontent.com/alexanderldavis/DOAMA/master/finalMovieList.txt')
 print("LIST SCRAPED FROM SOURCE")
