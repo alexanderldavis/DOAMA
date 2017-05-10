@@ -58,38 +58,45 @@ def search():
                                     genre join movie_genre on (genre.id=movie_genre.genre_id) join movie on (movie_genre.movie_id=movie.id)\
                                     where (((genre.genre='Adventure') or (genre.genre='Comedy') or (genre.genre='Animation') or (genre.genre='Mistery') or (genre.genre='Fantasy')) and ((movie.rated='PG13') or (movie.rated='PG')))\
                                     group by movie.id, movie.title, movie.poster,movie.rated, movie.rating order by random(), movie.rating limit 5;""")
+        activity="Family Night"
     if activity=="DateNight":
         res=db.session.execute("""SELECT movie.id, movie.title, movie.poster, movie.rated, movie.rating from \
                                   genre join movie_genre on (genre.id=movie_genre.genre_id) join movie on (movie_genre.movie_id=movie.id)\
                                   where ((genre.genre='Romance') or ((genre.genre='Animation')))\
                                   group by movie.id, movie.title, movie.poster,movie.rated, movie.rating order by random(), movie.rating  limit 5;""")
+        activity="Date Night"
     if activity=="GirlsNight":
         res=db.session.execute("""SELECT movie.id, movie.title, movie.poster, movie.rated, movie.rating from \
                                   genre join movie_genre on (genre.id=movie_genre.genre_id) join movie on (movie_genre.movie_id=movie.id)\
                                   where ((genre.genre='Romance') or (genre.genre='Animation') or (genre.genre='Comedy'))\
                                   group by movie.id, movie.title, movie.poster,movie.rated, movie.rating order by random(),movie.rating  limit 5;""")
+        activity="Girls Night"
     if activity=="NerdNight":
         res=db.session.execute("""SELECT movie.id, movie.title, movie.poster, movie.rated, movie.rating from \
                                   genre join movie_genre on (genre.id=movie_genre.genre_id) join movie on (movie_genre.movie_id=movie.id)\
                                   where ((genre.genre='Sci-Fi') or (genre.genre='Mistery'))\
                                   group by movie.id, movie.title, movie.poster,movie.rated, movie.rating order by random(),movie.rating  limit 5;""")
+        activity="Nerd Night"
     if activity=="GuysNight":
         res=db.session.execute("""SELECT movie.id, movie.title, movie.poster, movie.rated, movie.rating from \
                                   genre join movie_genre on (genre.id=movie_genre.genre_id) join movie on (movie_genre.movie_id=movie.id)\
                                   where ((genre.genre='Comedy') and (movie.rated='R'))\
                                   group by movie.id, movie.title, movie.poster,movie.rated, movie.rating order by random(),movie.rating  limit 5;""")
+        activity="Guys Night"
     if activity=="CulturedNight":
         res=db.session.execute("""SELECT movie.id, movie.title, movie.poster, movie.rated, movie.rating from \
                                   genre join movie_genre on (genre.id=movie_genre.genre_id) join movie on (movie_genre.movie_id=movie.id)\
                                   where ((genre.genre='Western') or (genre.genre='War'))\
                                   group by movie.id, movie.title, movie.poster,movie.rated, movie.rating order by random(),movie.rating  limit 5;""")
+        activity="Cultured Night"
     if activity=="SurpriseMe":
         res=db.session.execute("""SELECT movie.id, movie.title, movie.poster, movie.rated, movie.rating from \
                                   genre join movie_genre on (genre.id=movie_genre.genre_id) join movie on (movie_genre.movie_id=movie.id)\
                                   order by random(),movie.rating  limit 5;""")
 
+        activity="Surprise Me"
     res = res.fetchall()
-    return render_template('searchresults.html', movieList = res)
+    return render_template('searchresults.html', movieList = res, activity=activity)
 @app.route("/searchMovie")
 def searchMovie():
     movie=request.args['movietitle']
