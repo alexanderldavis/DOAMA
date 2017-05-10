@@ -1,19 +1,3 @@
-# from flask.ext.sqlalchemy import SQLAlchemy
-# import json
-# from json import load
-# import os
-# from bs4 import BeautifulSoup
-# import urllib.parse
-# import requests as req
-# from flask import Flask, render_template, request
-# from flask_wtf import Form
-# from flask_sqlalchemy import SQLAlchemy
-# from wtforms import Form, BooleanField, TextField, validators, SubmitField, RadioField, SelectField
-# from sqlalchemy import Table, Column, Integer, String, ForeignKey, create_engine
-# from sqlalchemy.ext.declarative import declarative_base
-# from sqlalchemy.orm import relationship, sessionmaker
-# from sqlalchemy.sql import select
-# import init
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, render_template, request, Response, jsonify
 import os
@@ -135,7 +119,7 @@ def goodFor():
     elif group == "Children":
         rating = 'PG'
     if rating is not None:
-        res=db.session.execute("""SELECT movie.id, movie.title, movie.poster, movie.rated, movie.rating from movie JOIN movie_genre ON (movie.id = movie_genre.movie_id) where movie_genre.genre_id =%s limit 12;"""%genre)
+        res=db.session.execute("""SELECT movie.id, movie.title, movie.poster, movie.rated, movie.rating from movie JOIN movie_genre ON (movie.id = movie_genre.movie_id) where movie_genre.genre_id =%s and movie.rated = '"""+rating+"""'limit 12;"""%genre)
     else:
         res=db.session.execute("""SELECT movie.id, movie.title, movie.poster, movie.rated, movie.rating from movie JOIN movie_genre ON (movie.id = movie_genre.movie_id) where movie_genre.genre_id =%s limit 12;"""%genre)
     res=res.fetchall()
@@ -172,7 +156,25 @@ def apiGenreInfo(movie):
     res.headers['Content-type'] = 'application/json'
     return res
 
+if __name__=='__main__':
+    app.run(debug=True)
 
+# from flask.ext.sqlalchemy import SQLAlchemy
+# import json
+# from json import load
+# import os
+# from bs4 import BeautifulSoup
+# import urllib.parse
+# import requests as req
+# from flask import Flask, render_template, request
+# from flask_wtf import Form
+# from flask_sqlalchemy import SQLAlchemy
+# from wtforms import Form, BooleanField, TextField, validators, SubmitField, RadioField, SelectField
+# from sqlalchemy import Table, Column, Integer, String, ForeignKey, create_engine
+# from sqlalchemy.ext.declarative import declarative_base
+# from sqlalchemy.orm import relationship, sessionmaker
+# from sqlalchemy.sql import select
+# import init
 # import psycopg2
 # from flask import Flask, render_template, request
 # import os
@@ -240,5 +242,3 @@ def apiGenreInfo(movie):
 #     return render_template('getmovieinfo.html', movieInformation = res)
 #
 #
-if __name__=='__main__':
-    app.run(debug=True)
