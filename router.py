@@ -108,7 +108,6 @@ def searchMovie(movie_id):
     res=res.fetchall()
     return render_template('getmovieinfo.html',movie=res)
 
-@app.route('/searchGenre')
 # import psycopg2
 # from flask import Flask, render_template, request
 # import os
