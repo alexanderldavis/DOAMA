@@ -3,7 +3,7 @@
 
 <form class="form-inline loadText" action="/search" method="get">
 <br><br><br><br><br>
-  <label for="activityselect" style="font-size: 20pt;">I need a movie for my</label>
+  <label for="activityselect" style="font-size: 30pt;">I need a movie for my</label>
    <fieldset>
      <select style="font-family: 'Source Sans Pro', sans-serif; font-size: 15pt;" class="form-control" name="selected_activity">
        {% for form in form.options %}
@@ -16,7 +16,12 @@
      </div>
    </fieldset>
 </form>
-
+<br><br><br><br><br>br><br><br><br><br>
+<h6 class="form-inline loadText2">Or, search for a Movie:</h6>
+<form class="form-inline loadText1" style = "margin-top:0;"action="/searchMovie" method="get">
+  <input id="idmoviesearch" class="form-control" type="text" name="movietitle" value="" placeholder="Movie Title">
+  <input type="submit" name="" class="btn btn-primary" id="submitMovieSearch" value = "Search for Movie">
+</form>
 
 
 {% endblock %}
