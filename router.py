@@ -116,7 +116,10 @@ def getMovieInfo(id):
 
     genres = db.session.execute("""SELECT genre.genre from movie join movie_genre on (movie.id = movie_genre.movie_id) join genre on (movie_genre.genre_id = genre.id) where movie.id = %s;"""%str(id))
     genrelist = genres.fetchall()
+    print("+++++++++++++===============+++++++++++++++")
     print(genrelist)
+    print(type(genrelist))
+    print("+++++++++++++===============+++++++++++++++")
     return render_template('getmovieinfo.html', movie = res, genres = genrelist)
 
 @app.route("/goodFor")
