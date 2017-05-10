@@ -46,7 +46,6 @@ def index():
 ### SEARCH FOR RECCOMMENDATONS ###
 @app.route("/search")
 def search():
-    cur = db.cursor()
     activity=request.args['selected_activity']
     print(activity)
     # cur.execute("""SELECT id, title, poster, rated from movies where title = 'Avatar';""")
@@ -55,8 +54,8 @@ def search():
         # s = select([movie]).where(title == 'Avatar')
         # result = db.session.execute(s)
         # print(result)
-        cur.execute("""SELECT id, title, poster, rated from movie where title = 'Avatar';""")
-    res = cur.fetchall()
+        res = db.session.execute("""SELECT id, title, poster, rated from movie where title = 'Avatar';""")
+    res = res.fetchall()
     return render_template('searchresults.html', movieList = res)
 
 
