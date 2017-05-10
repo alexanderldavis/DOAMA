@@ -83,8 +83,8 @@ div.desc {
           <div style="text-align:center;">
             {% for (id, title, poster, rated, rating) in movieList %}
               <div style="text-align: left; float: left; margin: 20px;">
-                <a href="http://www.projectdoama.com/getMovieInfo/{{id}}"><img style="text-align: center;" width="150" height="200" src="{{ poster }}" alt="Poster for {{ title }}"></a>
-                <h5 style="text-align: center;">{{ title }} [{{ rated }}]</h5>
+                <a href="http://www.projectdoama.com/getMovieInfo/{{id}}"><img style="text-align: center;" width="225" height="300" src="{{ poster }}" alt="Poster for {{ title }}"></a>
+                <!-- <h5 style="text-align: center;"> title  [ rated ]</h5> -->
               </div>
             {% endfor %}
           </div>
