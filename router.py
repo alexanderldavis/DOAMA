@@ -49,12 +49,15 @@ def search():
     activity=request.args['selected_activity']
     print(activity)
     # cur.execute("""SELECT id, title, poster, rated from movies where title = 'Avatar';""")
-    if activity!="":
+    if activity=="FamilyNight":
         # cur.execute("""SELECT movies.id, movies.title, movies.poster, movies.rated, movies.rating from movies join activities_movies on (activities_movies.movie_id=movies.id) join activity on (activities_movies.activity_id=acitvities.id) WHERE activities.name='%s' limit 5;"""%activity)
         # s = select([movie]).where(title == 'Avatar')
         # result = db.session.execute(s)
         # print(result)
-        res = db.session.execute("""SELECT id, title, poster, rated from movie where title = 'Avatar';""")
+        res = db.session.execute("""SELECT movie.id, movie.title, movie.poster, movie.rated from \
+                                    genre join movie_genre on (genre.id=movie_genre.genre_id) join movie on (movie_genre.movie_id=movie.id)\
+                                    where (((genre.genre='Adventure') or (genre.genre='Comedy') or (genre.genre='Animation') or (genre.genre='Mistery') or (genre.genre='Fantasy')) and ((movie.rated='PG13') or (movie.rated='PG')))\
+                                    order by rating limit 5;""")
     res = res.fetchall()
     return render_template('searchresults.html', movieList = res)
 
