@@ -24,10 +24,10 @@ url = urllib.parse.urlparse(os.environ["DATABASE_URL"])
 app = Flask(__name__)
 # app.config['SQLALCHEMY_DATABASE_URI']=os.environ["DATABASE_URL"]
 # db = SQLAlchemy(app)
-engine = create_engine(os.environ["DATABASE_URL"])
-Session = sessionmaker(bind=engine)
-
-db = Session()
+# engine = create_engine(os.environ["DATABASE_URL"])
+# Session = sessionmaker(bind=engine)
+#
+# db = Session()
 # Base.metadata.drop_all(engine)
 # Base.metadata.create_all(engine)
 app.secret_key = 'wtforms more like wtf forms'
