@@ -150,6 +150,16 @@ def apiMovie():
     res.headers['Content-type'] = 'application/json'
     return res
 
+@app.route("/api/v1/getMovieInfo/<movieName>", methods=["GET"])
+def apiMovieName(movieName):
+    movieName = movieName.replace("+"," ")
+    movieName = movieName.title()
+    res = db.session.execute("""SELECT * from movie where title = %s;"""%movieName)
+    movielist = res.fetchall()
+    res = Response(dumps(movielist))
+    res.headers['Access-Control-Allow-Origin'] = '*'
+    res.headers['Content-type'] = 'application/json'
+    return res
 
 
 # import psycopg2
