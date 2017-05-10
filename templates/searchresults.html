@@ -83,7 +83,7 @@ div.desc {
           <div>
             {% for (id, title, poster, rated, rating) in movieList %}
               <div class="">
-                <a href="http://www.projectdoama.com/searchMovie?movietitle={{title}}"><img width="300" height="400" class="movieName" src="{{ poster }}" alt="Poster for {{ title }}"></a>
+                <a href="http://www.projectdoama.com/searchMovie?movietitle={{title}}"><img width="300" height="400" src="{{ poster }}" alt="Poster for {{ title }}"></a>
                 <h5>{{ title }} [{{ rated }}]</h5>
               </div>
             {% endfor %}
