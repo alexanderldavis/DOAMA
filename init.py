@@ -3,7 +3,7 @@ import sqlalchemy
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Table, Column, Integer, String, create_engine, Sequence, ForeignKey
 from sqlalchemy.orm import sessionmaker, relationship
-
+import requests as req
 
 Base = declarative_base()
 # urllib.parse.uses_netloc.append("postgres")
