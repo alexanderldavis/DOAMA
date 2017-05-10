@@ -115,6 +115,14 @@ def getMovieInfo(id):
     res = res.fetchall()
     return render_template('getmovieinfo.html', movie = res)
 
+@app.route("/goodFor")
+def searchMovie():
+    # movie=request.args['movietitle']
+    # movie=movie.title()
+    # res=db.session.execute("""SELECT movie.id, movie.title, movie.poster, movie.rated, movie.rating from movie where movie.title like'%%%s%%' limit 12;"""%movie)
+    # res=res.fetchall()
+    return render_template('searchresults.html',movieList=[],activity="")
+
 
 # import psycopg2
 # from flask import Flask, render_template, request
