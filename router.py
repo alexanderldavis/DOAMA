@@ -155,7 +155,19 @@ def apiMovieName(movie):
     movieName = movie.replace("+"," ")
     movieName = movieName.replace("%20", " ")
     movieName = movieName.title()
-    res = db.session.execute("""SELECT * from movie where title = '%s';"""%movieName)
+    res = db.session.execute("""SELECT * from movie where title like'%%%s%%';"""%movieName)
+    movielist = res.fetchall()
+    res = Response(dumps(movielist))
+    res.headers['Access-Control-Allow-Origin'] = '*'
+    res.headers['Content-type'] = 'application/json'
+    return res
+
+@app.route("/api/v2/getGenreInfo/<movie>", methods=["GET"])
+def apiGenreInfo(movie):
+    movieName = movie.replace("+"," ")
+    movieName = movieName.replace("%20", " ")
+    movieName = movieName.title()
+    res = db.session.execute("""SELECT genre.genre from movie join movie_genre on (movie.id = movie_genre.movie_id) join genre on (movie_genre.genre_id = genre.id) where movie.title = %s;"""%movieName)
     movielist = res.fetchall()
     res = Response(dumps(movielist))
     res.headers['Access-Control-Allow-Origin'] = '*'
