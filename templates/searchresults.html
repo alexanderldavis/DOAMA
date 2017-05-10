@@ -82,7 +82,7 @@ div.desc {
           <h3 style="text-align:center;">Now Showing Results for {{ title }}</h3>
           <div>
             {% for (id, title, poster, rated, rating) in movieList %}
-              <div class="floated_img">
+              <div class="">
                 <a href="http://www.projectdoama.com/movieInfo/{{id}}"><img width="300" height="400" class="movieName" src="{{ poster }}" alt="Poster for {{ title }}"></a>
                 <h5>{{ title }} [{{ rated }}]</h5>
               </div>
