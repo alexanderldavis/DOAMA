@@ -63,3 +63,5 @@ for movie in movies:
         db.add(newmovie)
 
 db.commit()
+# try some query:
+movie=db.query(Movie).filter_by(Title='Happy feet')
