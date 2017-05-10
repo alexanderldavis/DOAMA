@@ -88,22 +88,22 @@ div.desc {
               </div>
             {% endfor %}
           </div>
-          <form class="form-inline" action="/search" method="get">
-            <br><br><br><br><br>
-              <label for="activityselect" style="font-size: 30pt;">I need a movie for my</label>
-               <fieldset>
-                 <select style="font-family: 'Source Sans Pro', sans-serif; font-size: 15pt;" class="form-control" name="selected_activity">
-                   {% for form in form.options %}
-                   {{form}}
-                   {% endfor %}
-                 </select>
-                 <br><br>
-                 <div class="form-group">
-                   <input style="font-family: 'Source Sans Pro', sans-serif; font-size: 20pt;" type="submit" name="" class="btn btn-primary" id="submitActivityQuery" value = "DOAMA!">
-                 </div>
-               </fieldset>
-            </form>
       </div>
+      <form class="form-inline" action="/search" method="get">
+        <br><br><br><br><br>
+          <label for="activityselect" style="font-size: 30pt;">I need a movie for my</label>
+           <fieldset>
+             <select style="font-family: 'Source Sans Pro', sans-serif; font-size: 15pt;" class="form-control" name="selected_activity">
+               {% for form in form.options %}
+               {{form}}
+               {% endfor %}
+             </select>
+             <br><br>
+             <div class="form-group">
+               <input style="font-family: 'Source Sans Pro', sans-serif; font-size: 20pt;" type="submit" name="" class="btn btn-primary" id="submitActivityQuery" value = "DOAMA!">
+             </div>
+           </fieldset>
+        </form>
   </div>
 
 
