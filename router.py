@@ -16,7 +16,6 @@
 # import init
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, render_template, request
-from init import Movie, Genre
 import os
 from flask_wtf import Form
 from wtforms import Form, BooleanField, TextField, validators, SubmitField, RadioField, SelectField
