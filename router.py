@@ -105,6 +105,10 @@ def searchMovie():
     res=db.session.execute("""SELECT movie.id, movie.title, movie.poster, movie.rated, movie.rating from movie where movie.title like'%%%s%%' limit 5;"""%movie)
     res=res.fetchall()
     return render_template('searchresults.html',movieList=res,activity=movie)
+
+@app.route("/getMovieInfo/<id>")
+def getMovieInfo(id):
+    res = db.session.execute("""SELECT * from movie where movie.id == %d""", (id,))
 # import psycopg2
 # from flask import Flask, render_template, request
 # import os
