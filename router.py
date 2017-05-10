@@ -49,7 +49,7 @@ def search():
     activity=request.args['selected_activity']
     movie=request.args['movietitle']
     # cur.execute("""SELECT id, title, poster, rated from movies where title = 'Avatar';""")
-    if activity!=""
+    if activity!="":
         if activity=="FamilyNight":
             # cur.execute("""SELECT movies.id, movies.title, movies.poster, movies.rated, movies.rating from movies join activities_movies on (activities_movies.movie_id=movies.id) join activity on (activities_movies.activity_id=acitvities.id) WHERE activities.name='%s' limit 5;"""%activity)
             # s = select([movie]).where(title == 'Avatar')
