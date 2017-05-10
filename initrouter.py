@@ -51,7 +51,8 @@ db = Session()
 Base.metadata.drop_all(engine)
 Base.metadata.create_all(engine)
 
-t = req.get('https://raw.githubusercontent.com/alexanderldavis/DOAMA/master/finalMovieList.txt')
+with open('movies_info.json', 'r') as mf:
+    movies = json.load(mf)
 print("LIST SCRAPED FROM SOURCE")
 
 
@@ -60,10 +61,10 @@ movies = data.split("\n")
 genreList = []
 allGenres = {}
 for movie in movies:
-    moviename = movie.title()
-    movieName = moviename.replace(" ", "+")
-    res = req.get("http://www.omdbapi.com/?t={}".format(movieName))
-    dataParsed = json.loads(res.text)
+    # moviename = movie.title()
+    # movieName = moviename.replace(" ", "+")
+    # res = req.get("http://www.omdbapi.com/?t={}".format(movieName))
+    dataParsed = movie
     if dataParsed["Response"] != "False":
         genresOfMovie = dataParsed["Genre"]
         genresOfMovie = genresOfMovie.split(", ")
