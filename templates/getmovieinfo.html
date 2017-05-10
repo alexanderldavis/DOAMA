@@ -2,7 +2,41 @@
 {% block body %}
 <!DOCTYPE html>
 
-<h1></h1>
-<p>{{movie}}</p>
+<style>
+section {
+    width: 80%;
+    height: 100%;
+    background: aqua;
+    margin: auto;
+    padding: 10px;
+}
+div#one {
+    width: 60%;
+    height: 100%;
+    background: red;
+    float: left;
+}
+div#two {
+    margin-left: 15%;
+    height: 100%;
+    background: black;
+}
+</style>
+
+{% for (id, title, poster, rated, rating, plot) in movie %}
+<section>
+  <div id = "one" class="loadText2">
+
+  </div>
+  <div id = "two" class="loadText2">
+    <h1>{{title}}</h1>
+    <img width="300" height="400" src="{{ poster }}" alt="Poster for {{ title }}">
+
+  </div>
+</section>
+
+
+
+{% endfor %}
 
 {% endblock %}
