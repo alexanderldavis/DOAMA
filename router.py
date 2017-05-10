@@ -46,6 +46,7 @@ def index():
 ### SEARCH FOR RECCOMMENDATONS ###
 @app.route("/search")
 def search():
+    form = SearchForm()
     activity=request.args['selected_activity']
     print(activity)
     # cur.execute("""SELECT id, title, poster, rated from movies where title = 'Avatar';""")
@@ -96,7 +97,7 @@ def search():
 
         activity="Surprise Me"
     res = res.fetchall()
-    return render_template('searchresults.html', movieList = res, activity=activity)
+    return render_template('searchresults.html', movieList = res, activity=activity, form= form)
 
 @app.route("/searchMovie")
 def searchMovie():
