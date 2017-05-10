@@ -12,8 +12,8 @@ from flask_sqlalchemy import SQLAlchemy
 
 Base = declarative_base()
 
-urllib.parse.uses_netloc.append("postgres")
-url = urllib.parse.urlparse(os.environ["DATABASE_URL"])
+# urllib.parse.uses_netloc.append("postgres")
+# url = urllib.parse.urlparse(os.environ["DATABASE_URL"])
 app = Flask(__name__)
 # db = SQLAlchemy(app)
 app.secret_key = 'wtforms more like wtf forms'
