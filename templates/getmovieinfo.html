@@ -108,6 +108,9 @@ div.desc {
             <p>{{ plot }}</p>
 
             <h3>Genres</h3>
+            {% for (genre,) in genres %}
+            <p>{{genre}}</p>
+            {% endfor %}
 
             <h3>Rotten Tomatoes Rating</h3>
             <p>{{ rating }}</p>
