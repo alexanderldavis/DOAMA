@@ -1,7 +1,25 @@
+# from flask.ext.sqlalchemy import SQLAlchemy
+# import json
+# from json import load
+# import os
+# from bs4 import BeautifulSoup
+# import urllib.parse
+# import requests as req
+# from flask import Flask, render_template, request
+# from flask_wtf import Form
+# from flask_sqlalchemy import SQLAlchemy
+# from wtforms import Form, BooleanField, TextField, validators, SubmitField, RadioField, SelectField
+# from sqlalchemy import Table, Column, Integer, String, ForeignKey, create_engine
+# from sqlalchemy.ext.declarative import declarative_base
+# from sqlalchemy.orm import relationship, sessionmaker
+# from sqlalchemy.sql import select
+# import init
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, render_template, request
 from init import Movie, Genre
 import os
+from flask_wtf import Form
+from wtforms import Form, BooleanField, TextField, validators, SubmitField, RadioField, SelectField
 from wtforms import StringField, SelectField
 
 app = Flask(__name__)
