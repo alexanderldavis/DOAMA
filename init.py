@@ -9,6 +9,7 @@ Base = declarative_base()
 # urllib.parse.uses_netloc.append("postgres")
 # url = urllib.parse.urlparse(os.environ["DATABASE_URL"])
 movie_genre=Table('movie_genre',Base.metadata,Column('movie_id',Integer,ForeignKey('movie.id')),Column('genre_id',Integer,ForeignKey('genre.id')))
+movie_actor=Table('movie_actor',Base.metadata,Column('movie_id',Integer,ForeignKey('movie.id')),Column('actor_id',Integer,ForeignKey('actor.id')))
 
 class Movie(Base):
     __tablename__='movie'
@@ -20,9 +21,8 @@ class Movie(Base):
     runtime=Column(String)
     poster = Column(String)
     rating = Column(Integer)
-    genres=relationship("Genre",
-                            secondary=movie_genre,
-                            back_populates="inMovie")
+    genres=relationship("Genre", secondary=movie_genre,back_populates="inMovie")
+    actors=relationship("Actor", secondary=movie_actor,back_populates="inMovie")
 
     def __repr__(self):
         return "Movie: ({})".format(self.title)
@@ -35,6 +35,15 @@ class Genre(Base):
 
     def __repr__(self):
         return "Genre({})".format(self.genre)
+
+class Actor(Base):
+    __tablename__="actor"
+    id=Column(Integer, primary_key=True)
+    actor=Column(String)
+    inMovie=relationship("Movie", secondary=movie_actor, back_populates="actors")
+
+    def __repr__(self):
+        return "Actor({})".format(self.genre)
 
 engine = create_engine(os.environ["DATABASE_URL"])
 Session = sessionmaker(bind=engine)
@@ -50,6 +59,8 @@ data = t.text
 movies = data.split("\n")
 genreList = []
 allGenres = {}
+actorList = []
+allActors = {}
 for movie in movies:
     moviename = movie.title()
     movieName = moviename.replace(" ", "+")
@@ -64,12 +75,21 @@ for movie in movies:
                 db.add(newgenre)
                 genreList.append(genre)
                 allGenres[genre] = newgenre
+        ## ADD ACTORS SUPPORT ##
+        actorsOfMovie = dataParsed["Actors"]
+        actorsOfMovie = actorsOfMovie.split(", ")
+        for actor in actorsOfMovie:
+            if actor not in actorList:
+                newactor = Actor(actor = actor)
+                db.add(newactor)
+                actorList.append(actor)
+                allActors[actor] = newactor
         try:
             if dataParsed["Ratings"] != []:
                 for source in dataParsed["Ratings"]:
                     if source["Source"] == "Rotten Tomatoes":
                         rating = int(source["Value"][:len(source['Value'])-1])
-            newmovie = Movie(title = dataParsed["Title"], description = dataParsed["Plot"], year = dataParsed["Year"], rated = dataParsed["Rated"], runtime = dataParsed["Runtime"], poster = dataParsed["Poster"], rating=rating, genres = [allGenres[g] for g in genresOfMovie])
+            newmovie = Movie(title = dataParsed["Title"], description = dataParsed["Plot"], year = dataParsed["Year"], rated = dataParsed["Rated"], runtime = dataParsed["Runtime"], poster = dataParsed["Poster"], rating=rating, genres = [allGenres[g] for g in genresOfMovie], actors = [allActors[a] for a in actorsOfMovie])
             print("Added: ", dataParsed["Title"])
             db.add(newmovie)
         except:
