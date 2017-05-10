@@ -101,7 +101,8 @@ div.desc {
       {% for (id, title, poster, rated, rating, plot) in movie %}
         <section>
           <div id = "one" class="loadText">
-
+            <h1>{{title}}</h1>
+            <img width="300" height="400" src="{{ poster }}" alt="Poster for {{ title }}">
           </div>
           <div id = "two" class="loadText">
             <h1>{{title}}</h1>
