@@ -126,6 +126,10 @@ def goodFor():
     res=res.fetchall()
     return render_template('searchresults.html',movieList=res,activity="")
 
+@app.route("/api", methods=["GET"])
+def apiMainPage():
+    return render_template('api.html')
+
 @app.route("/api/v1/getMovieInfo", methods=["GET"])
 def apiMovie():
     res = db.session.execute("""SELECT * from movie;""")
