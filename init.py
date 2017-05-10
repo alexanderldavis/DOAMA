@@ -2,7 +2,6 @@ from json import load
 from sqlalchemy import Table, Column, Integer, String, ForeignKey, create_engine
 from sqlalchemy.orm import relationship, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
-import psycopg2
 from flask import Flask, render_template, request
 import os
 from bs4 import BeautifulSoup
@@ -16,7 +15,10 @@ Base = declarative_base()
 
 urllib.parse.uses_netloc.append("postgres")
 url = urllib.parse.urlparse(os.environ["DATABASE_URL"])
-db = psycopg2.connect(database=url.path[1:],user=url.username,password=url.password,host=url.hostname,port=url.port)
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI']=os.environ["DATABASE_URL"]
+db=SQLAlchemy(app)
+# db = psycopg2.connect(database=url.path[1:],user=url.username,password=url.password,host=url.hostname,port=url.port)
 
 movie_genre=Table('movie_genre',Base.metadata,Column('movie_id',Integer,ForeignKey('movie.id')),Column('genre_id',Integer,ForeignKey('genre.id')))
 
@@ -49,9 +51,7 @@ class Genre(Base):
 # engine = create_engine(os.environ["DATABASE_URL"])
 # Session = sessionmaker(bind=engine)
 # db = Session()
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI']=os.environ["DATABASE_URL"]
-db=SQLAlchemy(app)
+
 # Base.metadata.drop_all(engine)
 # Base.metadata.create_all(engine)
 
