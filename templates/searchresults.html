@@ -80,7 +80,7 @@ div.desc {
       <div id ="loader"></div>
         <div class="animate-bottom" id="myDiv" style="display:none;">
           <h3 style="text-align:center;">Now Showing Results for {{ activity }}</h3>
-          <div style="margin:auto;">
+          <div style="margin:auto; width: 80%;">
             {% for (id, title, poster, rated, rating) in movieList %}
               <div style="margin:auto; float: left; margin: 20px;">
                 <a href="http://www.projectdoama.com/getMovieInfo/{{id}}"><img width="225" height="300" src="{{ poster }}" alt="Poster for {{ title }}"></a>
