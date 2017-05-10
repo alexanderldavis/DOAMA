@@ -47,7 +47,6 @@ def index():
 @app.route("/search")
 def search():
     activity=request.args['selected_activity']
-    movie=request.args['movietitle']
     print(activity)
     # cur.execute("""SELECT id, title, poster, rated from movies where title = 'Avatar';""")
     if activity=="FamilyNight":
@@ -98,13 +97,14 @@ def search():
         activity="Surprise Me"
     res = res.fetchall()
     return render_template('searchresults.html', movieList = res, activity=activity)
-@app.route("/searchMovie/")
+
+@app.route("/searchMovie")
 def searchMovie():
     movie=request.args['movietitle']
     movie=movie.title()
-    res=db.session.execute("""SELECT movie.id, movie.title, movie.description, movie.poster, movie.rated, movie.rating from movie where movie.title like'%%%s%%' limit 1;"""%movie)
+    res=db.session.execute("""SELECT movie.id, movie.title, movie.description, movie.poster, movie.rated, movie.rating from movie where movie.title like'%%%s%%' limit 5;"""%movie)
     res=res.fetchall()
-    return render_template('searchresults.html',movie=res,activity=movie)
+    return render_template('searchresults.html',movieList=res,activity=movie)
 # import psycopg2
 # from flask import Flask, render_template, request
 # import os
