@@ -108,7 +108,7 @@ def searchMovie():
 
 @app.route("/getMovieInfo/<id>")
 def getMovieInfo(id):
-    res = db.session.execute("""SELECT * from movie where movie.id == %d""", (id,))
+    res = db.session.execute("""SELECT * from movie where movie.id == %s""", (str(id),))
 # import psycopg2
 # from flask import Flask, render_template, request
 # import os
