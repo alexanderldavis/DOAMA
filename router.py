@@ -108,7 +108,7 @@ def searchMovie():
 
 @app.route("/getMovieInfo/<id>")
 def getMovieInfo(id):
-    res = db.session.execute("""SELECT movie.id, movie.title, movie.poster, movie.rated, movie.rating, movie.description from movie where movie.id == %s"""%str(id))
+    res = db.session.execute("""SELECT movie.id, movie.title, movie.poster, movie.rated, movie.rating, movie.description from movie where movie.id = %s"""%str(id))
     res = res.fetchall()
     return render_template('getmovieinfo.html', movie = res)
 
