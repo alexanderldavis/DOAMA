@@ -95,7 +95,7 @@ def search():
     if activity=="SurpriseMe":
         res=db.session.execute("""SELECT movie.id, movie.title, movie.poster, movie.rated, movie.rating from \
                                   genre join movie_genre on (genre.id=movie_genre.genre_id) join movie on (movie_genre.movie_id=movie.id)\
-                                  order by random(),movie.rating  limit 12;""")
+                                  group by movie.id, movie.title, movie.poster,movie.rated, movie.rating order by random(),movie.rating  limit 12;""")
 
         activity="Surprise Me"
     res = res.fetchall()
