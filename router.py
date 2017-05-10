@@ -99,7 +99,7 @@ def search():
         res = res.fetchall()
         return render_template('searchresults.html', movieList = res, activity=activity)
     if movie!="":
-        res=db.session.execute("""SELECT movie.id, movie.title, movie.description, movie.poster, movie.rated, movie.rating from movie where movie.id like '%%%s%%' limit 5;"""%movie)
+        res=db.session.execute("""SELECT movie.id, movie.title, movie.poster, movie.rated, movie.rating from movie where movie.id like '%%%s%%' limit 5;"""%movie)
         res=res.fetchall()
         return render_template('searchresults.html', movieList = res, activity=activity)
 @app.route("/searchMovie/<int:movie_id>")
