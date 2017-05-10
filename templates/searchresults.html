@@ -78,7 +78,7 @@ div.desc {
 </style>
   <div class="tablediv loadText" onload="loadFunction()">
       <div id ="loader"></div>
-        <div class="animate-bottom" id="myDiv" style="display:none;">
+        <div class="animate-bottom" id="myDiv" style="margin:auto; width: 99%; display:none;">
           <h3 style="text-align:center;">Now Showing Results for {{ activity }}</h3>
           <div style="margin:auto; width: 99%;">
             {% for (id, title, poster, rated, rating) in movieList %}
