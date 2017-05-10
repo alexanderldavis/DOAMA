@@ -57,7 +57,12 @@ def search():
         res = db.session.execute("""SELECT movie.id, movie.title, movie.poster, movie.rated from \
                                     genre join movie_genre on (genre.id=movie_genre.genre_id) join movie on (movie_genre.movie_id=movie.id)\
                                     where (((genre.genre='Adventure') or (genre.genre='Comedy') or (genre.genre='Animation') or (genre.genre='Mistery') or (genre.genre='Fantasy')) and ((movie.rated='PG13') or (movie.rated='PG')))\
-                                    order by rating limit 5;""")
+                                    order by rating group by movie.id, movie.title, movie.poster,movie.rated limit 5;""")
+    if activity=="DateNight":
+        res=db.session.execute("""SELECT movie.id, movie.title, movie.poster, movie.rated from \
+                                  genre join movie_genre on (genre.id=movie_genre.genre_id) join movie on (movie_genre.movie_id=movie.id)\
+                                  where ((genre.genre='Drama') or (genre.genre='Romance') or (genre.genre='Fantasy') or (genre.genre='Horror') or (genre.genre='Thriller'))\
+                                  order by rating group by movie.id, movie.title, movie.poster,movie.rated  limit 5;""")
     res = res.fetchall()
     return render_template('searchresults.html', movieList = res)
 
