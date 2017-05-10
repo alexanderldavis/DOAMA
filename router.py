@@ -1,4 +1,4 @@
-import psycopg2
+from flask.ext.sqlalchemy import SQLAlchemy
 import json
 from json import load
 import os

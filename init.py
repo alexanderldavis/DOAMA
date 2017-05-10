@@ -9,6 +9,7 @@ from bs4 import BeautifulSoup
 import urllib.parse
 import requests as req
 import json
+from flask.ext.sqlalchemy import SQLAlchemy
 
 
 Base = declarative_base()
