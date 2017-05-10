@@ -81,7 +81,7 @@ div.desc {
         <div class="animate-bottom" id="myDiv" style="display:none;">
           <h3 style="text-align:center;">Now Showing Results for {{ title }}</h3>
           <div>
-            {% for (id, title, poster, rated) in movieList %}
+            {% for (id, title, poster, rated, rating) in movieList %}
               <div class="floated_img">
                 <a href="http://www.projectdoama.com/movieInfo/{{id}}"><img width="300" height="400" class="movieName" src="{{ poster }}" alt="Poster for {{ title }}"></a>
                 <h5>{{ title }} [{{ rated }}]</h5>
