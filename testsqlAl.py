@@ -64,4 +64,5 @@ for movie in movies:
 
 db.commit()
 # try some query:
-movie=db.query(Movie).filter_by(Title='Happy feet')
+movie=db.query(Movie).filter_by(title='Happy Feet').all()
+print(movie)
