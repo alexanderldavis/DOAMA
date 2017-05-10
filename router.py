@@ -12,6 +12,7 @@ from wtforms import Form, BooleanField, TextField, validators, SubmitField, Radi
 from sqlalchemy import Table, Column, Integer, String, ForeignKey, create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, sessionmaker
+from sqlalchemy.sql import select
 
 Base = declarative_base()
 
