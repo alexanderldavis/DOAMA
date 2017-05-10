@@ -1,28 +1,22 @@
-import psycopg2
-import json
 from json import load
+from sqlalchemy import Table, Column, Integer, String, ForeignKey, create_engine
+from sqlalchemy.orm import relationship, sessionmaker
+from sqlalchemy.ext.declarative import declarative_base
+from flask import Flask, render_template, request
 import os
-from bs4 import BeautifulSoup
 import urllib.parse
 import requests as req
-from flask import Flask, render_template, request
-from flask_wtf import Form
-from flask_sqlalchemy import SQLAlchemy
+import json
 from wtforms import Form, BooleanField, TextField, validators, SubmitField, RadioField, SelectField
-from sqlalchemy import Table, Column, Integer, String, ForeignKey, create_engine
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relationship, sessionmaker
-from sqlalchemy.sql import select
+from flask_sqlalchemy import SQLAlchemy
 
 Base = declarative_base()
 
 urllib.parse.uses_netloc.append("postgres")
 url = urllib.parse.urlparse(os.environ["DATABASE_URL"])
-db = psycopg2.connect(database=url.path[1:],user=url.username,password=url.password,host=url.hostname,port=url.port)
 app = Flask(__name__)
-sqldb = SQLAlchemy(app)
+# db = SQLAlchemy(app)
 app.secret_key = 'wtforms more like wtf forms'
-
 movie_genre=Table('movie_genre',Base.metadata,Column('movie_id',Integer,ForeignKey('movie.id')),Column('genre_id',Integer,ForeignKey('genre.id')))
 
 class Movie(Base):
@@ -51,11 +45,11 @@ class Genre(Base):
     def __repr__(self):
         return "Genre({})".format(self.genre)
 
-# engine = create_engine(os.environ["DATABASE_URL"])
-# Session = sessionmaker(bind=engine)
-# db = Session()
-# Base.metadata.drop_all(engine)
-# Base.metadata.create_all(engine)
+engine = create_engine(os.environ["DATABASE_URL"])
+Session = sessionmaker(bind=engine)
+db = Session()
+Base.metadata.drop_all(engine)
+Base.metadata.create_all(engine)
 
 t = req.get('https://raw.githubusercontent.com/alexanderldavis/DOAMA/master/finalMovieList.txt')
 print("LIST SCRAPED FROM SOURCE")
@@ -81,7 +75,6 @@ for movie in movies:
                 allGenres[genre] = newgenre
         try:
             if dataParsed["Ratings"] != []:
-                rating=0
                 for source in dataParsed["Ratings"]:
                     if source["Source"] == "Rotten Tomatoes":
                         rating = int(source["Value"][:len(source['Value'])-1])
@@ -111,9 +104,12 @@ def search():
     # cur.execute("""SELECT id, title, poster, rated from movies where title = 'Avatar';""")
     if activity!="":
         # cur.execute("""SELECT movies.id, movies.title, movies.poster, movies.rated, movies.rating from movies join activities_movies on (activities_movies.movie_id=movies.id) join activity on (activities_movies.activity_id=acitvities.id) WHERE activities.name='%s' limit 5;"""%activity)
-        # s = select([movie]).where(title == 'Avatar')
-        # result = db.execute(s)
-        # print(result)
+        s = select([movie]).where(title == 'Avatar')
+        result = db.execute(s)
+        print(result)
         cur.execute("""SELECT id, title, poster, rated from movie where title = 'Avatar';""")
     res = cur.fetchall()
     return render_template('searchresults.html', movieList = res)
+
+if __name__=='__main__':
+    app.run(debug=True)
