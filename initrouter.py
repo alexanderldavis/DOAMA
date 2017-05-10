@@ -51,11 +51,11 @@ class Genre(Base):
     def __repr__(self):
         return "Genre({})".format(self.genre)
 
-engine = create_engine(os.environ["DATABASE_URL"])
-Session = sessionmaker(bind=engine)
-db = Session()
-Base.metadata.drop_all(engine)
-Base.metadata.create_all(engine)
+# engine = create_engine(os.environ["DATABASE_URL"])
+# Session = sessionmaker(bind=engine)
+# db = Session()
+# Base.metadata.drop_all(engine)
+# Base.metadata.create_all(engine)
 
 t = req.get('https://raw.githubusercontent.com/alexanderldavis/DOAMA/master/finalMovieList.txt')
 print("LIST SCRAPED FROM SOURCE")
@@ -110,9 +110,9 @@ def search():
     # cur.execute("""SELECT id, title, poster, rated from movies where title = 'Avatar';""")
     if activity!="":
         # cur.execute("""SELECT movies.id, movies.title, movies.poster, movies.rated, movies.rating from movies join activities_movies on (activities_movies.movie_id=movies.id) join activity on (activities_movies.activity_id=acitvities.id) WHERE activities.name='%s' limit 5;"""%activity)
-        s = select([movie]).where(title == 'Avatar')
-        result = db.execute(s)
-        print(result)
+        # s = select([movie]).where(title == 'Avatar')
+        # result = db.execute(s)
+        # print(result)
         cur.execute("""SELECT id, title, poster, rated from movie where title = 'Avatar';""")
     res = cur.fetchall()
     return render_template('searchresults.html', movieList = res)
