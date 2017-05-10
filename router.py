@@ -149,7 +149,7 @@ def apiMovieName(movie):
 def apiGenreInfo(movie):
     movieName = movie.replace("+"," ")
     movieName = movieName.replace("%20", " ")
-    res = db.session.execute("""SELECT genre.genre from movie join movie_genre on (movie.id = movie_genre.movie_id) join genre on (movie_genre.genre_id = genre.id) where movie.title like '%%%s%%';"""%movieName)
+    res = db.session.execute("""SELECT movie.title, genre.genre from movie join movie_genre on (movie.id = movie_genre.movie_id) join genre on (movie_genre.genre_id = genre.id) where movie.title like '%%%s%%';"""%movieName)
     movielist = res.fetchall()
     res = Response(dumps(movielist))
     res.headers['Access-Control-Allow-Origin'] = '*'
