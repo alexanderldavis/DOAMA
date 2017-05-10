@@ -12,6 +12,7 @@ itsdangerous==0.24
 Jinja2==2.9.6
 MarkupSafe==1.0
 packaging==16.8
+pymongo==3.4.0
 psycopg2==2.7.1
 pyparsing==2.2.0
 requests==2.13.0
@@ -22,3 +23,4 @@ SQLAlchemy==1.0.12
 WTForms==2.1
 dominate==2.2.0
 visitor==0.1.2
+Flask-PyMongo==0.4.1
