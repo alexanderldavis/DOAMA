@@ -80,32 +80,33 @@ div.desc {
       <div id ="loader"></div>
         <div class="animate-bottom" id="myDiv" style="display:none;">
           <h3 style="text-align:center;">Now Showing Results for {{ activity }}</h3>
-          <div>
+          <div style="text-align:center;">
             {% for (id, title, poster, rated, rating) in movieList %}
               <div style="text-align: left; float: left; margin: 20px;">
-                <a style="text-align: center;" href="http://www.projectdoama.com/getMovieInfo/{{id}}"><img width="150" height="200" src="{{ poster }}" alt="Poster for {{ title }}"></a>
+                <a href="http://www.projectdoama.com/getMovieInfo/{{id}}"><img style="text-align: center;" width="150" height="200" src="{{ poster }}" alt="Poster for {{ title }}"></a>
                 <h5 style="text-align: center;">{{ title }} [{{ rated }}]</h5>
               </div>
             {% endfor %}
           </div>
+          <form class="form-inline" action="/search" method="get">
+            <br><br><br><br><br>
+              <label for="activityselect" style="font-size: 30pt;">I need a movie for my</label>
+               <fieldset>
+                 <select style="font-family: 'Source Sans Pro', sans-serif; font-size: 15pt;" class="form-control" name="selected_activity">
+                   {% for form in form.options %}
+                   {{form}}
+                   {% endfor %}
+                 </select>
+                 <br><br>
+                 <div class="form-group">
+                   <input style="font-family: 'Source Sans Pro', sans-serif; font-size: 20pt;" type="submit" name="" class="btn btn-primary" id="submitActivityQuery" value = "DOAMA!">
+                 </div>
+               </fieldset>
+            </form>
       </div>
   </div>
 
-  <form class="form-inline loadText" action="/search" method="get">
-  <br><br><br><br><br>
-    <label for="activityselect" style="font-size: 30pt;">I need a movie for my</label>
-     <fieldset>
-       <select style="font-family: 'Source Sans Pro', sans-serif; font-size: 15pt;" class="form-control" name="selected_activity">
-         {% for form in form.options %}
-         {{form}}
-         {% endfor %}
-       </select>
-       <br><br>
-       <div class="form-group">
-         <input style="font-family: 'Source Sans Pro', sans-serif; font-size: 20pt;" type="submit" name="" class="btn btn-primary" id="submitActivityQuery" value = "DOAMA!">
-       </div>
-     </fieldset>
-  </form>
+
 
 
 
