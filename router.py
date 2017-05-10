@@ -40,7 +40,7 @@ class SearchForm(Form):
 @app.route("/", methods=['GET'])
 def index():
     form = SearchForm()
-    res = db.session.execute("""SELECT id, name from genre;""")
+    res = db.session.execute("""SELECT id, genre from genre;""")
     res = res.fetchall()
     return render_template('welcome.html', genreList = res, form=form)
 
