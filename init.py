@@ -1,30 +1,13 @@
-from json import load
-from sqlalchemy import Table, Column, Integer, String, ForeignKey, create_engine
-from sqlalchemy.orm import relationship, sessionmaker
+import json, os
+import sqlalchemy
 from sqlalchemy.ext.declarative import declarative_base
-from flask import Flask, render_template, request
-import os
-from bs4 import BeautifulSoup
-import urllib.parse
-import requests as req
-import json
-from flask.ext.sqlalchemy import SQLAlchemy
+from sqlalchemy import Table, Column, Integer, String, create_engine, Sequence, ForeignKey
+from sqlalchemy.orm import sessionmaker, relationship
 
 
 Base = declarative_base()
-
-urllib.parse.uses_netloc.append("postgres")
-url = urllib.parse.urlparse(os.environ["DATABASE_URL"])
-# app = Flask(__name__)
-# app.config['SQLALCHEMY_DATABASE_URI']=os.environ["DATABASE_URL"]
-engine = create_engine(os.environ["DATABASE_URL"])
-Session = sessionmaker(bind=engine)
-
-db = Session()
-Base.metadata.drop_all(engine)
-Base.metadata.create_all(engine)
-# db = psycopg2.connect(database=url.path[1:],user=url.username,password=url.password,host=url.hostname,port=url.port)
-
+# urllib.parse.uses_netloc.append("postgres")
+# url = urllib.parse.urlparse(os.environ["DATABASE_URL"])
 movie_genre=Table('movie_genre',Base.metadata,Column('movie_id',Integer,ForeignKey('movie.id')),Column('genre_id',Integer,ForeignKey('genre.id')))
 
 class Movie(Base):
@@ -53,12 +36,11 @@ class Genre(Base):
     def __repr__(self):
         return "Genre({})".format(self.genre)
 
-# engine = create_engine(os.environ["DATABASE_URL"])
-# Session = sessionmaker(bind=engine)
-# db = Session()
-
-# Base.metadata.drop_all(engine)
-# Base.metadata.create_all(engine)
+engine = create_engine(os.environ["DATABASE_URL"])
+Session = sessionmaker(bind=engine)
+db = Session()
+Base.metadata.drop_all(engine)
+Base.metadata.create_all(engine)
 
 t = req.get('https://raw.githubusercontent.com/alexanderldavis/DOAMA/master/finalMovieList.txt')
 print("LIST SCRAPED FROM SOURCE")
