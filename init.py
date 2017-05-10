@@ -45,9 +45,12 @@ class Genre(Base):
     def __repr__(self):
         return "Genre({})".format(self.genre)
 
-engine = create_engine(os.environ["DATABASE_URL"])
-Session = sessionmaker(bind=engine)
-db = Session()
+# engine = create_engine(os.environ["DATABASE_URL"])
+# Session = sessionmaker(bind=engine)
+# db = Session()
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI']=os.environ["DATABASE_URL"]
+db=SQLAlchemy(app)
 Base.metadata.drop_all(engine)
 Base.metadata.create_all(engine)
 
