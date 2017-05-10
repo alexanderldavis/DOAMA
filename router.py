@@ -154,7 +154,6 @@ def apiMovie():
 def apiMovieName(movie):
     movieName = movie.replace("+"," ")
     movieName = movieName.replace("%20", " ")
-    movieName = movieName.title()
     res = db.session.execute("""SELECT * from movie where title like'%%%s%%';"""%movieName)
     movielist = res.fetchall()
     res = Response(dumps(movielist))
@@ -166,7 +165,7 @@ def apiMovieName(movie):
 def apiGenreInfo(movie):
     movieName = movie.replace("+"," ")
     movieName = movieName.replace("%20", " ")
-    movieName = movieName.title()
+    movieName = movieName.lower()
     res = db.session.execute("""SELECT genre.genre from movie join movie_genre on (movie.id = movie_genre.movie_id) join genre on (movie_genre.genre_id = genre.id) where movie.title = %s;"""%movieName)
     movielist = res.fetchall()
     res = Response(dumps(movielist))
