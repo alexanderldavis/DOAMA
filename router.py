@@ -15,11 +15,15 @@
 # from sqlalchemy.sql import select
 # import init
 from flask_sqlalchemy import SQLAlchemy
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, Response, jsonify
 import os
 from flask_wtf import Form
 from wtforms import Form, BooleanField, TextField, validators, SubmitField, RadioField, SelectField
 from wtforms import StringField, SelectField
+from json import dumps, loads
+from flask_pymongo import PyMongo
+from bson.json_util import dumps
+from bson.objectid import ObjectId
 
 app = Flask(__name__)
 # urllib.parse.uses_netloc.append("postgres")
@@ -117,8 +121,8 @@ def getMovieInfo(id):
     genrelist = genres.fetchall()
     genrestring = ""
     for (genre,) in genrelist:
-        genrestring += genre +" "
-    genrestring = genrestring[:-1]
+        genrestring += genre +",  "
+    genrestring = genrestring[:-3]
     return render_template('getmovieinfo.html', movie = res, genres = genrestring)
 
 @app.route("/goodFor")
@@ -136,6 +140,16 @@ def goodFor():
         res=db.session.execute("""SELECT movie.id, movie.title, movie.poster, movie.rated, movie.rating from movie JOIN movie_genre ON (movie.id = movie_genre.movie_id) where movie_genre.genre_id =%s limit 12;"""%genre)
     res=res.fetchall()
     return render_template('searchresults.html',movieList=res,activity="")
+
+@app.route("/api/v1/getMovieInfo", methods=["GET"])
+def apiMovie():
+    res = db.session.execute("""SELECT * from movie;""")
+    movielist = res.fetchall()
+    res = Response(dumps(movielist))
+    res.headers['Access-Control-Allow-Origin'] = '*'
+    res.headers['Content-type'] = 'application/json'
+    return res
+
 
 
 # import psycopg2
