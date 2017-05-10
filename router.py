@@ -101,7 +101,7 @@ def search():
 def searchMovie():
     movie=request.args['movietitle']
     movie=movie.title()
-    res=db.session.execute("""SELECT movie.id, movie.title, movie.description, movie.poster, movie.rated, movie.rating from movie where movie.title='%s' limit 1;"""%movie)
+    res=db.session.execute("""SELECT movie.id, movie.title, movie.description, movie.poster, movie.rated, movie.rating from movie where movie.title like'%%%s%%' limit 5;"""%movie)
     res=res.fetchall()
     return render_template('getmovieinfo.html',movie=res)
 
