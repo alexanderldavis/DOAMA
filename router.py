@@ -116,7 +116,7 @@ def getMovieInfo(id):
     return render_template('getmovieinfo.html', movie = res)
 
 @app.route("/goodFor")
-def searchMovie():
+def goodFor():
     # movie=request.args['movietitle']
     # movie=movie.title()
     # res=db.session.execute("""SELECT movie.id, movie.title, movie.poster, movie.rated, movie.rating from movie where movie.title like'%%%s%%' limit 12;"""%movie)
