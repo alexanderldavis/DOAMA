@@ -15,9 +15,14 @@ Base = declarative_base()
 
 urllib.parse.uses_netloc.append("postgres")
 url = urllib.parse.urlparse(os.environ["DATABASE_URL"])
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI']=os.environ["DATABASE_URL"]
-db=SQLAlchemy(app)
+# app = Flask(__name__)
+# app.config['SQLALCHEMY_DATABASE_URI']=os.environ["DATABASE_URL"]
+engine = create_engine(os.environ["DATABASE_URL"])
+Session = sessionmaker(bind=engine)
+
+db = Session()
+Base.metadata.drop_all(engine)
+Base.metadata.create_all(engine)
 # db = psycopg2.connect(database=url.path[1:],user=url.username,password=url.password,host=url.hostname,port=url.port)
 
 movie_genre=Table('movie_genre',Base.metadata,Column('movie_id',Integer,ForeignKey('movie.id')),Column('genre_id',Integer,ForeignKey('genre.id')))

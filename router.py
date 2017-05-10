@@ -22,8 +22,14 @@ url = urllib.parse.urlparse(os.environ["DATABASE_URL"])
 # db = psycopg2.connect(database=url.path[1:],user=url.username,password=url.password,host=url.hostname,port=url.port)
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI']=os.environ["DATABASE_URL"]
-db = SQLAlchemy(app)
+# app.config['SQLALCHEMY_DATABASE_URI']=os.environ["DATABASE_URL"]
+# db = SQLAlchemy(app)
+engine = create_engine(os.environ["DATABASE_URL"])
+Session = sessionmaker(bind=engine)
+
+db = Session()
+Base.metadata.drop_all(engine)
+Base.metadata.create_all(engine)
 app.secret_key = 'wtforms more like wtf forms'
 
 class SearchForm(Form):
