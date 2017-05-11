@@ -78,6 +78,7 @@ div.desc {
 </style>
   <div class="tablediv loadText " style="margin:auto;" onload="loadFunction()">
       <div id ="loader"></div>
+      {%if count>0%}
         <div class="animate-bottom" id="myDiv" style="display:none;">
           <h3 style="text-align:center;">Now Showing Results for {{ activity }}</h3>
           <div>
@@ -96,6 +97,16 @@ div.desc {
           <input type="submit" name="" class="btn btn-primary" id="submitMovieAdd" value = "Add Movie">
         </form>
       </div>
+      {% else %}
+      <p style="text-align:center;"> We could not find the result for {{activity}}</p>
+      <div class="container">
+        <p>If you want to, we can it to the database!</p>
+        <form class="form-inline loadText1" style = "margin-top:0;" action="/addMovie">
+          <input id="idmovieadd" class="form-control" type="text" name="movieTitleAdd" value="" placeholder="{{activity}}">
+          <input type="submit" name="" class="btn btn-primary" id="submitMovieAdd" value = "Add Movie">
+        </form>
+      </div>
+      {% endif %}
   </div>
 
 

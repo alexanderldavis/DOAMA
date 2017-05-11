@@ -125,7 +125,8 @@ def search():
 
         activity="Surprise Me"
     res = res.fetchall()
-    return render_template('searchresults.html', movieList = res, activity=activity, form= form)
+    count=len(res)
+    return render_template('searchresults.html', movieList = res, activity=activity, form= form, count=count)
 
 @app.route("/searchMovie")
 def searchMovie():
@@ -133,7 +134,8 @@ def searchMovie():
     movie=movie.title()
     res=db.session.execute("""SELECT movie.id, movie.title, movie.poster, movie.rated, movie.rating from movie where movie.title like'%%%s%%' order by random() limit 12;"""%movie)
     res=res.fetchall()
-    return render_template('searchresults.html',movieList=res,activity=movie)
+    count=len(res)
+    return render_template('searchresults.html',movieList=res,activity=movie,count=count)
 
 @app.route("/getMovieInfo/<id>")
 def getMovieInfo(id):
@@ -168,7 +170,8 @@ def goodFor():
     else:
         res=db.session.execute("""SELECT movie.id, movie.title, movie.poster, movie.rated, movie.rating from movie JOIN movie_genre ON (movie.id = movie_genre.movie_id) where movie_genre.genre_id = %s order by random() limit 12;"""%genre)
     res=res.fetchall()
-    return render_template('searchresults.html',movieList=res,activity="")
+    count=len(res)
+    return render_template('searchresults.html',movieList=res,activity="",count=count)
 
 @app.route("/addMovie")
 def addMovieToDb():
