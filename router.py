@@ -202,7 +202,7 @@ def addMovieToDb():
             db.session.commit()
             writeTo.write(dataParsed['Title'])
         writeTo.close()
-        return render_template('dataAdded.html',movie=movieName)
+    return render_template('dataAdded.html',movie=movieName)
 
 @app.route("/api", methods=["GET"])
 def apiMainPage():
