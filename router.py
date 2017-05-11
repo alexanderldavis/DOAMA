@@ -194,7 +194,7 @@ def addMovieToDb():
         print(moviename)
         if dataParsed['Response']=="False":
             return render_template('dataAdded.html',movie=movieName,found=0)
-        else dataParsed['Response']!='False':
+        else:
             # db.session.execute("""INSERT INTO movies (title, description, year, rated, runtime, poster) VALUES (%s, %s, %s, %s, %s, %s);""", (dataParsed["Title"],dataParsed["Plot"],dataParsed["Year"],dataParsed["Rated"], dataParsed["Runtime"],dataParsed["Poster"]))
             # db.session.commit()
             # add object genres
