@@ -107,7 +107,13 @@ def getMovieInfo(id):
     for (genre,) in genrelist:
         genrestring += genre +",  "
     genrestring = genrestring[:-3]
-    return render_template('getmovieinfo.html', movie = res, genres = genrestring)
+    actors = db.session.execute("""SELECT actor.actor from actor join movie_actor on (actor.id = movie_actor.actor_id) WHERE movie_actor.movie_id = %s;"""%str(id))
+    actorlist = actors.fetchall()
+    actorstring = ""
+    for (actor,) in actorlist:
+        actorstring += actor+ ",  "
+    actorstring = actorstring[:-3]
+    return render_template('getmovieinfo.html', movie = res, genres = genrestring, actors = actorstring)
 
 @app.route("/goodFor")
 def goodFor():
