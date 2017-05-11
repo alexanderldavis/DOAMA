@@ -146,9 +146,9 @@ def addMovieToDb():
 
         if dataParsed['Response']!='False':
             db.session.execute("""INSERT INTO movies (title, description, year, rated, runtime, poster) VALUES (%s, %s, %s, %s, %s, %s);""", (dataParsed["Title"],dataParsed["Plot"],dataParsed["Year"],dataParsed["Rated"], dataParsed["Runtime"],dataParsed["Poster"]))
-            db.session.commit()
-            # writeTo.write(dataParsed['Title'])
-        # writeTo.close()
+            # db.session.commit()
+            writeTo.write(dataParsed['Title'])
+        writeTo.close()
         return render_template('dataAdded.html',movie=movieName)
 
 @app.route("/api", methods=["GET"])
