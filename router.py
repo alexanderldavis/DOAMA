@@ -203,6 +203,7 @@ def addMovieToDb():
                 if genre not in genreList:
                     print(genre)
                     genreList.append(genre)
+                    print(genreList)
                     newgenre = Genre(genre = genre)
                     db.session.add(newgenre)
                     db.session.commit()
