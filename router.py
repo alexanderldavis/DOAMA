@@ -200,9 +200,8 @@ def addMovieToDb():
             genresOfMovie = dataParsed["Genre"]
             genresOfMovie = genresOfMovie.split(", ")
             for genre in genresOfMovie:
-                if genre not in genreList:
-                    print(genre)
-                    genreList.append(genre)
+                if (genre,) not in genreList:
+                    genreList.append((genre,))
                     print(genreList)
                     newgenre = Genre(genre = genre)
                     db.session.add(newgenre)
