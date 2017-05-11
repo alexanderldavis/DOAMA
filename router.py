@@ -182,6 +182,8 @@ def addMovieToDb():
     res=db.session.execute("""SELECT actor from actor""")
     actorList=res.fetchall()
     actorAdd={}
+    res=db.session.execute("""SELECT genre from genre""")
+    genreList=res.fetchall()
     genreAdd={}
     writeTo=open("FINLIST.txt",'w')
     print(returnList)
@@ -197,6 +199,11 @@ def addMovieToDb():
             genresOfMovie = dataParsed["Genre"]
             genresOfMovie = genresOfMovie.split(", ")
             for genre in genresOfMovie:
+                if genre not in genreList:
+                    newgenre = Genre(genre = genre)
+                    db.session.add(newgenre)
+                    db.session.commit()
+                    genreAdd[genre]=newgenre
                 oldgenre=db.session.query(Genre).filter_by(genre=genre).first()
                 genreAdd[genre]=oldgenre
             ## ADD ACTORS SUPPORT ##
