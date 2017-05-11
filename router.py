@@ -197,19 +197,26 @@ def addMovieToDb():
                     newactor = Actor(actor = actor)
                     db.session.add(newactor)
                     db.session.commit()
-            print(actorsOfMovie)
-            try:
-                if dataParsed["Ratings"] != []:
-                    for source in dataParsed["Ratings"]:
-                        if source["Source"] == "Rotten Tomatoes":
-                            rating = int(source["Value"][:len(source['Value'])-1])
-                print(rating)
-                newmovie = Movie(title = dataParsed["Title"], description = dataParsed["Plot"], year = dataParsed["Year"], rated = dataParsed["Rated"], runtime = dataParsed["Runtime"], poster = dataParsed["Poster"], rating=rating, genres = [g for g in genresOfMovie], actors = [a for a in actorsOfMovie])
-                print("Added: ", dataParsed["Title"])
-                db.session.add(newmovie)
-                db.session.commit()
-            except:
-                print("Failed to add "+dataParsed["Title"]+". Sigh-Oh well! Moving on!")
+            # try:
+            #     if dataParsed["Ratings"] != []:
+            #         for source in dataParsed["Ratings"]:
+            #             if source["Source"] == "Rotten Tomatoes":
+            #                 rating = int(source["Value"][:len(source['Value'])-1])
+            #     print(rating)
+            #     newmovie = Movie(title = dataParsed["Title"], description = dataParsed["Plot"], year = dataParsed["Year"], rated = dataParsed["Rated"], runtime = dataParsed["Runtime"], poster = dataParsed["Poster"], rating=rating, genres = [g for g in genresOfMovie], actors = [a for a in actorsOfMovie])
+            #     print("Added: ", dataParsed["Title"])
+            #     db.session.add(newmovie)
+            #     db.session.commit()
+            # except:
+            #     print("Failed to add "+dataParsed["Title"]+". Sigh-Oh well! Moving on!")
+            if dataParsed["Ratings"] != []:
+                for source in dataParsed["Ratings"]:
+                    if source["Source"] == "Rotten Tomatoes":
+                        rating = int(source["Value"][:len(source['Value'])-1])
+            print(rating)
+            newmovie = Movie(title = dataParsed["Title"], description = dataParsed["Plot"], year = dataParsed["Year"], rated = dataParsed["Rated"], runtime = dataParsed["Runtime"], poster = dataParsed["Poster"], rating=rating, genres = [g for g in genresOfMovie], actors = [a for a in actorsOfMovie])
+            print("Added: ", dataParsed["Title"])
+            db.session.add(newmovie)
             db.session.commit()
             writeTo.write(dataParsed['Title'])
         writeTo.close()
