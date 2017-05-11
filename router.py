@@ -26,31 +26,31 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'wtforms more like wtf forms'
 db = SQLAlchemy(app)
 
-Base = declarative_base()
-movie_genre=Table('movie_genre',Base.metadata,Column('movie_id',Integer,ForeignKey('movie.id')),Column('genre_id',Integer,ForeignKey('genre.id')))
-movie_actor=Table('movie_actor',Base.metadata,Column('movie_id',Integer,ForeignKey('movie.id')),Column('actor_id',Integer,ForeignKey('actor.id')))
-
-class Movie(Base):
-    __tablename__='movie'
-    id=Column(Integer,primary_key=True)
-    title=Column(String)
-    description=Column(String)
-    year=Column(String)
-    rated=Column(String)
-    runtime=Column(String)
-    poster = Column(String)
-    rating = Column(Integer)
-    genres=relationship("Genre", secondary=movie_genre,back_populates="inMovie")
-    actors=relationship("Actor", secondary=movie_actor,back_populates="inMovie")
-
-    def __repr__(self):
-        return "Movie: ({})".format(self.title)
-
-class Actor(Base):
-    __tablename__="actor"
-    id=Column(Integer, primary_key=True)
-    actor=Column(String)
-    inMovie=relationship("Movie", secondary=movie_actor, back_populates="actors")
+# Base = declarative_base()
+# movie_genre=Table('movie_genre',Base.metadata,Column('movie_id',Integer,ForeignKey('movie.id')),Column('genre_id',Integer,ForeignKey('genre.id')))
+# movie_actor=Table('movie_actor',Base.metadata,Column('movie_id',Integer,ForeignKey('movie.id')),Column('actor_id',Integer,ForeignKey('actor.id')))
+#
+# class Movie(Base):
+#     __tablename__='movie'
+#     id=Column(Integer,primary_key=True)
+#     title=Column(String)
+#     description=Column(String)
+#     year=Column(String)
+#     rated=Column(String)
+#     runtime=Column(String)
+#     poster = Column(String)
+#     rating = Column(Integer)
+#     genres=relationship("Genre", secondary=movie_genre,back_populates="inMovie")
+#     actors=relationship("Actor", secondary=movie_actor,back_populates="inMovie")
+#
+#     def __repr__(self):
+#         return "Movie: ({})".format(self.title)
+#
+# class Actor(Base):
+#     __tablename__="actor"
+#     id=Column(Integer, primary_key=True)
+#     actor=Column(String)
+#     inMovie=relationship("Movie", secondary=movie_actor, back_populates="actors")
 
 class SearchForm(Form):
     options = SelectField('Search By:', [validators.Required()], choices=[('FamilyNight', 'Family Night'), ('DateNight', 'Date Night'),('GirlsNight', 'Girls Night'),('GuysNight', 'Guys Night'), ('NerdNight', 'Nerd Night'), ('CulturedNight', 'Cultured Movie Night'), ('SurpriseMe', 'Surprise Me')])
@@ -162,47 +162,47 @@ def goodFor():
     res=res.fetchall()
     return render_template('searchresults.html',movieList=res,activity="")
 
-@app.route("/addMovie")
-def addMovieToDb():
-    movieName=request.args['movieTitleAdd']
-    res=db.session.execute("""SELECT count(*) from movie where title='%s'"""%movieName)
-    returnList=res.fetchall()
-    res=db.session.execute("""SELECT actor from actor""")
-    actorList=res.fetchall()
-    writeTo=open("FINLIST.txt",'w')
-    if returnList==[]:
-        moviename = movieName.replace(" ", "+")
-        res = req.get("http://www.omdbapi.com/?t={}".format(moviename))
-        dataParsed = json.loads(res.text)
-
-        if dataParsed['Response']!='False':
-            # db.session.execute("""INSERT INTO movies (title, description, year, rated, runtime, poster) VALUES (%s, %s, %s, %s, %s, %s);""", (dataParsed["Title"],dataParsed["Plot"],dataParsed["Year"],dataParsed["Rated"], dataParsed["Runtime"],dataParsed["Poster"]))
-            # db.session.commit()
-            genresOfMovie = dataParsed["Genre"]
-            genresOfMovie = genresOfMovie.split(", ")
-            ## ADD ACTORS SUPPORT ##
-            actorsOfMovie = dataParsed["Actors"]
-            actorsOfMovie = actorsOfMovie.split(", ")
-            for actor in actorsOfMovie:
-                if actor not in actorList:
-                    newactor = Actor(actor = actor)
-                    db.session.add(newactor)
-                    db.session.commit()
-            try:
-                if dataParsed["Ratings"] != []:
-                    for source in dataParsed["Ratings"]:
-                        if source["Source"] == "Rotten Tomatoes":
-                            rating = int(source["Value"][:len(source['Value'])-1])
-                newmovie = Movie(title = dataParsed["Title"], description = dataParsed["Plot"], year = dataParsed["Year"], rated = dataParsed["Rated"], runtime = dataParsed["Runtime"], poster = dataParsed["Poster"], rating=rating, genres = [g for g in genresOfMovie], actors = [a for a in actorsOfMovie])
-                print("Added: ", dataParsed["Title"])
-                db.session.add(newmovie)
-                db.session.commit()
-            except:
-                print("Failed to add "+dataParsed["Title"]+". Sigh-Oh well! Moving on!")
-            db.session.commit()
-            writeTo.write(dataParsed['Title'])
-        writeTo.close()
-    return render_template('dataAdded.html',movie=movieName)
+# @app.route("/addMovie")
+# def addMovieToDb():
+#     movieName=request.args['movieTitleAdd']
+#     res=db.session.execute("""SELECT count(*) from movie where title='%s'"""%movieName)
+#     returnList=res.fetchall()
+#     res=db.session.execute("""SELECT actor from actor""")
+#     actorList=res.fetchall()
+#     writeTo=open("FINLIST.txt",'w')
+#     if returnList==[]:
+#         moviename = movieName.replace(" ", "+")
+#         res = req.get("http://www.omdbapi.com/?t={}".format(moviename))
+#         dataParsed = json.loads(res.text)
+#
+#         if dataParsed['Response']!='False':
+#             # db.session.execute("""INSERT INTO movies (title, description, year, rated, runtime, poster) VALUES (%s, %s, %s, %s, %s, %s);""", (dataParsed["Title"],dataParsed["Plot"],dataParsed["Year"],dataParsed["Rated"], dataParsed["Runtime"],dataParsed["Poster"]))
+#             # db.session.commit()
+#             genresOfMovie = dataParsed["Genre"]
+#             genresOfMovie = genresOfMovie.split(", ")
+#             ## ADD ACTORS SUPPORT ##
+#             actorsOfMovie = dataParsed["Actors"]
+#             actorsOfMovie = actorsOfMovie.split(", ")
+#             for actor in actorsOfMovie:
+#                 if actor not in actorList:
+#                     newactor = Actor(actor = actor)
+#                     db.session.add(newactor)
+#                     db.session.commit()
+#             try:
+#                 if dataParsed["Ratings"] != []:
+#                     for source in dataParsed["Ratings"]:
+#                         if source["Source"] == "Rotten Tomatoes":
+#                             rating = int(source["Value"][:len(source['Value'])-1])
+#                 newmovie = Movie(title = dataParsed["Title"], description = dataParsed["Plot"], year = dataParsed["Year"], rated = dataParsed["Rated"], runtime = dataParsed["Runtime"], poster = dataParsed["Poster"], rating=rating, genres = [g for g in genresOfMovie], actors = [a for a in actorsOfMovie])
+#                 print("Added: ", dataParsed["Title"])
+#                 db.session.add(newmovie)
+#                 db.session.commit()
+#             except:
+#                 print("Failed to add "+dataParsed["Title"]+". Sigh-Oh well! Moving on!")
+#             db.session.commit()
+#             writeTo.write(dataParsed['Title'])
+#         writeTo.close()
+#     return render_template('dataAdded.html',movie=movieName)
 
 @app.route("/api", methods=["GET"])
 def apiMainPage():
