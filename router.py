@@ -185,7 +185,6 @@ def addMovieToDb():
     res=db.session.execute("""SELECT genre from genre""")
     genreList=res.fetchall()
     genreAdd={}
-    writeTo=open("FINLIST.txt",'w')
     print(returnList)
     if returnList==[(0,)]:
         moviename = movieName.replace(" ", "+")
@@ -219,32 +218,32 @@ def addMovieToDb():
                     actorAdd[actor]=newactor
                 oldactor=db.session.query(Actor).filter_by(actor=actor).first()
                 actorAdd[actor]=oldactor
-            # try:
-            #     if dataParsed["Ratings"] != []:
-            #         for source in dataParsed["Ratings"]:
-            #             if source["Source"] == "Rotten Tomatoes":
-            #                 rating = int(source["Value"][:len(source['Value'])-1])
-            #     print(rating)
-            #     newmovie = Movie(title = dataParsed["Title"], description = dataParsed["Plot"], year = dataParsed["Year"], rated = dataParsed["Rated"], runtime = dataParsed["Runtime"], poster = dataParsed["Poster"], rating=rating, genres = [g for g in genresOfMovie], actors = [a for a in actorsOfMovie])
-            #     print("Added: ", dataParsed["Title"])
-            #     db.session.add(newmovie)
-            #     db.session.commit()
-            # except:
-            #     print("Failed to add "+dataParsed["Title"]+". Sigh-Oh well! Moving on!")
-            if dataParsed["Ratings"] != []:
-                rating=0
-                for source in dataParsed["Ratings"]:
-                    if source["Source"] == "Rotten Tomatoes":
-                        rating = int(source["Value"][:len(source['Value'])-1])
-            print(rating)
-            print([g for g in genresOfMovie])
-            print([a for a in actorsOfMovie])
-            newmovie = Movie(title = dataParsed["Title"], description = dataParsed["Plot"], year = dataParsed["Year"], rated = dataParsed["Rated"], runtime = dataParsed["Runtime"], poster = dataParsed["Poster"], rating=rating, genres = [genreAdd[g] for g in genresOfMovie], actors = [actorAdd[a] for a in actorsOfMovie])
-            print("Added: ", dataParsed["Title"])
-            db.session.add(newmovie)
-            db.session.commit()
-            writeTo.write(dataParsed['Title'])
-        writeTo.close()
+            try:
+                if dataParsed["Ratings"] != []:
+                    for source in dataParsed["Ratings"]:
+                        if source["Source"] == "Rotten Tomatoes":
+                            rating = int(source["Value"][:len(source['Value'])-1])
+                newmovie = Movie(title = dataParsed["Title"], description = dataParsed["Plot"], year = dataParsed["Year"], rated = dataParsed["Rated"], runtime = dataParsed["Runtime"], poster = dataParsed["Poster"], rating=rating, genres = [genreAdd[g] for g in genresOfMovie], actors = [actorAdd[a] for a in actorsOfMovie])
+                print("Added: ", dataParsed["Title"])
+                db.session.add(newmovie)
+                db.session.commit()
+            except:
+                print("Failed to add "+dataParsed["Title"]+". Sigh-Oh well! Moving on!")
+                return render_template('dataAdded.html',movie=movieName,found=0)
+        #     if dataParsed["Ratings"] != []:
+        #         rating=0
+        #         for source in dataParsed["Ratings"]:
+        #             if source["Source"] == "Rotten Tomatoes":
+        #                 rating = int(source["Value"][:len(source['Value'])-1])
+        #     print(rating)
+        #     print([g for g in genresOfMovie])
+        #     print([a for a in actorsOfMovie])
+        #     newmovie = Movie(title = dataParsed["Title"], description = dataParsed["Plot"], year = dataParsed["Year"], rated = dataParsed["Rated"], runtime = dataParsed["Runtime"], poster = dataParsed["Poster"], rating=rating, genres = [genreAdd[g] for g in genresOfMovie], actors = [actorAdd[a] for a in actorsOfMovie])
+        #     print("Added: ", dataParsed["Title"])
+        #     db.session.add(newmovie)
+        #     db.session.commit()
+        #     writeTo.write(dataParsed['Title'])
+        # writeTo.close()
     return render_template('dataAdded.html',movie=movieName)
 
 @app.route("/about")
