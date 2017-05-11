@@ -1,13 +1,21 @@
 {% extends "base.html" %}
 {% block body %}
 <!DOCTYPE html>
-<h2 style="text-align:center;">projectDOAMA API</h2>
+<h2 style="text-align:center;"><strong>projectDOAMA API</strong></h2>
 <p  style="text-align:center;">projectDOAMA allows API calls to be made against our ever-growing databse of movies, actors, and genres.</p>
 
-<h4 style="text-align:center;">Movie Information</h4>
+<h4 style="text-align:center;"><strong>Movie Information</strong></h4>
 <p  style="text-align:center;">To recieve the full database of movies, search:</p>
 <p  style="text-align:center;">http://www.projectdoama.com/api/v1/getMovieInfo</p>
 <p  style="text-align:center;">To recieve information about a specific movie, search:</p>
 <p  style="text-align:center;">http://www.projectdoama.com/api/v1/getMovieInfo/[[INSERT MOVIE TITLE HERE]]</p>
+
+<h4 style="text-align:center;"><strong>Genre Information</strong></h4>
+<p  style="text-align:center;">To recieve the full database of genres, search:</p>
+<p  style="text-align:center;">http://www.projectdoama.com/api/v2/getGenreInfo/[[INSERT GENRE HERE]]</p>
+
+<h4 style="text-align:center;"><strong>Actor Information</strong></h4>
+<p  style="text-align:center;">To recieve the full database of actors, search:</p>
+<p  style="text-align:center;">http://www.projectdoama.com/api/v3/getActorInfo/[[INSERT ACTOR HERE]]</p>
 
 {% endblock %}

@@ -161,6 +161,17 @@ def apiGenreInfo(movie):
     res.headers['Content-type'] = 'application/json'
     return res
 
+@app.route("/api/v3/getActorInfo/<actor>", methods=["GET"])
+def apiActorInfo(actor):
+    actorName = actor.replace("+"," ")
+    actor = actorName.replace("%20", " ")
+    res = db.session.execute("""SELECT title from movie join movie_actor ON (movie.id = movie_actor.movie_id) join actor on (movie_actor.actor_id = actor.id) where actor.actor = %s;"""%actor)
+    actorlist = res.fetchall()
+    res = Response(dumps(actorlist))
+    res.headers['Access-Control-Allow-Origin'] = '*'
+    res.headers['Content-type'] = 'application/json'
+    return res
+
 if __name__=='__main__':
     app.run(debug=True)
 
