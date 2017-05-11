@@ -131,7 +131,7 @@ def search():
 @app.route("/searchMovie")
 def searchMovie():
     movie=request.args['movietitle']
-    # movie=movie.title()
+    movie=movie.title()
     res=db.session.execute("""SELECT movie.id, movie.title, movie.poster, movie.rated, movie.rating from movie where movie.title like'%%%s%%' order by random() limit 12;"""%movie)
     res=res.fetchall()
     count=len(res)
