@@ -203,7 +203,10 @@ def goodFor():
 #             writeTo.write(dataParsed['Title'])
 #         writeTo.close()
 #     return render_template('dataAdded.html',movie=movieName)
-
+@app.route("/about")
+def getAbout():
+    return render_template("about.html")
+    
 @app.route("/api", methods=["GET"])
 def apiMainPage():
     return render_template('api.html')
