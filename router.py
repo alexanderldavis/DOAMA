@@ -94,7 +94,7 @@ def search():
 def searchMovie():
     movie=request.args['movietitle']
     movie=movie.title()
-    res=db.session.execute("""SELECT movie.id, movie.title, movie.poster, movie.rated, movie.rating from movie where movie.title like'%%%s%%' limit 12;"""%movie)
+    res=db.session.execute("""SELECT movie.id, movie.title, movie.poster, movie.rated, movie.rating from movie where movie.title like'%%%s%%' order by random() limit 12;"""%movie)
     res=res.fetchall()
     return render_template('searchresults.html',movieList=res,activity=movie)
 
@@ -127,13 +127,13 @@ def goodFor():
         rating = 'PG'
     if rating != '':
         rating = "'"+rating+"'"
-        res=db.session.execute("""SELECT movie.id, movie.title, movie.poster, movie.rated, movie.rating from movie JOIN movie_genre ON (movie.id = movie_genre.movie_id) where movie_genre.genre_id = %s and movie.rated = %s limit 12;"""%(genre, rating))
+        res=db.session.execute("""SELECT movie.id, movie.title, movie.poster, movie.rated, movie.rating from movie JOIN movie_genre ON (movie.id = movie_genre.movie_id) where movie_genre.genre_id = %s and movie.rated = %s  order by random() limit 12;"""%(genre, rating))
     else:
-        res=db.session.execute("""SELECT movie.id, movie.title, movie.poster, movie.rated, movie.rating from movie JOIN movie_genre ON (movie.id = movie_genre.movie_id) where movie_genre.genre_id = %s limit 12;"""%genre)
+        res=db.session.execute("""SELECT movie.id, movie.title, movie.poster, movie.rated, movie.rating from movie JOIN movie_genre ON (movie.id = movie_genre.movie_id) where movie_genre.genre_id = %s order by random() limit 12;"""%genre)
     res=res.fetchall()
     return render_template('searchresults.html',movieList=res,activity="")
 
-@app.route("/api/v1/addMovie", methods=["POST"])
+@app.route("/addMovie", methods=["POST"])
 def addMovieToDb():
     movieName=request.args['movieTitleAdd']
     res=db.session.execute("""SELECT count(*) from movie where title='%s'"""%movieName)
