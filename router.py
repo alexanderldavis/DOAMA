@@ -135,7 +135,7 @@ def searchMovie():
     res=db.session.execute("""SELECT movie.id, movie.title, movie.poster, movie.rated, movie.rating from movie where movie.title like'%%%s%%' order by random() limit 12;"""%movie)
     res=res.fetchall()
     count=len(res)
-    return render_template('.title.html',movieList=res,activity=movie,count=count)
+    return render_template('searchresults.html',movieList=res,activity=movie,count=count)
 
 @app.route("/getMovieInfo/<id>")
 def getMovieInfo(id):
