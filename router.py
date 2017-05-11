@@ -170,6 +170,7 @@ def addMovieToDb():
     res=db.session.execute("""SELECT actor from actor""")
     actorList=res.fetchall()
     writeTo=open("FINLIST.txt",'w')
+    print(returnList)
     if returnList==[]:
         moviename = movieName.replace(" ", "+")
         res = req.get("http://www.omdbapi.com/?t={}".format(moviename))
@@ -188,7 +189,7 @@ def addMovieToDb():
                     newactor = Actor(actor = actor)
                     db.session.add(newactor)
                     db.session.commit()
-            prnt(actorsOfMovie)
+            print(actorsOfMovie)
             try:
                 if dataParsed["Ratings"] != []:
                     for source in dataParsed["Ratings"]:
