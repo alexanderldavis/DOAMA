@@ -135,7 +135,7 @@ def goodFor():
 
 @app.route("/addMovie", methods=['POST'])
 def addMovieToDb():
-    movieName=request.args('movieTitleAdd')
+    movieName=request.args['movieTitleAdd']
     res=db.session.execute("""SELECT count(*) from movie where title='%s'"""%movieName)
     returnList=res.fetchall()
     writeTo=open("FINLIST.txt",'w')
