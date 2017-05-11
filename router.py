@@ -11,6 +11,7 @@ from bson.objectid import ObjectId
 import requests as req
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Table, Column, Integer, String, create_engine, Sequence, ForeignKey
+from sqlalchemy.orm import sessionmaker, relationship
 
 app = Flask(__name__)
 # urllib.parse.uses_netloc.append("postgres")
@@ -24,7 +25,10 @@ app.config['SQLALCHEMY_DATABASE_URI']=os.environ["DATABASE_URL"]
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'wtforms more like wtf forms'
 db = SQLAlchemy(app)
+
 Base = declarative_base()
+movie_genre=Table('movie_genre',Base.metadata,Column('movie_id',Integer,ForeignKey('movie.id')),Column('genre_id',Integer,ForeignKey('genre.id')))
+movie_actor=Table('movie_actor',Base.metadata,Column('movie_id',Integer,ForeignKey('movie.id')),Column('actor_id',Integer,ForeignKey('actor.id')))
 
 class Movie(Base):
     __tablename__='movie'
@@ -189,7 +193,7 @@ def addMovieToDb():
                     for source in dataParsed["Ratings"]:
                         if source["Source"] == "Rotten Tomatoes":
                             rating = int(source["Value"][:len(source['Value'])-1])
-                newmovie = Movie(title = dataParsed["Title"], description = dataParsed["Plot"], year = dataParsed["Year"], rated = dataParsed["Rated"], runtime = dataParsed["Runtime"], poster = dataParsed["Poster"], rating=rating, genres = [allGenres[g] for g in genresOfMovie], actors = [allActors[a] for a in actorsOfMovie])
+                newmovie = Movie(title = dataParsed["Title"], description = dataParsed["Plot"], year = dataParsed["Year"], rated = dataParsed["Rated"], runtime = dataParsed["Runtime"], poster = dataParsed["Poster"], rating=rating, genres = [g for g in genresOfMovie], actors = [a for a in actorsOfMovie])
                 print("Added: ", dataParsed["Title"])
                 db.session.add(newmovie)
                 db.session.commit()
