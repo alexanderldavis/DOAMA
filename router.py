@@ -171,7 +171,7 @@ def addMovieToDb():
     actorList=res.fetchall()
     writeTo=open("FINLIST.txt",'w')
     print(returnList)
-    if returnList==[]:
+    if returnList==[(0,)]:
         moviename = movieName.replace(" ", "+")
         res = req.get("http://www.omdbapi.com/?t={}".format(moviename))
         dataParsed = json.loads(res.text)
