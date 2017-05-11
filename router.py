@@ -9,6 +9,7 @@ from flask_pymongo import PyMongo
 from bson.json_util import dumps
 from bson.objectid import ObjectId
 import requests as req
+from sqlalchemy.ext.declarative import declarative_base
 
 app = Flask(__name__)
 # urllib.parse.uses_netloc.append("postgres")
