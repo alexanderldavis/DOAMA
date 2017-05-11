@@ -25,7 +25,10 @@ app.config['SQLALCHEMY_DATABASE_URI']=os.environ["DATABASE_URL"]
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'wtforms more like wtf forms'
 db = SQLAlchemy(app)
+
 Base = declarative_base()
+movie_genre=Table('movie_genre',Base.metadata,Column('movie_id',Integer,ForeignKey('movie.id')),Column('genre_id',Integer,ForeignKey('genre.id')))
+movie_actor=Table('movie_actor',Base.metadata,Column('movie_id',Integer,ForeignKey('movie.id')),Column('actor_id',Integer,ForeignKey('actor.id')))
 
 class Movie(Base):
     __tablename__='movie'
