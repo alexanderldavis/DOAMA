@@ -183,6 +183,7 @@ def addMovieToDb():
     actorList=res.fetchall()
     actorAdd={}
     genreAdd={}
+    writeTo=open("FINLIST.txt",'w')
     print(returnList)
     if returnList==[(0,)]:
         moviename = movieName.replace(" ", "+")
@@ -233,6 +234,8 @@ def addMovieToDb():
             print("Added: ", dataParsed["Title"])
             db.session.add(newmovie)
             db.session.commit()
+            writeTo.write(dataParsed['Title'])
+        writeTo.close()
     return render_template('dataAdded.html',movie=movieName)
 
 @app.route("/about")
