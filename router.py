@@ -11,6 +11,7 @@ from bson.objectid import ObjectId
 import requests as req
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Table, Column, Integer, String, create_engine, Sequence, ForeignKey
+from sqlalchemy.orm import sessionmaker, relationship
 
 app = Flask(__name__)
 # urllib.parse.uses_netloc.append("postgres")
