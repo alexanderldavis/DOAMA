@@ -76,7 +76,7 @@ div.desc {
 }
 
 </style>
-  <div class="tablediv loadText" style="margin:auto;" onload="loadFunction()">
+  <div class="tablediv loadText " style="margin:auto;" onload="loadFunction()">
       <div id ="loader"></div>
         <div class="animate-bottom" id="myDiv" style="display:none;">
           <h3 style="text-align:center;">Now Showing Results for {{ activity }}</h3>
@@ -91,7 +91,13 @@ div.desc {
       </div>
   </div>
 
-
+  <div class="container">
+    <p>Don't like what we suggest? Suggest us a movie and we will add it to the database!</p>
+    <form class="form-inline loadText1" style = "margin-top:0;" action="/addMovie" method="post">
+      <input id="idmovieadd" class="form-control" type="text" name="movieTitleAdd" value="" placeholder="Movie Title">
+      <input type="submit" name="" class="btn btn-primary" id="submitMovieAdd" value = "Add Movie">
+    </form>
+  </div>
 
 
 

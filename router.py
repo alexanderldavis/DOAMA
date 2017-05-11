@@ -8,6 +8,7 @@ from json import dumps, loads
 from flask_pymongo import PyMongo
 from bson.json_util import dumps
 from bson.objectid import ObjectId
+import requests as req
 
 app = Flask(__name__)
 # urllib.parse.uses_netloc.append("postgres")
@@ -132,6 +133,24 @@ def goodFor():
     res=res.fetchall()
     return render_template('searchresults.html',movieList=res,activity="")
 
+@app.route("/addMovie", methods=['POST'])
+def addMovieToDb():
+    movieName=request.args('movieTitleAdd')
+    res=db.session.execute("""SELECT count(*) from movie where title='%s'"""%movieName)
+    returnList=res.fetchall()
+    writeTo=open("FINLIST.txt",'w')
+    if returnList==[]:
+        moviename = movieName.replace(" ", "+")
+        res = req.get("http://www.omdbapi.com/?t={}".format(moviename))
+        dataParsed = json.loads(res.text)
+
+        if dataParsed['Response']!='False':
+            db.session.execute("""INSERT INTO movies (title, description, year, rated, runtime, poster) VALUES (%s, %s, %s, %s, %s, %s);""", (dataParsed["Title"],dataParsed["Plot"],dataParsed["Year"],dataParsed["Rated"], dataParsed["Runtime"],dataParsed["Poster"]))
+            db.session.commit()
+            writeTo.write(dataParsed['Title'])
+        writeTo.close()
+        return render_template('dataAdded.html',movie=movieName)
+
 @app.route("/api", methods=["GET"])
 def apiMainPage():
     return render_template('api.html')
@@ -144,6 +163,7 @@ def apiMovie():
     res.headers['Access-Control-Allow-Origin'] = '*'
     res.headers['Content-type'] = 'application/json'
     return res
+
 
 @app.route("/api/v1/getMovieInfo/<movie>", methods=["GET"])
 def apiMovieName(movie):
