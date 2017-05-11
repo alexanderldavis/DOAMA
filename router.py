@@ -162,7 +162,7 @@ def goodFor():
     res=res.fetchall()
     return render_template('searchresults.html',movieList=res,activity="")
 
-@app.route("/addMovie", methods=["GET"])
+@app.route("/addMovie")
 def addMovieToDb():
     movieName=request.args['movieTitleAdd']
     res=db.session.execute("""SELECT count(*) from movie where title='%s'"""%movieName)
