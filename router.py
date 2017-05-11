@@ -85,7 +85,7 @@ def search():
         # print(result)
         res = db.session.execute("""SELECT movie.id, movie.title, movie.poster, movie.rated, movie.rating from \
                                     genre join movie_genre on (genre.id=movie_genre.genre_id) join movie on (movie_genre.movie_id=movie.id)\
-                                    where (((genre.genre='Adventure') or (genre.genre='Comedy') or (genre.genre='Animation') or (genre.genre='Mistery') or (genre.genre='Fantasy')) and ((movie.rated='PG13') or (movie.rated='PG')))\
+                                    where (((genre.genre='Adventure') or (genre.genre='Comedy') or (genre.genre='Animation') or (genre.genre='Mistery') or (genre.genre='Fantasy')) and ((movie.rated='PG-13') or (movie.rated='PG')))\
                                     group by movie.id, movie.title, movie.poster,movie.rated, movie.rating order by random(), movie.rating limit 12;""")
         activity="Family Night"
     if activity=="DateNight":
@@ -109,7 +109,7 @@ def search():
     if activity=="GuysNight":
         res=db.session.execute("""SELECT movie.id, movie.title, movie.poster, movie.rated, movie.rating from \
                                   genre join movie_genre on (genre.id=movie_genre.genre_id) join movie on (movie_genre.movie_id=movie.id)\
-                                  where ((genre.genre='Comedy') and (movie.rated='R'))\
+                                  where ((genre.genre='Comedy') and ((movie.rated='R') or (movie.rated='PG-13'))\
                                   group by movie.id, movie.title, movie.poster,movie.rated, movie.rating order by random(),movie.rating  limit 12;""")
         activity="Guys Night"
     if activity=="CulturedNight":
@@ -131,11 +131,11 @@ def search():
 @app.route("/searchMovie")
 def searchMovie():
     movie=request.args['movietitle']
-    movie=movie.title()
+    # movie=movie.title()
     res=db.session.execute("""SELECT movie.id, movie.title, movie.poster, movie.rated, movie.rating from movie where movie.title like'%%%s%%' order by random() limit 12;"""%movie)
     res=res.fetchall()
     count=len(res)
-    return render_template('searchresults.html',movieList=res,activity=movie,count=count)
+    return render_template('.title.html',movieList=res,activity=movie,count=count)
 
 @app.route("/getMovieInfo/<id>")
 def getMovieInfo(id):
@@ -177,7 +177,7 @@ def goodFor():
 def addMovieToDb():
     movieName=request.args['movieTitleAdd']
     movieName=movieName.title()
-    res=db.session.execute("""SELECT count(*) from movie where title='%s'"""%movieName)
+    res=db.session.execute("""SELECT count(*) from movie where title like '%%%s%%'"""%movieName)
     returnList=res.fetchall()
     res=db.session.execute("""SELECT actor from actor""")
     actorList=res.fetchall()
