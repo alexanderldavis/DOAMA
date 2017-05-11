@@ -177,6 +177,8 @@ def addMovieToDb():
     returnList=res.fetchall()
     res=db.session.execute("""SELECT actor from actor""")
     actorList=res.fetchall()
+    actorAdd={}
+    genreAdd={}
     writeTo=open("FINLIST.txt",'w')
     print(returnList)
     if returnList==[(0,)]:
@@ -187,8 +189,12 @@ def addMovieToDb():
         if dataParsed['Response']!='False':
             # db.session.execute("""INSERT INTO movies (title, description, year, rated, runtime, poster) VALUES (%s, %s, %s, %s, %s, %s);""", (dataParsed["Title"],dataParsed["Plot"],dataParsed["Year"],dataParsed["Rated"], dataParsed["Runtime"],dataParsed["Poster"]))
             # db.session.commit()
+            # add object genres
             genresOfMovie = dataParsed["Genre"]
             genresOfMovie = genresOfMovie.split(", ")
+            for genre in genresOfMovie:
+                oldgenre=db.session.query(Genre).filter_by(genre=genre).first()
+                genreAdd[genre]=oldgenre
             ## ADD ACTORS SUPPORT ##
             actorsOfMovie = dataParsed["Actors"]
             actorsOfMovie = actorsOfMovie.split(", ")
@@ -197,6 +203,9 @@ def addMovieToDb():
                     newactor = Actor(actor = actor)
                     db.session.add(newactor)
                     db.session.commit()
+                    actorAdd[actor]=newactor
+                oldactor=db.session.query(Actor).filter_by(actor=actor).first()
+                actorAdd[actor]=oldactor
             # try:
             #     if dataParsed["Ratings"] != []:
             #         for source in dataParsed["Ratings"]:
@@ -217,7 +226,7 @@ def addMovieToDb():
             print(rating)
             print([g for g in genresOfMovie])
             print([a for a in actorsOfMovie])
-            newmovie = Movie(title = dataParsed["Title"], description = dataParsed["Plot"], year = dataParsed["Year"], rated = dataParsed["Rated"], runtime = dataParsed["Runtime"], poster = dataParsed["Poster"], rating=rating, genres = [g for g in genresOfMovie], actors = [a for a in actorsOfMovie])
+            newmovie = Movie(title = dataParsed["Title"], description = dataParsed["Plot"], year = dataParsed["Year"], rated = dataParsed["Rated"], runtime = dataParsed["Runtime"], poster = dataParsed["Poster"], rating=rating, genres = [genreAdd[g] for g in genresOfMovie], actors = [actorAdd[a] for a in actorsOfMovie])
             print("Added: ", dataParsed["Title"])
             db.session.add(newmovie)
             db.session.commit()
