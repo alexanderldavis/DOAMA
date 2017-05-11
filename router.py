@@ -174,7 +174,7 @@ def addMovieToDb():
         moviename = movieName.replace(" ", "+")
         res = req.get("http://www.omdbapi.com/?t={}".format(moviename))
         dataParsed = json.loads(res.text)
-
+        print(moviename)
         if dataParsed['Response']!='False':
             # db.session.execute("""INSERT INTO movies (title, description, year, rated, runtime, poster) VALUES (%s, %s, %s, %s, %s, %s);""", (dataParsed["Title"],dataParsed["Plot"],dataParsed["Year"],dataParsed["Rated"], dataParsed["Runtime"],dataParsed["Poster"]))
             # db.session.commit()
@@ -188,11 +188,13 @@ def addMovieToDb():
                     newactor = Actor(actor = actor)
                     db.session.add(newactor)
                     db.session.commit()
+            prnt(actorsOfMovie)
             try:
                 if dataParsed["Ratings"] != []:
                     for source in dataParsed["Ratings"]:
                         if source["Source"] == "Rotten Tomatoes":
                             rating = int(source["Value"][:len(source['Value'])-1])
+                print(rating)
                 newmovie = Movie(title = dataParsed["Title"], description = dataParsed["Plot"], year = dataParsed["Year"], rated = dataParsed["Rated"], runtime = dataParsed["Runtime"], poster = dataParsed["Poster"], rating=rating, genres = [g for g in genresOfMovie], actors = [a for a in actorsOfMovie])
                 print("Added: ", dataParsed["Title"])
                 db.session.add(newmovie)
@@ -203,7 +205,7 @@ def addMovieToDb():
             writeTo.write(dataParsed['Title'])
         writeTo.close()
     return render_template('dataAdded.html',movie=movieName)
-    
+
 @app.route("/about")
 def getAbout():
     return render_template("about.html")
