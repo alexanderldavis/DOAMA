@@ -215,6 +215,8 @@ def addMovieToDb():
                     if source["Source"] == "Rotten Tomatoes":
                         rating = int(source["Value"][:len(source['Value'])-1])
             print(rating)
+            print([g for g in genresOfMovie])
+            print([a for a in actorsOfMovie])
             newmovie = Movie(title = dataParsed["Title"], description = dataParsed["Plot"], year = dataParsed["Year"], rated = dataParsed["Rated"], runtime = dataParsed["Runtime"], poster = dataParsed["Poster"], rating=rating, genres = [g for g in genresOfMovie], actors = [a for a in actorsOfMovie])
             print("Added: ", dataParsed["Title"])
             db.session.add(newmovie)
