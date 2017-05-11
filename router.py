@@ -45,6 +45,14 @@ class Movie(Base):
 
     def __repr__(self):
         return "Movie: ({})".format(self.title)
+class Genre(Base):
+    __tablename__="genre"
+    id=Column(Integer,primary_key=True)
+    genre=Column(String)
+    inMovie=relationship("Movie", secondary=movie_genre, back_populates="genres")
+
+    def __repr__(self):
+        return "Genre({})".format(self.genre)
 
 class Actor(Base):
     __tablename__="actor"
