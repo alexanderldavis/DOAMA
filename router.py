@@ -210,6 +210,7 @@ def addMovieToDb():
             # except:
             #     print("Failed to add "+dataParsed["Title"]+". Sigh-Oh well! Moving on!")
             if dataParsed["Ratings"] != []:
+                rating=0
                 for source in dataParsed["Ratings"]:
                     if source["Source"] == "Rotten Tomatoes":
                         rating = int(source["Value"][:len(source['Value'])-1])
