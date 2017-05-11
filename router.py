@@ -166,9 +166,9 @@ def goodFor():
         rating = 'PG'
     if rating != '':
         rating = "'"+rating+"'"
-        res=db.session.execute("""SELECT movie.id, movie.title, movie.poster, movie.rated, movie.rating from movie JOIN movie_genre ON (movie.id = movie_genre.movie_id) where movie_genre.genre_id = %s and movie.rated = %s  order by random() limit 12;"""%(genre, rating))
+        res=db.session.execute("""SELECT movie.id, movie.title, movie.poster, movie.rated, movie.rating from movie JOIN movie_genre ON (movie.id = movie_genre.movie_id) where movie_genre.genre_id = %s and ((movie.rated = %s) and (movie.rated='PG')) and movie.rating>70  order by random() limit 12;"""%(genre, rating))
     else:
-        res=db.session.execute("""SELECT movie.id, movie.title, movie.poster, movie.rated, movie.rating from movie JOIN movie_genre ON (movie.id = movie_genre.movie_id) where movie_genre.genre_id = %s order by random() limit 12;"""%genre)
+        res=db.session.execute("""SELECT movie.id, movie.title, movie.poster, movie.rated, movie.rating from movie JOIN movie_genre ON (movie.id = movie_genre.movie_id) where movie_genre.genre_id = %s and movie.rating>70 order by random() limit 12;"""%genre)
     res=res.fetchall()
     count=len(res)
     return render_template('searchresults.html',movieList=res,activity="",count=count)
