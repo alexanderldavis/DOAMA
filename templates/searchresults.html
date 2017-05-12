@@ -89,23 +89,24 @@ div.desc {
               </div>
             {% endfor %}
           </div>
+          <div class="container ">
+            <p>Don't like what we suggest? Suggest us a movie and we will add it to the database!</p>
+            <form class="form-inline " style = "margin-top:0;" action="/addMovie">
+              <input id="idmovieadd" class="form-control" type="text" name="movieTitleAdd" value="" placeholder="Movie Title">
+              <input type="submit" name="" class="btn btn-primary" id="submitMovieAdd" value = "Add Movie">
+            </form>
+          </div>
+          {% else %}
+          <p style="text-align:center;"> We could not find the result for {{activity}}</p>
+          <div class="container ">
+            <p>If you want to, we can add it to the database!</p>
+            <form class="form-inline " style = "margin-top:0;" action="/addMovie">
+              <input id="idmovieadd" class="form-control" type="text" name="movieTitleAdd" value="{{activity}}" placeholder="{{activity}}">
+              <input type="submit" name="" class="btn btn-primary" id="submitMovieAdd" value = "Add Movie">
+            </form>
+          </div>
       </div>
-      <div class="container loadText3">
-        <p>Don't like what we suggest? Suggest us a movie and we will add it to the database!</p>
-        <form class="form-inline loadText1" style = "margin-top:0;" action="/addMovie">
-          <input id="idmovieadd" class="form-control" type="text" name="movieTitleAdd" value="" placeholder="Movie Title">
-          <input type="submit" name="" class="btn btn-primary" id="submitMovieAdd" value = "Add Movie">
-        </form>
-      </div>
-      {% else %}
-      <p style="text-align:center;"> We could not find the result for {{activity}}</p>
-      <div class="container loadText3">
-        <p>If you want to, we can add it to the database!</p>
-        <form class="form-inline loadText3" style = "margin-top:0;" action="/addMovie">
-          <input id="idmovieadd" class="form-control" type="text" name="movieTitleAdd" value="{{activity}}" placeholder="{{activity}}">
-          <input type="submit" name="" class="btn btn-primary" id="submitMovieAdd" value = "Add Movie">
-        </form>
-      </div>
+
       {% endif %}
   </div>
 
