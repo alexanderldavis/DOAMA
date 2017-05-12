@@ -134,7 +134,7 @@ def searchMovie():
     # if "'" in movie:
     #     movie=movie.replace("'","''")
     # movie=movie.title()
-    res=db.session.execute("""SELECT movie.id, movie.title, movie.poster, movie.rated, movie.rating from movie where upper(movie.title) like'%%%s%%' order by random() limit 12;"""%upper(movie))
+    res=db.session.execute("""SELECT movie.id, movie.title, movie.poster, movie.rated, movie.rating from movie where upper(movie.title) like'%%%s%%' order by random() limit 12;"""%(movie.upper()))
     res=res.fetchall()
     count=len(res)
     return render_template('searchresults.html',movieList=res,activity=movie,count=count)
@@ -182,7 +182,7 @@ def addMovieToDb():
     #     movieName=movieName.replace("'","''")
     #     print(movieName)
     # movieName=movieName.title()
-    res=db.session.execute("""SELECT count(*) from movie where upper(title) like '%%%s%%' """%upper(movieName))
+    res=db.session.execute("""SELECT count(*) from movie where upper(title) like '%%%s%%' """%(movieName.upper()))
     returnList=res.fetchall()
     res=db.session.execute("""SELECT actor from actor""")
     actorList=res.fetchall()
