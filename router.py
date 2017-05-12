@@ -178,6 +178,7 @@ def addMovieToDb():
     movieName=request.args['movieTitleAdd']
     if "'" in movieName:
         movieName=movieName.replace("'","''")
+        print(movieName)
     movieName=movieName.title()
     res=db.session.execute("""SELECT count(*) from movie where title like '%%%s%%' """%movieName)
     returnList=res.fetchall()
