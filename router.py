@@ -173,8 +173,8 @@ def goodFor():
         res=db.session.execute("""SELECT movie.id, movie.title, movie.poster, movie.rated, movie.rating from movie JOIN movie_genre ON (movie.id = movie_genre.movie_id) where movie_genre.genre_id = %s order by random() limit 12;"""%genre)
     res=res.fetchall()
     count=len(res)
-    res=db.session.execute("""SELECT genre from genre where genre.id=%s"""%genre)
-    (genrename,)=res.fetchall()[0]
+    genreList=db.session.execute("""SELECT genre from genre where genre.id=%s"""%genre)
+    (genrename,)=genreList.fetchall()[0]
     return render_template('searchresults.html',movieList=res,activity=group+" who like "+genrename,count=count)
 
 @app.route("/addMovie")
