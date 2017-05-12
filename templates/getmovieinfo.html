@@ -121,9 +121,10 @@ div.desc {
             <img  src="{{ poster }}" alt="Poster for {{ title }}">
           </div>
         </section>
+        {%endfor%}
       </div>
-      <form class="form-inline loadText1" style = "margin-top:0;" action="/">
-        <input type="submit" name="" class="btn btn-primary" id="submitMovieAdd" value = "Back to Homepage">
+      <form class="form-inline" style = "margin-top:0;" action="">
+        <input type="submit" name="" class="btn btn-primary" id="submitMovieAdd" onclick="history.go(-1);return true;" value = "Back to Search Resutl">
       </form>
 </div>
 
