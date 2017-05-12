@@ -177,7 +177,7 @@ def goodFor():
 def addMovieToDb():
     movieName=request.args['movieTitleAdd']
     movieName=movieName.title()
-    res=db.session.execute("""SELECT count(*) from movie where title like "%%%s%%" """%movieName)
+    res=db.session.execute("""SELECT count(*) from movie where title like "%s" """%movieName)
     returnList=res.fetchall()
     res=db.session.execute("""SELECT actor from actor""")
     actorList=res.fetchall()
