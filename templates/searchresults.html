@@ -78,7 +78,6 @@ div.desc {
 </style>
   <div class="tablediv loadText " style="margin:auto;" onload="loadFunction()">
       <div id ="loader"></div>
-      {%if count>0%}
         <div class="animate-bottom" id="myDiv" style="display:none;">
           <h3 style="text-align:center;">Now Showing Results for {{ activity }}</h3>
           <div>
@@ -89,6 +88,7 @@ div.desc {
               </div>
             {% endfor %}
           </div>
+          {%if count>0%}
           <div class="container ">
             <p>Don't like what we suggest? Suggest us a movie and we will add it to the database!</p>
             <form class="form-inline " style = "margin-top:0;" action="/addMovie">
@@ -97,7 +97,7 @@ div.desc {
             </form>
           </div>
           {% else %}
-          <div class="container loadText ">
+          <div class="container ">
             <p style="text-align:center;"> We could not find the result for {{activity}}</p>
             <p>If you want to, we can add it to the database!</p>
             <form class="form-inline " style = "margin-top:0;" action="/addMovie">
