@@ -103,7 +103,7 @@ def search():
     if activity=="NerdNight":
         res=db.session.execute("""SELECT movie.id, movie.title, movie.poster, movie.rated, movie.rating from \
                                   genre join movie_genre on (genre.id=movie_genre.genre_id) join movie on (movie_genre.movie_id=movie.id)\
-                                  where ((genre.genre='Sci-Fi') or (genre.genre='Mistery')) \
+                                  where ((genre.genre='Sci-Fi') or (genre.genre='Mystery')) \
                                   group by movie.id, movie.title, movie.poster,movie.rated, movie.rating order by random(),movie.rating  limit 12;""")
         activity="Nerd Night"
     if activity=="GuysNight":
